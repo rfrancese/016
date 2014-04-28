@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Math Challenger</string>
+    <string name="action_settings">Settings</string>
+    <string name="home_login_tv">Login</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Accedi</string>
+    <string name="text_registrazione_home">Se non possiedi un account, clicca il tasto sottostante per registrarti</string>
+    <string name="register_button">Registrati</string>
+    <string name="lost_password_tv">Se hai dimenticato la password, clicca il tasto sottostante</string>
+    <string name="lost_pass_button">Recupera password</string>
+    <string name="register_title_tv">Registrati</string>
+    <string name="username_tv">Username</string>
+    <string name="password_tv">Password</string>
+    <string name="email_tv">e-mail</string>
+    <string name="conferma_password_registrazione_hint">Conferma password</string>
+    <string name="email_hint">E-Mail</string>
+    <string name="reset_pass_title_tv">Reset password</string>
+    <string name="reset_pass_text">Tramite questa funzionalità verrà generata una nuova password che le verrà inviata all\'indirizzo fornito in fase di registrazione.</string>
+    <string name="reset_password_button">Reset password</string>
+    <string name="login_fail_message">Login fallito!</string>
+    <string name="reg_password_diverse">Le password inserite non corrispondono</string>
+    <string name="communication_error">Errore di comunicazione</string>
+    <string name="error_unknown">Errore indefinito</string>
+    <string name="reset_password_ok">Le è stata inviata una email contenente una nuova password</string>
+    <string name="reset_password_error">La password non è stata resettata</string>
+
+</resources>
