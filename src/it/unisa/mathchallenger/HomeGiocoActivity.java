@@ -11,6 +11,8 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_gioco);
+		//TODO get partite
+		//
 	}
 
 	@Override

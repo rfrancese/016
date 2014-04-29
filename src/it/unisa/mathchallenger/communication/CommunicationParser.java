@@ -1,6 +1,10 @@
 package it.unisa.mathchallenger.communication;
 
+import java.util.ArrayList;
+
+import it.unisa.mathchallenger.status.Account;
 import it.unisa.mathchallenger.status.AccountUser;
+import it.unisa.mathchallenger.status.Partita;
 
 public class CommunicationParser {
 	private static CommunicationParser sing;
@@ -85,5 +89,127 @@ public class CommunicationParser {
 			}
 		}
 		return false;
+	}
+	public boolean parseExit(Messaggio m){
+		String[] prop=m.getResponse().split(";");
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+				case "exit":
+					if(kv[1].compareTo("OK")==0)
+						return true;
+					break;
+				case "message":
+					m.setErrorMessage(kv[1]);
+					break;
+			}
+		}
+		return false;
+	}
+	public boolean parseLoginAuthcode(Messaggio m){
+		String prop[]=m.getResponse().split(";");
+		boolean loginOK=false;
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+				case "login":
+					if(kv[1].compareTo("OK")==0)
+						loginOK=true;
+					break;
+				case "message":
+					m.setErrorMessage(kv[1]);
+					break;
+			}
+		}
+		return loginOK;
+	}
+	public boolean parseLogout(Messaggio m){
+		boolean logoutOK=false;
+		String[] prop=m.getResponse().split(";");
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+				case "logout":
+					if(kv[1].compareTo("OK")==0)
+						logoutOK=true;
+					break;
+				case "message":
+					m.setErrorMessage(kv[1]);
+					break;
+			}
+		}
+		return logoutOK;
+	}
+	public boolean parseChangePassword(Messaggio m){
+		String[] prop=m.getResponse().split(";");
+		boolean changeOK=false;
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+				case "change-psw":
+					if(kv[1].compareTo("OK")==0)
+						changeOK=true;
+					break;
+				case "message":
+					m.setErrorMessage(kv[1]);
+					break;
+			}
+		}
+		return changeOK;
+	}
+	public Partita parseNewGame(Messaggio m){
+		String[] prop=m.getResponse().split(";");
+		Partita partita=null;
+		int id = 0;
+		boolean partitaOK=false;
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+				case "newgame":
+					if(kv[1].compareTo("OK")==0)
+						partitaOK=true;
+					break;
+				case "id":
+					id=Integer.parseInt(kv[1]);
+					break;
+				case "message":
+					m.setErrorMessage(kv[1]);
+					break;
+			}
+		}
+		if(partitaOK){
+			partita=new Partita();
+			partita.setIDPartita(id);
+		}
+		return partita;
+	}
+	public ArrayList<Account> parseSearchUser(Messaggio m){
+		ArrayList<Account> trovati=null;
+		String[] prop=m.getResponse().split(";");
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+			case "trovati":
+				int trovati_n=Integer.parseInt(kv[1]);
+				if(trovati_n>0)
+					trovati=new ArrayList<Account>(trovati_n);
+				break;
+			case "search-user":
+				if(kv[1].compareTo("OK")!=0)
+					return null;
+				break;
+			case "account":
+				String[] acc=kv[1].split(",");
+				int id=Integer.parseInt(acc[1]);
+				Account a=new Account(id);
+				a.setUsername(acc[0]);
+				trovati.add(a);
+				break;
+			case "message":
+				m.setErrorMessage(kv[1]);
+				break;
+			}
+		}
+		return trovati;
 	}
 }

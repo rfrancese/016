@@ -26,5 +26,13 @@
     <string name="error_unknown">Errore indefinito</string>
     <string name="reset_password_ok">Le è stata inviata una email contenente una nuova password</string>
     <string name="reset_password_error">La password non è stata resettata</string>
+    <string name="homegioco_nuovapartita">Nuova partita</string>
+    <string name="homegioco_statistiche_button">Statistiche</string>
+    <string name="homegioco_partiteincorso_tv">Partite in corso</string>
+    <string name="homegioco_test_partita_button">Partita prova</string>
 
+    <string name="action_cambia_password_menu">Cambia password</string>
+    <string name="action_logout_menu">Logout</string>
+    <string name="action_exit_menu">Esci</string>
+    
 </resources>

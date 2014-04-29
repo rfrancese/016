@@ -4,9 +4,9 @@
     tools:context="it.unisa.mathchallenger.HomeAutenticazioneActivity" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_homelogin_exit"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_exit_menu"
         app:showAsAction="never"/>
 
 </menu>

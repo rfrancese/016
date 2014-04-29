@@ -4,9 +4,19 @@
     tools:context="it.unisa.mathchallenger.HomeGiocoActivity" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_cambia_password_menu"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_cambia_password_menu"
         app:showAsAction="never"/>
-
+    
+    <item
+        android:id="@+id/action_logout_menu"
+        android:orderInCategory="100"
+        android:title="@string/action_logout_menu"
+        app:showAsAction="never"/>
+	<item
+        android:id="@+id/action_exit_menu"
+        android:orderInCategory="100"
+        android:title="@string/action_exit_menu"
+        app:showAsAction="never"/>
 </menu>

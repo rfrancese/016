@@ -31,6 +31,8 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		}
 		new Thread(Communication.getInstance()).start();
 		comm=Communication.getInstance();
+		
+		//TODO login-auth
 	}
 
 	@Override
