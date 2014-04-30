@@ -30,9 +30,14 @@
     <string name="homegioco_statistiche_button">Statistiche</string>
     <string name="homegioco_partiteincorso_tv">Partite in corso</string>
     <string name="homegioco_test_partita_button">Partita prova</string>
-
     <string name="action_cambia_password_menu">Cambia password</string>
     <string name="action_logout_menu">Logout</string>
     <string name="action_exit_menu">Esci</string>
-    
+    <string name="title_activity_activity_cambia_password">ActivityCambiaPassword</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="cambio_pass_vecchia">Vecchia Password</string>
+    <string name="cambio_pass_nuova_tv">Nuova Password</string>
+    <string name="cambia_password_conferma_tv">Conferma Password</string>
+    <string name="message_cambio_pass_password_non_corrispondenti">Le password inserite non corrispondono</string>
+	<string name="message_cambio_pass_ok">Password cambiata correttamente</string>
 </resources>

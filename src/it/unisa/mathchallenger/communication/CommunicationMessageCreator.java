@@ -27,8 +27,8 @@ public class CommunicationMessageCreator {
 	public Messaggio createLogoutMessage(){
 		return new Messaggio("logout");
 	}
-	public Messaggio createChangePasswordMessage(String pass){
-		return new Messaggio("change-psw "+pass);
+	public Messaggio createChangePasswordMessage(String oldPass,String newPass){
+		return new Messaggio("change-psw "+oldPass+" "+newPass);
 	}
 	public Messaggio createSearchUserMessage(String username_utente){
 		return new Messaggio("search-user "+username_utente);

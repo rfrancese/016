@@ -49,8 +49,8 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.action_homelogin_exit) {
+			System.exit(0);
 		}
 		return super.onOptionsItemSelected(item);
 	}
