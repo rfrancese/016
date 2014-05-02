@@ -3,6 +3,14 @@ package it.unisa.mathchallenger.status;
 import java.util.ArrayList;
 
 public class Partita {
+	public final static int CREATA=0,
+			INIZIATA=1,
+			ABBANDONATA_1=2, 
+			ABBANDONATA_2=3,
+			VINCITORE_1=4,
+			VINCITORE_2=5, 
+			TEMPO_SCADUTO=6, 
+			PAREGGIATA=7;
 	private Account utente_sfidato;
 	private ArrayList<Domanda> domande;
 	private int id_partita;

@@ -19,20 +19,13 @@
         android:text="@string/homegioco_nuovapartita"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/homegioco_partiteincorso_tv"
-        android:textStyle="bold" />
-
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="0.58" >
 
         <LinearLayout
@@ -43,10 +36,12 @@
 
             <Button
                 android:id="@+id/button1"
+                style="@style/buttonPartita"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:background="@drawable/button_partite"
                 android:text="Button" />
+
         </LinearLayout>
 
     </ScrollView>

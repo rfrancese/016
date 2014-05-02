@@ -38,6 +38,16 @@
             android:name="it.unisa.mathchallenger.ActivityCambiaPassword"
             android:label="@string/title_activity_activity_cambia_password" >
         </activity>
+        <activity
+            android:name="it.unisa.mathchallenger.GiocaPartitaActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_gioca_partita"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name="it.unisa.mathchallenger.VisualizzaPartitaActivity"
+            android:label="@string/title_activity_visualizza_partita" >
+        </activity>
     </application>
 
 </manifest>

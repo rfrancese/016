@@ -212,4 +212,35 @@ public class CommunicationParser {
 		}
 		return trovati;
 	}
+	public ArrayList<Partita> parseGetPartiteInCorso(Messaggio m){
+		String[] prop=m.getResponse().split(";");
+		ArrayList<Partita> partite=null;
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+			case "getPartiteInCorso":
+				if(kv[1].compareTo("OK")==0)
+					partite=new ArrayList<Partita>();
+				break;
+			case "partita":
+				String[] dati_partita=kv[1].split(",");
+				int id_partita=Integer.parseInt(dati_partita[0]);
+				int id_sfidante=Integer.parseInt(dati_partita[1]);
+				String username_sfidante=dati_partita[2];
+				int stato_partita=Integer.parseInt(dati_partita[3]);
+				Partita p=new Partita();
+				Account sfidante=new Account(id_sfidante);
+				sfidante.setUsername(username_sfidante);
+				p.setUtenteSfidato(sfidante);
+				p.setStatoPartita(stato_partita);
+				p.setIDPartita(id_partita);
+				partite.add(p);
+				break;
+			case "message":
+				m.setErrorMessage(kv[1]);
+				break;
+			}
+		}
+		return partite;
+	}
 }

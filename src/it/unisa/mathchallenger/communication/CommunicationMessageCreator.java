@@ -36,4 +36,7 @@ public class CommunicationMessageCreator {
 	public Messaggio createNewGameMessage(int id_utente){
 		return new Messaggio("newgame "+id_utente);
 	}
+	public Messaggio createGetPartiteInCorso(){
+		return new Messaggio("getPartiteInCorso");
+	}
 }

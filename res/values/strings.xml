@@ -39,5 +39,12 @@
     <string name="cambio_pass_nuova_tv">Nuova Password</string>
     <string name="cambia_password_conferma_tv">Conferma Password</string>
     <string name="message_cambio_pass_password_non_corrispondenti">Le password inserite non corrispondono</string>
-	<string name="message_cambio_pass_ok">Password cambiata correttamente</string>
+    <string name="message_cambio_pass_ok">Password cambiata correttamente</string>
+    <string name="homegioco_partite_in_corso">Partite in corso</string>
+    <string name="homegioco_partite_terminate">Partite terminate</string>
+    <string name="title_activity_gioca_partita">GiocaPartitaActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_visualizza_partita">VisualizzaPartitaActivity</string>
+
 </resources>
