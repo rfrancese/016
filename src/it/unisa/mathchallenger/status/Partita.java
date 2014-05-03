@@ -46,4 +46,9 @@ public class Partita {
 	public void setStatoPartita(int s){
 		stato_partita=s;
 	}
+	public boolean isTerminata(){
+		if(getStatoPartita()!=CREATA && getStatoPartita()!=INIZIATA)
+			return true;
+		return false;
+	}
 }

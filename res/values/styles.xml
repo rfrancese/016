@@ -36,6 +36,7 @@
     <style name="buttonPartita">
         <item name="android:height">45dp</item>
         <item name="android:background">@drawable/button_partite</item>
+        <item name="android:maxHeight">45dp</item>
     </style>
 
     <style name="ButtonBarButton" />

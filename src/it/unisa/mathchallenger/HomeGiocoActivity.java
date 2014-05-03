@@ -12,12 +12,14 @@ import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class HomeGiocoActivity extends ActionBarActivity {
@@ -86,11 +88,13 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		int height=(int) (scale*45+0.5f);
 		for(int i=0;i<partite.size();i++){
 			final Partita p=partite.get(i);
-			if(p.getStatoPartita()==Partita.CREATA || p.getStatoPartita()==Partita.INIZIATA){
+			if(!p.isTerminata()){
 				Button b_prt=new Button(getApplicationContext());
 				b_prt.setText(p.getUtenteSfidato().getUsername());
 				b_prt.setBackgroundResource(R.drawable.button_partite);
-				b_prt.setHeight(height);
+				LayoutParams dim=new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, height);
+				dim.setMargins(0, (int) (10*scale), 0, 0);
+				b_prt.setLayoutParams(dim);
 				b_prt.setGravity(Gravity.CENTER);
 				b_prt.setOnClickListener(new Button.OnClickListener() {
 					public void onClick(View v) {
@@ -139,7 +143,6 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			aggiungiPartite(p);
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
