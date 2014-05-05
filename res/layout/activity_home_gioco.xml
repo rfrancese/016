@@ -34,14 +34,6 @@
             android:layout_height="147dp"
             android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/button1"
-                style="@style/buttonPartita"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:background="@drawable/button_partite"
-                android:text="Button" />
-
         </LinearLayout>
 
     </ScrollView>

@@ -11,8 +11,8 @@ import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,8 +66,16 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				startActivity(intent);
 				break;
 			}
-			//Messaggio m_res=CommunicationMessageCreator.getInstance().createChangePasswordMessage(pass);
-			
+			case R.id.action_exit_menu:
+				Messaggio m=CommunicationMessageCreator.getInstance().createExitMessage();
+				try {
+					comm.send(m);
+					System.exit(0);
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -81,18 +89,21 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		LinearLayout lay=(LinearLayout) findViewById(R.id.layoutPartiteInCorso);
 		lay.removeAllViews();
 		ArrayList<Partita> terminate=new ArrayList<Partita>();
-		TextView label_incorso=new TextView(getApplicationContext());
-		label_incorso.setText(R.string.homegioco_partite_in_corso);
-		lay.addView(label_incorso);
+		//TextView label_incorso=new TextView(getApplicationContext());
+		//label_incorso.setText(R.string.homegioco_partite_in_corso);
+		//lay.addView(label_incorso);
 		float scale=getApplicationContext().getResources().getDisplayMetrics().density;
 		int height=(int) (scale*45+0.5f);
+		boolean inCorso=false;
 		for(int i=0;i<partite.size();i++){
 			final Partita p=partite.get(i);
 			if(!p.isTerminata()){
+				inCorso=true;
 				Button b_prt=new Button(getApplicationContext());
 				b_prt.setText(p.getUtenteSfidato().getUsername());
+				b_prt.setTextColor(Color.BLACK);
 				b_prt.setBackgroundResource(R.drawable.button_partite);
-				LayoutParams dim=new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, height);
+				LayoutParams dim=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
 				dim.setMargins(0, (int) (10*scale), 0, 0);
 				b_prt.setLayoutParams(dim);
 				b_prt.setGravity(Gravity.CENTER);
@@ -111,17 +122,26 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				terminate.add(p);
 			}
 		}
+		if(inCorso){
+			TextView label_incorso=new TextView(getApplicationContext());
+			label_incorso.setText(R.string.homegioco_partite_in_corso);
+			label_incorso.setTextColor(Color.BLACK);
+			lay.addView(label_incorso, 0);
+		}
 		if(terminate.size()>0){
 			TextView label_terminate=new TextView(getApplicationContext());
 			label_terminate.setText(R.string.homegioco_partite_terminate);
+			label_terminate.setTextColor(Color.BLACK);
 			lay.addView(label_terminate);
 			for(int i=0;i<terminate.size();i++){
 				final Partita partita=terminate.get(i);
 				Button b=new Button(getApplicationContext());
 				b.setBackgroundResource(R.drawable.button_partite);
 				b.setText(partita.getUtenteSfidato().getUsername());
+				b.setTextColor(Color.BLACK);
 				b.setGravity(Gravity.CENTER);
-				b.setHeight(height);
+				LayoutParams dim=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
+				b.setLayoutParams(dim);
 				b.setOnClickListener(new Button.OnClickListener() {
 					public void onClick(View v) {
 						Intent intent=new Intent(getApplicationContext(), VisualizzaPartitaActivity.class);
