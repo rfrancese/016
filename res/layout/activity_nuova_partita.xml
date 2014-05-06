@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_opacita"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="it.unisa.mathchallenger.NuovaPartitaActivity" >
+
+    <Button
+        android:id="@+id/button_crea_casuale"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/button"
+        android:onClick="onClickCreaRandom"
+        android:text="@string/nuova_partita_casuale"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_cerca_utente"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button"
+        android:text="@string/nuova_partita_cerca_utente"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/elenco_amici" />
+
+    <ScrollView
+        android:id="@+id/elenco_amici_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.60" >
+
+    </ScrollView>
+
+</LinearLayout>

@@ -46,5 +46,9 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_visualizza_partita">VisualizzaPartitaActivity</string>
+    <string name="title_activity_nuova_partita">Math Challenger</string>
+    <string name="nuova_partita_casuale">Scontro casuale</string>
+    <string name="nuova_partita_cerca_utente">Cerca utente</string>
+    <string name="elenco_amici">Elenco amici</string>
 
 </resources>

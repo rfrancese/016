@@ -243,4 +243,24 @@ public class CommunicationParser {
 		}
 		return partite;
 	}
+	public Partita parseNewGameRandom(Messaggio m){
+		String[] prop=m.getResponse().split(";");
+		Partita partita=null;
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+			case "newgame-random":
+				if(kv[1].compareTo("OK")==0)
+					partita=new Partita();
+				break;
+			case "id":
+				partita.setIDPartita(Integer.parseInt(kv[1]));
+				break;
+			case "message":
+				m.setErrorMessage(kv[1]);
+				break;
+			}
+		}
+		return partita;
+	}
 }

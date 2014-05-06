@@ -24,12 +24,15 @@ import android.widget.TextView;
 
 public class HomeGiocoActivity extends ActionBarActivity {
 	private Communication comm;
+	private Thread t_aggiorna_partite;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		comm=Communication.getInstance();
 		setContentView(R.layout.activity_home_gioco);
-		getPartite();
+		//getPartite();
+		t_aggiorna_partite=new Thread(new t_aggiorna_partite());
+		t_aggiorna_partite.start();
 	}
 
 	@Override
@@ -141,6 +144,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				b.setTextColor(Color.BLACK);
 				b.setGravity(Gravity.CENTER);
 				LayoutParams dim=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
+				dim.setMargins(0, (int) (10*scale), 0, 0);
 				b.setLayoutParams(dim);
 				b.setOnClickListener(new Button.OnClickListener() {
 					public void onClick(View v) {
@@ -165,5 +169,37 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	class t_aggiorna_partite implements Runnable{
+		private static final long time_sleep=1*60*1000;
+		
+		public void run() {
+			while(true) {
+				Messaggio m=CommunicationMessageCreator.getInstance().createGetPartiteInCorso();
+				try {
+					comm.send(m);
+					ArrayList<Partita> partite=CommunicationParser.getInstance().parseGetPartiteInCorso(m);
+					if(partite!=null){
+						for(int i=0;i<partite.size();i++)
+							Status.getInstance().aggiungiPartita(partite.get(i));
+					}
+				} 
+				catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				HomeGiocoActivity.this.runOnUiThread(new Runnable(){
+					public void run() {
+						aggiungiPartite(Status.getInstance().getElencoPartite());
+					}
+				});
+				try {
+					Thread.sleep(time_sleep);
+				}
+				catch(InterruptedException e){					
+				}
+			}
+		}
+		
 	}
 }

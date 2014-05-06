@@ -39,4 +39,10 @@ public class CommunicationMessageCreator {
 	public Messaggio createGetPartiteInCorso(){
 		return new Messaggio("getPartiteInCorso");
 	}
+	public Messaggio createNewGameRandom(){
+		return new Messaggio("newgame-random");
+	}
+	public Messaggio createAbandonGame(int id){
+		return new Messaggio("abandon "+id);
+	}
 }

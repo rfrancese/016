@@ -14,7 +14,7 @@ public class Communication implements Runnable {
 	
 	private Socket socket;
 	//private final static String HOSTNAME="192.168.0.210";
-	private final static String HOSTNAME="172.19.249.195";
+	private final static String HOSTNAME="172.19.253.48";
 	private final static int HOSTNAME_PORT=50000;
 	
 	private Communication(){

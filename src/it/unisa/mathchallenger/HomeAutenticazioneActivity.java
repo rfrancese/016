@@ -105,7 +105,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 	
 	public void onClickResetPassword(View v) {
 		if(v.getId()==R.id.button_recupera_pass_home)
-			setContentView(R.layout.reset_password_activity);
+			setContentView(R.layout.activity_reset_password);
 		else if(v.getId()==R.id.reg_reset_pass_button){
 			TextView user_tv=(TextView) findViewById(R.id.reset_username_text);
 			String user=user_tv.getText().toString();

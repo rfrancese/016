@@ -9,6 +9,8 @@ public class Status {
 	private ArrayList<Partita> partite;
 	private ArrayList<Account> amici;
 	
+	private long last_update_game;
+	
 	public static Status getInstance(){
 		if(status==null)
 			status=new Status();
@@ -50,6 +52,9 @@ public class Status {
 		}
 		return null;
 	}
+	public ArrayList<Partita> getElencoPartite() {
+		return partite;
+	}
 	public Account getAmico(int i){
 		if(i>=0 && i<amici.size())
 			return amici.get(i);
@@ -69,5 +74,14 @@ public class Status {
 				return amici.remove(i);
 		}
 		return null;
+	}
+	public long getLastUpdateGames(){
+		return last_update_game;
+	}
+	public void setLastUpdateGames(long u){
+		last_update_game=u;
+	}
+	public void setLastUpdateGamesNow(){
+		last_update_game=System.currentTimeMillis();
 	}
 }

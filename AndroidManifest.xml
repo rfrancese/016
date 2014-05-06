@@ -48,6 +48,10 @@
             android:name="it.unisa.mathchallenger.VisualizzaPartitaActivity"
             android:label="@string/title_activity_visualizza_partita" >
         </activity>
+        <activity
+            android:name="it.unisa.mathchallenger.NuovaPartitaActivity"
+            android:label="@string/title_activity_nuova_partita" >
+        </activity>
     </application>
 
 </manifest>
