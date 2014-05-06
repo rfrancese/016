@@ -2,7 +2,7 @@
 -- Host:                         127.0.0.1
 -- Versione server:              5.6.16 - MySQL Community Server (GPL)
 -- S.O. server:                  Win32
--- HeidiSQL Versione:            8.3.0.4753
+-- HeidiSQL Versione:            8.3.0.4766
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -17,7 +17,7 @@ USE `mathchallenger`;
 
 -- Dump della struttura di tabella mathchallenger.account
 CREATE TABLE IF NOT EXISTS `account` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `password` char(64) NOT NULL COMMENT 'hash in SHA256',
   `email` varchar(105) NOT NULL,
@@ -26,27 +26,71 @@ CREATE TABLE IF NOT EXISTS `account` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella mathchallenger.account: ~0 rows (circa)
+DELETE FROM `account`;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+
+INSERT INTO `account` (`id`, `username`) VALUES	(0, 'bot');
 
 
 -- Dump della struttura di tabella mathchallenger.amico
 CREATE TABLE IF NOT EXISTS `amico` (
-  `id_utente` int(10) unsigned DEFAULT NULL,
-  `id_amico` int(10) unsigned DEFAULT NULL,
+  `id_utente` int(10) DEFAULT NULL,
+  `id_amico` int(10) DEFAULT NULL,
   KEY `FK_amico_id_utente` (`id_utente`),
   KEY `FK_amico_id_amico` (`id_amico`),
   CONSTRAINT `FK_amico_id_amico` FOREIGN KEY (`id_amico`) REFERENCES `account` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_amico_id_utente` FOREIGN KEY (`id_utente`) REFERENCES `account` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella mathchallenger.amico: ~0 rows (circa)
+DELETE FROM `amico`;
+/*!40000 ALTER TABLE `amico` DISABLE KEYS */;
+/*!40000 ALTER TABLE `amico` ENABLE KEYS */;
+
+
+-- Dump della struttura di tabella mathchallenger.bot
+CREATE TABLE IF NOT EXISTS `bot` (
+  `id` int(11) NOT NULL,
+  `nome` char(30) NOT NULL,
+  `percentuale_successo` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dump dei dati della tabella mathchallenger.bot: ~21 rows (circa)
+DELETE FROM `bot`;
+/*!40000 ALTER TABLE `bot` DISABLE KEYS */;
+INSERT INTO `bot` (`id`, `nome`, `percentuale_successo`) VALUES
+	(-21, 'Randy', 20),
+	(-20, 'Hope', 50),
+	(-19, 'Johnny', 10),
+	(-18, 'Dexter', 70),
+	(-17, 'Bruce', 70),
+	(-16, 'Gennaro', 78),
+	(-15, 'Angelica', 50),
+	(-14, 'Marco', 25),
+	(-13, 'Belen', 5),
+	(-12, 'Penny', 30),
+	(-11, 'Francesco', 15),
+	(-10, 'Shepard', 50),
+	(-9, 'Rachel', 60),
+	(-8, 'Tony', 75),
+	(-7, 'Vicky', 45),
+	(-6, 'Sheldon', 80),
+	(-5, 'Rita', 65),
+	(-4, 'Hermione', 60),
+	(-3, 'Bart', 20),
+	(-2, 'Hal', 55),
+	(-1, 'Lisa', 65);
+/*!40000 ALTER TABLE `bot` ENABLE KEYS */;
 
 
 -- Dump della struttura di tabella mathchallenger.partite
 CREATE TABLE IF NOT EXISTS `partite` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_utente_1` int(10) unsigned NOT NULL,
-  `id_utente_2` int(10) unsigned NOT NULL,
+  `id_utente_1` int(10) NOT NULL,
+  `id_utente_2` int(10) NOT NULL,
   `stato_partita` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `domanda1` varchar(100) NOT NULL,
   `risposta1_esatta` float NOT NULL,
@@ -99,12 +143,15 @@ CREATE TABLE IF NOT EXISTS `partite` (
   CONSTRAINT `FK_partite_account_2` FOREIGN KEY (`id_utente_2`) REFERENCES `account` (`id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella mathchallenger.partite: ~0 rows (circa)
+DELETE FROM `partite`;
+/*!40000 ALTER TABLE `partite` DISABLE KEYS */;
+/*!40000 ALTER TABLE `partite` ENABLE KEYS */;
 
 
 -- Dump della struttura di tabella mathchallenger.statistiche
 CREATE TABLE IF NOT EXISTS `statistiche` (
-  `id_utente` int(10) unsigned NOT NULL,
+  `id_utente` int(10) NOT NULL,
   `partite_giocate` int(10) unsigned NOT NULL DEFAULT '0',
   `vinte` int(10) unsigned NOT NULL DEFAULT '0',
   `perse` int(10) unsigned NOT NULL DEFAULT '0',
@@ -115,7 +162,10 @@ CREATE TABLE IF NOT EXISTS `statistiche` (
   CONSTRAINT `FK__account` FOREIGN KEY (`id_utente`) REFERENCES `account` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- L’esportazione dei dati non era selezionata.
+-- Dump dei dati della tabella mathchallenger.statistiche: ~0 rows (circa)
+DELETE FROM `statistiche`;
+/*!40000 ALTER TABLE `statistiche` DISABLE KEYS */;
+/*!40000 ALTER TABLE `statistiche` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
