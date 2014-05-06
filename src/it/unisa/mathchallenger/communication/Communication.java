@@ -2,8 +2,6 @@ package it.unisa.mathchallenger.communication;
 
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
-import it.unisa.mathchallenger.status.AccountUser;
-import it.unisa.mathchallenger.status.Status;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -48,6 +46,7 @@ public class Communication implements Runnable {
 	private BufferedReader in;
 	private boolean connect() throws UnknownHostException, IOException {
 		socket=new Socket(HOSTNAME, HOSTNAME_PORT);
+		socket.setKeepAlive(true);
 		out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
 		in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		return true;
@@ -75,40 +74,10 @@ public class Communication implements Runnable {
 		
 	}
 	public synchronized void send(Messaggio m) throws IOException, LoginException, ConnectionException{
-		try {
-			send(CommunicationMessageCreator.getInstance().createPingMessage());
+		if(socket==null){
+			connect();
 		}
-		catch(NullPointerException | IOException e){
-			AccountUser acc=Status.getInstance().getUtente();
-			Messaggio m_reconnect=null;
-			if(acc!=null){
-				int id=Status.getInstance().getUtente().getID();
-				String auth=Status.getInstance().getUtente().getAuthCode();
-				m_reconnect=CommunicationMessageCreator.getInstance().createLoginAuthcode(id, auth);	
-			}
-			int try_numbers=0;
-			boolean connected=false;
-			boolean loginOK=false;
-			while(try_numbers<5 && !connected && !loginOK){
-				try_numbers++;
-				
-				try {
-					connected=connect();
-					if(m_reconnect!=null){
-						out.println(m_reconnect.getComando());
-						m_reconnect.setResponse(read());
-						loginOK=CommunicationParser.getInstance().parseLoginAuthcode(m_reconnect);
-					}
-				}
-				catch(IOException e2){
-					connected=false;
-				}
-			}
-			if(connected==false)
-				throw new ConnectionException("Connessione assente o server non raggiungibile");
-			if(loginOK==false)
-				throw new LoginException("Accesso non effettuato. Potrei essere collegato da un altro dispositivo");
-		}
+		
 		out.println(m.getComando());
 		m.setResponse(read());
 	}

@@ -15,7 +15,7 @@
         android:id="@+id/button_crea_casuale"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_style"
         android:onClick="onClickCreaRandom"
         android:text="@string/nuova_partita_casuale"
         android:textStyle="bold" />
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_style"
         android:text="@string/nuova_partita_cerca_utente"
         android:textStyle="bold" />
 

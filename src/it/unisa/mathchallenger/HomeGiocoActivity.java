@@ -9,12 +9,14 @@ import it.unisa.mathchallenger.communication.CommunicationParser;
 import it.unisa.mathchallenger.communication.Messaggio;
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
+import it.unisa.mathchallenger.status.Account;
 import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -108,9 +110,6 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		LinearLayout lay=(LinearLayout) findViewById(R.id.layoutPartiteInCorso);
 		lay.removeAllViews();
 		ArrayList<Partita> terminate=new ArrayList<Partita>();
-		//TextView label_incorso=new TextView(getApplicationContext());
-		//label_incorso.setText(R.string.homegioco_partite_in_corso);
-		//lay.addView(label_incorso);
 		float scale=getApplicationContext().getResources().getDisplayMetrics().density;
 		int height=(int) (scale*45+0.5f);
 		boolean inCorso=false;
@@ -119,9 +118,10 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			if(!p.isTerminata()){
 				inCorso=true;
 				Button b_prt=new Button(getApplicationContext());
-				b_prt.setText(p.getUtenteSfidato().getUsername());
+				Account acc=p.getUtenteSfidato();
+				b_prt.setText(acc==null?"null":acc.getUsername());
 				b_prt.setTextColor(Color.BLACK);
-				b_prt.setBackgroundResource(R.drawable.button_partite);
+				b_prt.setBackgroundResource(R.drawable.button_style);
 				LayoutParams dim=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
 				dim.setMargins(0, (int) (10*scale), 0, 0);
 				b_prt.setLayoutParams(dim);
@@ -155,7 +155,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			for(int i=0;i<terminate.size();i++){
 				final Partita partita=terminate.get(i);
 				Button b=new Button(getApplicationContext());
-				b.setBackgroundResource(R.drawable.button_partite);
+				b.setBackgroundResource(R.drawable.button_style);
 				b.setText(partita.getUtenteSfidato().getUsername());
 				b.setTextColor(Color.BLACK);
 				b.setGravity(Gravity.CENTER);
@@ -174,6 +174,12 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				lay.addView(b);
 			}
 		}
+	}
+	public void onClickNuovaPartita(View v){
+		Intent intent=new Intent(getApplicationContext(), NuovaPartitaActivity.class);
+		startActivity(intent);
+		t_aggiorna_partite.interrupt();
+		finish();
 	}
 	public void getPartite(){
 		Messaggio m = CommunicationMessageCreator.getInstance().createGetPartiteInCorso();
@@ -198,7 +204,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	}
 	
 	class t_aggiorna_partite implements Runnable{
-		private static final long time_sleep=1*60*1000;
+		private static final long time_sleep=10*60*1000;
 		
 		public void run() {
 			while(true) {
@@ -214,7 +220,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				catch (IOException | LoginException | ConnectionException e1) {
 					e1.printStackTrace();
 				}
-				HomeGiocoActivity.this.runOnUiThread(new Runnable(){
+				runOnUiThread(new Runnable(){
 					public void run() {
 						aggiungiPartite(Status.getInstance().getElencoPartite());
 					}
@@ -222,10 +228,10 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				try {
 					Thread.sleep(time_sleep);
 				}
-				catch(InterruptedException e){					
+				catch(InterruptedException e){	
+					Log.d("", "thread update interrotto");
 				}
 			}
 		}
-		
 	}
 }

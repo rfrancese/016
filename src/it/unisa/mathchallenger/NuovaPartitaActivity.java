@@ -52,10 +52,11 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		try {
 			comm.send(m);
 			Partita p=CommunicationParser.getInstance().parseNewGameRandom(m);
-			Status.getInstance().aggiungiPartita(p);
+			//TODO avvio partita e load partita
+			//Status.getInstance().aggiungiPartita(p);
 		} 
 		catch (IOException e) {
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();;
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		} 
 		catch (LoginException e) {
@@ -64,8 +65,14 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			finish();
 		} 
 		catch (ConnectionException e) {
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();;
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public void onBackPressed() {
+		Intent intent=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+		startActivity(intent);
+		finish();
 	}
 }

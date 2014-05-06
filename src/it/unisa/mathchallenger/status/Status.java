@@ -33,8 +33,10 @@ public class Status {
 	public void aggiungiPartita(Partita p){
 		for(int i=0;i<partite.size();i++){
 			Partita partita=partite.get(i);
-			if(partita.getIDPartita()==p.getIDPartita())
+			if(partita.getIDPartita()==p.getIDPartita()){
+				partita.setStatoPartita(p.getStatoPartita());
 				return;
+			}
 		}
 		partite.add(p);
 	}

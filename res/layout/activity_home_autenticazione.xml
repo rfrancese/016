@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_style"
         android:onClick="onClickAccedi"
         android:text="@string/login_button"
         android:textStyle="bold" />
@@ -78,7 +78,7 @@
         android:id="@+id/button_registrazione_home"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_style"
         android:onClick="onClickRegistra"
         android:text="@string/register_button"
         android:textStyle="bold" />
@@ -96,7 +96,7 @@
         android:id="@+id/button_recupera_pass_home"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_style"
         android:onClick="onClickResetPassword"
         android:text="@string/lost_pass_button"
         android:textStyle="bold" />

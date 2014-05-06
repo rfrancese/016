@@ -10,12 +10,14 @@
 
     <Button
         android:id="@+id/homegioco_nuovapartita"
+        style="?android:attr/buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_style"
+        android:onClick="onClickNuovaPartita"
         android:text="@string/homegioco_nuovapartita"
         android:textStyle="bold" />
 
@@ -47,7 +49,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_style"
         android:text="@string/homegioco_statistiche_button"
         android:textStyle="bold" />
 

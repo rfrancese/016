@@ -225,7 +225,7 @@ public class CommunicationParser {
 			case "partita":
 				String[] dati_partita=kv[1].split(",");
 				int id_partita=Integer.parseInt(dati_partita[0]);
-				int id_sfidante=Integer.parseInt(dati_partita[1]);
+				Integer id_sfidante=Integer.parseInt(dati_partita[1]);
 				String username_sfidante=dati_partita[2];
 				int stato_partita=Integer.parseInt(dati_partita[3]);
 				Partita p=new Partita();
