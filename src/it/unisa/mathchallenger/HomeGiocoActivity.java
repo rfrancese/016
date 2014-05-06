@@ -7,6 +7,8 @@ import it.unisa.mathchallenger.communication.Communication;
 import it.unisa.mathchallenger.communication.CommunicationMessageCreator;
 import it.unisa.mathchallenger.communication.CommunicationParser;
 import it.unisa.mathchallenger.communication.Messaggio;
+import it.unisa.mathchallenger.eccezioni.ConnectionException;
+import it.unisa.mathchallenger.eccezioni.LoginException;
 import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
@@ -57,10 +60,20 @@ public class HomeGiocoActivity extends ActionBarActivity {
 						Status.getInstance().logout();
 						Intent intent=new Intent(this, HomeAutenticazioneActivity.class);
 						startActivity(intent);
+						finish();
 					}
 				} 
 				catch (IOException e) {
-					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				catch (LoginException e) {
+					Intent intent=new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
+					startActivity(intent);
+					finish();
+					e.printStackTrace();
+				} 
+				catch (ConnectionException e) {
+					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 					e.printStackTrace();
 				}
 				break;
@@ -73,9 +86,12 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				Messaggio m=CommunicationMessageCreator.getInstance().createExitMessage();
 				try {
 					comm.send(m);
+					finish();
 					System.exit(0);
 				}
-				catch (IOException e) {
+				catch (IOException | LoginException | ConnectionException e) {
+					finish();
+					System.exit(0);
 					e.printStackTrace();
 				}
 				break;
@@ -169,6 +185,16 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+		catch (LoginException e) {
+			Intent intent=new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
+			startActivity(intent);
+			finish();
+			e.printStackTrace();
+		} 
+		catch (ConnectionException e) {
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
 	}
 	
 	class t_aggiorna_partite implements Runnable{
@@ -185,7 +211,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 							Status.getInstance().aggiungiPartita(partite.get(i));
 					}
 				} 
-				catch (IOException e1) {
+				catch (IOException | LoginException | ConnectionException e1) {
 					e1.printStackTrace();
 				}
 				HomeGiocoActivity.this.runOnUiThread(new Runnable(){

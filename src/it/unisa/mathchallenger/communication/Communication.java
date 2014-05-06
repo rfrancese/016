@@ -1,5 +1,10 @@
 package it.unisa.mathchallenger.communication;
 
+import it.unisa.mathchallenger.eccezioni.ConnectionException;
+import it.unisa.mathchallenger.eccezioni.LoginException;
+import it.unisa.mathchallenger.status.AccountUser;
+import it.unisa.mathchallenger.status.Status;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -13,8 +18,8 @@ public class Communication implements Runnable {
 	private static Communication singleton;
 	
 	private Socket socket;
-	//private final static String HOSTNAME="192.168.0.210";
-	private final static String HOSTNAME="172.19.253.48";
+	private final static String HOSTNAME="192.168.0.210";
+	//private final static String HOSTNAME="172.19.253.48";
 	private final static int HOSTNAME_PORT=50000;
 	
 	private Communication(){
@@ -56,12 +61,54 @@ public class Communication implements Runnable {
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
+		} 
+		catch (LoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	public void restart(){
 		
 	}
-	public synchronized void send(Messaggio m) throws IOException{
+	public synchronized void send(Messaggio m) throws IOException, LoginException, ConnectionException{
+		try {
+			send(CommunicationMessageCreator.getInstance().createPingMessage());
+		}
+		catch(NullPointerException | IOException e){
+			AccountUser acc=Status.getInstance().getUtente();
+			Messaggio m_reconnect=null;
+			if(acc!=null){
+				int id=Status.getInstance().getUtente().getID();
+				String auth=Status.getInstance().getUtente().getAuthCode();
+				m_reconnect=CommunicationMessageCreator.getInstance().createLoginAuthcode(id, auth);	
+			}
+			int try_numbers=0;
+			boolean connected=false;
+			boolean loginOK=false;
+			while(try_numbers<5 && !connected && !loginOK){
+				try_numbers++;
+				
+				try {
+					connected=connect();
+					if(m_reconnect!=null){
+						out.println(m_reconnect.getComando());
+						m_reconnect.setResponse(read());
+						loginOK=CommunicationParser.getInstance().parseLoginAuthcode(m_reconnect);
+					}
+				}
+				catch(IOException e2){
+					connected=false;
+				}
+			}
+			if(connected==false)
+				throw new ConnectionException("Connessione assente o server non raggiungibile");
+			if(loginOK==false)
+				throw new LoginException("Accesso non effettuato. Potrei essere collegato da un altro dispositivo");
+		}
 		out.println(m.getComando());
 		m.setResponse(read());
 	}

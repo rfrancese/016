@@ -6,6 +6,8 @@ import it.unisa.mathchallenger.communication.Communication;
 import it.unisa.mathchallenger.communication.CommunicationMessageCreator;
 import it.unisa.mathchallenger.communication.CommunicationParser;
 import it.unisa.mathchallenger.communication.Messaggio;
+import it.unisa.mathchallenger.eccezioni.ConnectionException;
+import it.unisa.mathchallenger.eccezioni.LoginException;
 import it.unisa.mathchallenger.status.AccountUser;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
@@ -98,6 +100,14 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				catch (IOException e) {
 					Toast.makeText(getApplicationContext(), R.string.communication_error, Toast.LENGTH_LONG).show();
 					e.printStackTrace();
+				} 
+				catch (LoginException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				catch (ConnectionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}
@@ -126,6 +136,14 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				} 
 				catch (IOException e) {
 					e.printStackTrace();
+				} 
+				catch (LoginException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				catch (ConnectionException e) {
+					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+					e.printStackTrace();
 				}
 			}
 		}
@@ -153,6 +171,14 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		} 
 		catch (IOException e) {
 			Toast.makeText(getApplicationContext(), R.string.communication_error, Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		} 
+		catch (LoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (ConnectionException e) {
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 	}

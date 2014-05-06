@@ -6,13 +6,17 @@ import it.unisa.mathchallenger.communication.Communication;
 import it.unisa.mathchallenger.communication.CommunicationMessageCreator;
 import it.unisa.mathchallenger.communication.CommunicationParser;
 import it.unisa.mathchallenger.communication.Messaggio;
+import it.unisa.mathchallenger.eccezioni.ConnectionException;
+import it.unisa.mathchallenger.eccezioni.LoginException;
 import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class NuovaPartitaActivity extends ActionBarActivity {
 	private Communication comm;
@@ -51,7 +55,16 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			Status.getInstance().aggiungiPartita(p);
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();;
+			e.printStackTrace();
+		} 
+		catch (LoginException e) {
+			Intent intent=new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
+			startActivity(intent);
+			finish();
+		} 
+		catch (ConnectionException e) {
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();;
 			e.printStackTrace();
 		}
 	}

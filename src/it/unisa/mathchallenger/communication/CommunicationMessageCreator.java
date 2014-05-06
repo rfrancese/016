@@ -45,4 +45,7 @@ public class CommunicationMessageCreator {
 	public Messaggio createAbandonGame(int id){
 		return new Messaggio("abandon "+id);
 	}
+	public Messaggio createPingMessage(){
+		return new Messaggio("ping");
+	}
 }
