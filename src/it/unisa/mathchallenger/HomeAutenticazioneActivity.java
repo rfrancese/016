@@ -33,17 +33,35 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			Runtime.getRuntime().addShutdownHook(new ShutdownThread());
 		}
 		
-		setContentView(R.layout.activity_home_autenticazione);
 		if(VERSION.SDK_INT>=9){
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		
 		new Thread(Communication.getInstance()).start();
 		comm=Communication.getInstance();
 		
+		Status.getInstance(getApplicationContext());
+		AccountUser acc=Status.getInstance().getUtente();
+		boolean loginOK=false;
+		if(acc!=null){
+			Messaggio m=CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
+			try {
+				comm.send(m);
+				loginOK=CommunicationParser.getInstance().parseLoginAuthcode(m);
+			} 
+			catch (IOException | LoginException | ConnectionException e) {
+				e.printStackTrace();
+			}
+		}
 		
-		//TODO login-auth
+		if(!loginOK)
+			setContentView(R.layout.activity_home_autenticazione);
+		else {
+			Status.getInstance().loginAuth(acc);
+			Intent intent=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+		}
 	}
 	
 	@Override
@@ -172,8 +190,8 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				Toast.makeText(getApplicationContext(), R.string.login_fail_message, Toast.LENGTH_LONG).show();
 			}
 			else {
-				Status.getInstance().login(acc);
 				acc.setUsername(username);
+				Status.getInstance().login(acc);
 				Intent intent=new Intent(this, HomeGiocoActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);

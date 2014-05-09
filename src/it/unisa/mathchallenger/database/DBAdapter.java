@@ -16,19 +16,24 @@ public class DBAdapter implements Database{
 	private Context context;
 	private SQLiteDatabase database;
 	private DatabaseHelper dbHelper;
+	private boolean open=false;
 
 	public DBAdapter(Context c) {
 		context = c;
 	}
 
 	public DBAdapter open() throws SQLException {
-		dbHelper = new DatabaseHelper(context);
-		database = dbHelper.getWritableDatabase();
+		if(!open){
+			dbHelper = new DatabaseHelper(context);
+			database = dbHelper.getWritableDatabase();
+		}
+		open=true;
 		return this;
 	}
 
 	public void close() {
 		dbHelper.close();
+		open=false;
 	}
 	
 	private ContentValues cv_Account(int id, String username, String authcode){
@@ -50,7 +55,7 @@ public class DBAdapter implements Database{
 		val.put("id_partita", idPartita);
 		val.put("account", account);
 		val.put("id_sfidante", id_sfidato);
-		val.put("username_sfidato", sfidato_user);
+		val.put("username_sfidante", sfidato_user);
 		val.put("stato_partita", stato);
 		return val;
 	}
@@ -71,6 +76,9 @@ public class DBAdapter implements Database{
 		}
 		res.close();
 		return acc;
+	}
+	public void rimuoviAccount(){
+		deleteAll("account");
 	}
 	
 	public void inserisciAmico(int account_id, int id_amico, String friend_user){
