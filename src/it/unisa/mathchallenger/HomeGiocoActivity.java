@@ -35,7 +35,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		comm=Communication.getInstance();
 		setContentView(R.layout.activity_home_gioco);
-		//getPartite();
+
 		t_aggiorna_partite=new Thread(new t_aggiorna_partite());
 		t_aggiorna_partite.start();
 	}
@@ -61,8 +61,9 @@ public class HomeGiocoActivity extends ActionBarActivity {
 					if(CommunicationParser.getInstance().parseLogout(m_logout)){
 						Status.getInstance().logout();
 						Intent intent=new Intent(this, HomeAutenticazioneActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						t_aggiorna_partite.interrupt();
 						startActivity(intent);
-						finish();
 					}
 				} 
 				catch (IOException e) {
@@ -70,9 +71,9 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				} 
 				catch (LoginException e) {
 					Intent intent=new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					t_aggiorna_partite.interrupt();
 					startActivity(intent);
-					finish();
-					e.printStackTrace();
 				} 
 				catch (ConnectionException e) {
 					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -85,17 +86,11 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				break;
 			}
 			case R.id.action_exit_menu:
-				Messaggio m=CommunicationMessageCreator.getInstance().createExitMessage();
-				try {
-					comm.send(m);
-					finish();
-					System.exit(0);
-				}
-				catch (IOException | LoginException | ConnectionException e) {
-					finish();
-					System.exit(0);
-					e.printStackTrace();
-				}
+				t_aggiorna_partite.interrupt();
+				comm.disconnect();
+				finish();
+				android.os.Process.killProcess(android.os.Process.myPid());
+				System.exit(0);
 				break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -177,9 +172,9 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	}
 	public void onClickNuovaPartita(View v){
 		Intent intent=new Intent(getApplicationContext(), NuovaPartitaActivity.class);
+		//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//t_aggiorna_partite.interrupt();
 		startActivity(intent);
-		t_aggiorna_partite.interrupt();
-		finish();
 	}
 	public void getPartite(){
 		Messaggio m = CommunicationMessageCreator.getInstance().createGetPartiteInCorso();
@@ -193,9 +188,8 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		}
 		catch (LoginException e) {
 			Intent intent=new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-			finish();
-			e.printStackTrace();
 		} 
 		catch (ConnectionException e) {
 			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();

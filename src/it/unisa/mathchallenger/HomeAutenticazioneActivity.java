@@ -9,6 +9,7 @@ import it.unisa.mathchallenger.communication.Messaggio;
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
 import it.unisa.mathchallenger.status.AccountUser;
+import it.unisa.mathchallenger.status.ShutdownThread;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
@@ -22,21 +23,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeAutenticazioneActivity extends ActionBarActivity {
+	private static boolean hookShutdown=false;
 	Communication comm;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(!hookShutdown){
+			hookShutdown=true;
+			Runtime.getRuntime().addShutdownHook(new ShutdownThread());
+		}
+		
 		setContentView(R.layout.activity_home_autenticazione);
 		if(VERSION.SDK_INT>=9){
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
+		
 		new Thread(Communication.getInstance()).start();
 		comm=Communication.getInstance();
 		
+		
 		//TODO login-auth
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -166,6 +175,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				Status.getInstance().login(acc);
 				acc.setUsername(username);
 				Intent intent=new Intent(this, HomeGiocoActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}
 		} 
@@ -182,5 +192,4 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 	}
-	
 }

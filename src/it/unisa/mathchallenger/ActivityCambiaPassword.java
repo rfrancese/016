@@ -84,6 +84,7 @@ public class ActivityCambiaPassword extends ActionBarActivity {
 	@Override
 	public void onBackPressed() {
 		Intent intente=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+		intente.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intente);
 	}
 }

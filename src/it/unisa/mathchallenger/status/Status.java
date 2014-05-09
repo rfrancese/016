@@ -22,6 +22,7 @@ public class Status {
 	}
 	
 	public void login(AccountUser u){
+		//TODO salva utente
 		utente=u;
 	}
 	public AccountUser getUtente(){
