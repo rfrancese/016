@@ -6,7 +6,6 @@ import it.unisa.mathchallenger.database.DBAdapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 public class Status {
 	private static Status status;
@@ -36,6 +35,19 @@ public class Status {
 		database.open();
 		AccountUser user=database.selezionaAccount();
 		setAccount(user);
+		t_ping=ThreadPing.getInstance();
+	}
+	private void setAccount(AccountUser u){
+		utente=u;
+	}
+	public void login(AccountUser u){
+		setAccount(u);
+		database.inserisciAccount(u.getID(), u.getUsername(), u.getAuthCode());
+		initUser();
+		t_ping.start();
+	}
+	private void initUser(){
+		Account user=getUtente();
 		if(user!=null){
 			ArrayList<Partita> partite=database.selezionaPartiteInCorso(user.getID());
 			for(Partita p: partite)
@@ -45,24 +57,11 @@ public class Status {
 			for(Account a:amici)
 				aggiungiAmico(a);
 		}
-		//database.close();
-		t_ping=ThreadPing.getInstance();
-	}
-	private void setAccount(AccountUser u){
-		utente=u;
-	}
-	public void login(AccountUser u){
-		setAccount(u);
-		Log.d("", "User is null: "+(u==null));
-		Log.d("", "Username: "+u.getUsername());
-		//database.open();
-		database.inserisciAccount(u.getID(), u.getUsername(), u.getAuthCode());
-		//database.close();
-		//t_ping.start();
 	}
 	public void loginAuth(AccountUser u){
 		setAccount(u);
-		//t_ping.start();
+		initUser();
+		t_ping.start();
 	}
 	public AccountUser getUtente(){
 		return utente;
@@ -82,9 +81,7 @@ public class Status {
 			}
 		}
 		partite.add(p);
-		//database.open();
 		database.inserisciPartita(p.getIDPartita(), getUtente().getID(), p.getUtenteSfidato().getID(), p.getUtenteSfidato().getUsername(), p.getStatoPartita());
-		//database.close();
 	}
 	public Partita getPartitaByID(int id){
 		for(int i=0;i<partite.size();i++){
@@ -115,9 +112,7 @@ public class Status {
 				return;
 		}
 		amici.add(a);
-		//database.open();
 		database.inserisciAmico(getUtente().getID(), a.getID(), a.getUsername());
-		//database.close();
 	}
 	public Account rimuoviAmico(int id){
 		for(int i=0;i<amici.size();i++){
@@ -134,5 +129,8 @@ public class Status {
 	}
 	public void setLastUpdateGamesNow(){
 		last_update_game=System.currentTimeMillis();
+	}
+	public void closeDB(){
+		database.close();
 	}
 }
