@@ -325,4 +325,31 @@ public class CommunicationParser {
 		}
 		return false;
 	}
+	public ArrayList<Account> parseGetMyFriends(Messaggio m){
+		String[] prop=m.getResponse().split(";");
+		ArrayList<Account> amici=null;
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+				case "getMyFriends":
+					if(kv[1].compareTo("OK")==0){}
+					break;
+				case "trovati":
+					int size=Integer.parseInt(kv[1]);
+					if(size>0)
+						amici=new ArrayList<Account>(size);
+					break;
+				case "message":
+					m.setErrorMessage(kv[1]);
+					break;
+				case "account":
+					String[] d=kv[1].split(",");
+					Account a=new Account(Integer.parseInt(d[0]));
+					a.setUsername(d[1]);
+					amici.add(a);
+					break;
+			}
+		}
+		return amici;
+	}
 }

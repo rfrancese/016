@@ -109,7 +109,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 				Button btn=new Button(getApplicationContext());
 				
 				LayoutParams dim = new LinearLayout.LayoutParams(width, height);
-				//dim.setMargins(0, (int) (10 * scale), 0, 0);
+				dim.setMargins(0, (int) (10 * scale), 0, 0);
 				btn.setLayoutParams(dim);
 				btn.setText(acc.getUsername());
 				btn.setBackgroundResource(R.drawable.button_style);
@@ -146,6 +146,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 				});
 				Button btn_friend=new Button(getApplicationContext());
 				LayoutParams dim2 = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
+				dim2.setMargins(0, (int) (10 * scale), 0, 0);
 				btn_friend.setLayoutParams(dim2);
 				btn_friend.setBackgroundResource(R.drawable.button_style);
 				btn_friend.setTextColor(Color.BLACK);
@@ -188,6 +189,8 @@ public class CercaUtenteActivity extends ActionBarActivity {
 	}
 	@Override
 	public void onBackPressed() {
-		super.onBackPressed();
+		Intent intent=new Intent(getApplicationContext(), NuovaPartitaActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
 	}
 }

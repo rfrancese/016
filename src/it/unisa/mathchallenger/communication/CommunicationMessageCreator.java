@@ -72,4 +72,7 @@ public class CommunicationMessageCreator {
 	public Messaggio createRimuoviAmico(int id_amico){
 		return new Messaggio("removefriend "+id_amico);
 	}
+	public Messaggio createGetMyFriends(){
+		return new Messaggio("getMyFriends");
+	}
 }

@@ -30,13 +30,43 @@ import android.widget.Toast;
 public class NuovaPartitaActivity extends ActionBarActivity {
 
 	private Communication comm;
+	private static boolean firstStart=true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nuova_partita);
 		comm = Communication.getInstance();
-		
+		if(firstStart){
+			firstStart=false;
+			Messaggio m=CommunicationMessageCreator.getInstance().createGetMyFriends();
+			try {
+				comm.send(m);
+				ArrayList<Account> friends=CommunicationParser.getInstance().parseGetMyFriends(m);
+				if(friends!=null){
+					for(int i=0;i<friends.size();i++)
+						Status.getInstance().aggiungiAmico(friends.get(i));
+				}
+			}
+			catch (IOException e) {
+				Toast.makeText(getApplicationContext(),
+						e.getMessage(),
+						Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+			catch (LoginException e) {
+				Toast.makeText(getApplicationContext(),
+						e.getMessage(),
+						Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+			catch (ConnectionException e) {
+				Toast.makeText(getApplicationContext(),
+						e.getMessage(),
+						Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+		}
 		aggiungiAmiciUI();
 	}
 
@@ -121,6 +151,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			btn_amico.setGravity(Gravity.CENTER);
 			btn_amico.setBackgroundResource(R.drawable.button_style);
 			LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(width, height);
+			params.setMargins(0, (int) (10*scale), 0, 0);
 			btn_amico.setLayoutParams(params);
 			
 			Button btn_remove=new Button(getApplicationContext());
@@ -130,6 +161,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			btn_remove.setGravity(Gravity.CENTER);
 			btn_remove.setBackgroundResource(R.drawable.button_style);
 			LayoutParams params2=new LayoutParams(LayoutParams.WRAP_CONTENT, height);
+			params2.setMargins(0, (int) (10*scale), 0, 0);
 			btn_remove.setLayoutParams(params2);
 			btn_remove.setOnClickListener(new Button.OnClickListener(){
 				public void onClick(View v) {
@@ -142,22 +174,26 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 						}
 					}
 					catch (IOException e) {
-						// TODO Auto-generated catch block
+						Toast.makeText(getApplicationContext(),
+								e.getMessage(),
+								Toast.LENGTH_LONG).show();
 						e.printStackTrace();
 					}
 					catch (LoginException e) {
-						// TODO Auto-generated catch block
+						Toast.makeText(getApplicationContext(),
+								e.getMessage(),
+								Toast.LENGTH_LONG).show();
 						e.printStackTrace();
 					}
 					catch (ConnectionException e) {
-						// TODO Auto-generated catch block
+						Toast.makeText(getApplicationContext(),
+								e.getMessage(),
+								Toast.LENGTH_LONG).show();
 						e.printStackTrace();
 					}
 					
 				}
 			});
-			
-			
 			lay.addView(newLay);
 		}
 	}
