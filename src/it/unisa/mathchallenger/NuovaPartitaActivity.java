@@ -9,6 +9,7 @@ import it.unisa.mathchallenger.communication.Messaggio;
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
 import it.unisa.mathchallenger.status.Partita;
+import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,8 +52,10 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		try {
 			comm.send(m);
 			Partita p=CommunicationParser.getInstance().parseNewGameRandom(m);
-			//TODO avvio partita e load partita
-			//Status.getInstance().aggiungiPartita(p);
+			Intent intent=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			//TODO avvio partita
 		} 
 		catch (IOException e) {
 			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
