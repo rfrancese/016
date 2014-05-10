@@ -1,3 +1,4 @@
+
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
@@ -19,12 +20,14 @@ import android.view.View;
 import android.widget.Toast;
 
 public class NuovaPartitaActivity extends ActionBarActivity {
+
 	private Communication comm;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nuova_partita);
-		comm=Communication.getInstance();
+		comm = Communication.getInstance();
 	}
 
 	@Override
@@ -46,34 +49,39 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void onClickCreaRandom(View v){
-		Messaggio m=CommunicationMessageCreator.getInstance().createNewGameRandom();
+
+	public void onClickCreaRandom(View v) {
+		Messaggio m = CommunicationMessageCreator.getInstance().createNewGameRandom();
 		try {
 			comm.send(m);
-			Partita p=CommunicationParser.getInstance().parseNewGameRandom(m);
-			Intent intent=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+			Partita p = CommunicationParser.getInstance().parseNewGameRandom(m);
+			Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-			//TODO avvio partita
-		} 
+			// TODO avvio partita
+		}
 		catch (IOException e) {
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(),
+					e.getMessage(),
+					Toast.LENGTH_LONG).show();
 			e.printStackTrace();
-		} 
+		}
 		catch (LoginException e) {
-			Intent intent=new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
+			Intent intent = new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-		} 
+		}
 		catch (ConnectionException e) {
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(),
+					e.getMessage(),
+					Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public void onBackPressed() {
-		Intent intent=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+		Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}

@@ -1,3 +1,4 @@
+
 package it.unisa.mathchallenger.util;
 
 import android.app.Activity;
@@ -24,6 +25,7 @@ import android.view.View;
  * @see android.view.WindowManager.LayoutParams#FLAG_FULLSCREEN
  */
 public abstract class SystemUiHider {
+
 	/**
 	 * When this flag is set, the
 	 * {@link android.view.WindowManager.LayoutParams#FLAG_LAYOUT_IN_SCREEN}
@@ -98,7 +100,8 @@ public abstract class SystemUiHider {
 			int flags) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			return new SystemUiHiderHoneycomb(activity, anchorView, flags);
-		} else {
+		}
+		else {
 			return new SystemUiHiderBase(activity, anchorView, flags);
 		}
 	}
@@ -136,7 +139,8 @@ public abstract class SystemUiHider {
 	public void toggle() {
 		if (isVisible()) {
 			hide();
-		} else {
+		}
+		else {
 			show();
 		}
 	}
@@ -158,15 +162,16 @@ public abstract class SystemUiHider {
 	 * A dummy no-op callback for use when there is no other listener set.
 	 */
 	private static OnVisibilityChangeListener sDummyListener = new OnVisibilityChangeListener() {
+
 		@Override
-		public void onVisibilityChange(boolean visible) {
-		}
+		public void onVisibilityChange(boolean visible) {}
 	};
 
 	/**
 	 * A callback interface used to listen for system UI visibility changes.
 	 */
 	public interface OnVisibilityChangeListener {
+
 		/**
 		 * Called when the system UI visibility has changed.
 		 * 

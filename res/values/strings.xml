@@ -50,5 +50,7 @@
     <string name="nuova_partita_casuale">Scontro casuale</string>
     <string name="nuova_partita_cerca_utente">Cerca utente</string>
     <string name="elenco_amici">Elenco amici</string>
-
+	<string name="dialog_abbandona_partita">Vuoi abbandonare la partita?</string>
+	<string name="yes">Si</string>
+	<string name="no">No</string>
 </resources>

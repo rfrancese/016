@@ -1,3 +1,4 @@
+
 package it.unisa.mathchallenger.util;
 
 import android.app.Activity;
@@ -9,6 +10,7 @@ import android.view.WindowManager;
  * API levels to show and hide the status bar.
  */
 public class SystemUiHiderBase extends SystemUiHider {
+
 	/**
 	 * Whether or not the system UI is currently visible. This is a cached value
 	 * from calls to {@link #hide()} and {@link #show()}.
@@ -26,11 +28,8 @@ public class SystemUiHiderBase extends SystemUiHider {
 	@Override
 	public void setup() {
 		if ((mFlags & FLAG_LAYOUT_IN_SCREEN_OLDER_DEVICES) == 0) {
-			mActivity.getWindow().setFlags(
-					WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
-							| WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-					WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
-							| WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+			mActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+					WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 		}
 	}
 
@@ -42,8 +41,7 @@ public class SystemUiHiderBase extends SystemUiHider {
 	@Override
 	public void hide() {
 		if ((mFlags & FLAG_FULLSCREEN) != 0) {
-			mActivity.getWindow().setFlags(
-					WindowManager.LayoutParams.FLAG_FULLSCREEN,
+			mActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 					WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		}
 		mOnVisibilityChangeListener.onVisibilityChange(false);

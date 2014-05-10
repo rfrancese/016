@@ -1,3 +1,4 @@
+
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
@@ -18,13 +19,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityCambiaPassword extends ActionBarActivity {
+
 	private Communication comm;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cambia_password);
-		comm=Communication.getInstance();
-		
+		comm = Communication.getInstance();
+
 	}
 
 	@Override
@@ -46,44 +49,55 @@ public class ActivityCambiaPassword extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void onClickCambiaPassword(View v){
-		String oldPass_tv=((TextView)findViewById(R.id.vecchia_pass_text)).getText().toString();
-		String newPass1=((TextView)findViewById(R.id.pass1_cambia_text)).getText().toString();
-		String newPass2=((TextView)findViewById(R.id.pass2_cambia_text)).getText().toString();
-		if(newPass1.compareTo(newPass2)==0){
-			Messaggio m=CommunicationMessageCreator.getInstance().createChangePasswordMessage(oldPass_tv, newPass1);
+
+	public void onClickCambiaPassword(View v) {
+		String oldPass_tv = ((TextView) findViewById(R.id.vecchia_pass_text)).getText().toString();
+		String newPass1 = ((TextView) findViewById(R.id.pass1_cambia_text)).getText().toString();
+		String newPass2 = ((TextView) findViewById(R.id.pass2_cambia_text)).getText().toString();
+		if (newPass1.compareTo(newPass2) == 0) {
+			Messaggio m = CommunicationMessageCreator.getInstance().createChangePasswordMessage(oldPass_tv,
+					newPass1);
 			try {
 				comm.send(m);
-				if(CommunicationParser.getInstance().parseChangePassword(m)){
-					Toast.makeText(getApplicationContext(), R.string.message_cambio_pass_ok, Toast.LENGTH_LONG).show();
+				if (CommunicationParser.getInstance().parseChangePassword(m)) {
+					Toast.makeText(getApplicationContext(),
+							R.string.message_cambio_pass_ok,
+							Toast.LENGTH_LONG).show();
 				}
 				else {
-					Toast.makeText(getApplicationContext(), m.getErrorMessage(), Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(),
+							m.getErrorMessage(),
+							Toast.LENGTH_LONG).show();
 				}
 			}
 			catch (IOException e) {
-				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(),
+						e.getMessage(),
+						Toast.LENGTH_LONG).show();
 				e.printStackTrace();
-			} 
+			}
 			catch (LoginException e) {
-				Intent intent=new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
+				Intent intent = new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
 				startActivity(intent);
 				finish();
-			} 
+			}
 			catch (ConnectionException e) {
-				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(),
+						e.getMessage(),
+						Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			}
 		}
 		else {
-			Toast.makeText(getApplicationContext(), R.string.message_cambio_pass_password_non_corrispondenti, Toast.LENGTH_LONG).show();;
+			Toast.makeText(getApplicationContext(),
+					R.string.message_cambio_pass_password_non_corrispondenti,
+					Toast.LENGTH_LONG).show();;
 		}
 	}
-	
+
 	@Override
 	public void onBackPressed() {
-		Intent intente=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+		Intent intente = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 		intente.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intente);
 	}
