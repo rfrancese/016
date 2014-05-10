@@ -34,7 +34,21 @@ public class ThreadPing extends Thread {
 				comm.send(m);
 			}
 			catch (IOException | LoginException | ConnectionException e) {
-				e.printStackTrace();
+				try {
+					comm.restart();
+				}
+				catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				catch (LoginException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				catch (ConnectionException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 	}

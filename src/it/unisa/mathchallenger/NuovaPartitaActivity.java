@@ -77,6 +77,10 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 	}
+	public void onClickCercaUtente(View v){
+		Intent intent=new Intent(getApplicationContext(), CercaUtenteActivity.class);
+		startActivity(intent);
+	}
 
 	@Override
 	public void onBackPressed() {

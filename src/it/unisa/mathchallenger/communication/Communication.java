@@ -3,6 +3,8 @@ package it.unisa.mathchallenger.communication;
 
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
+import it.unisa.mathchallenger.status.AccountUser;
+import it.unisa.mathchallenger.status.Status;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -50,7 +52,6 @@ public class Communication implements Runnable {
 
 	private boolean connect() throws UnknownHostException, IOException {
 		socket = new Socket(HOSTNAME, HOSTNAME_PORT);
-		socket.setKeepAlive(true);
 		out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		return true;
@@ -76,8 +77,13 @@ public class Communication implements Runnable {
 		}
 	}
 
-	public void restart() {
-
+	public void restart() throws UnknownHostException, IOException, LoginException, ConnectionException {
+		connect();
+		AccountUser a=Status.getInstance().getUtente();
+		if(a!=null){
+			Messaggio relog=CommunicationMessageCreator.getInstance().createLoginAuthcode(a.getID(), a.getAuthCode());
+			send(relog);
+		}
 	}
 
 	public synchronized void send(Messaggio m) throws IOException,

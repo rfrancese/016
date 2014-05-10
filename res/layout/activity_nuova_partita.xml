@@ -26,6 +26,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_style"
+        android:onClick="onClickCercaUtente"
         android:text="@string/nuova_partita_cerca_utente"
         android:textStyle="bold" />
 

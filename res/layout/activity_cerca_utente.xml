@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_opacita"
+    android:paddingBottom="20dp"
+    tools:context="it.unisa.mathchallenger.CercaUtenteActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <EditText
+        android:id="@+id/textfield_cerca"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/textfield"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="5dp" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/buttonCerca"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/textfield_cerca"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/button_style"
+        android:onClick="onClickCerca"
+        android:text="@string/button_cerca"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/risultati_ricerca_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/buttonCerca"
+        android:layout_alignRight="@+id/buttonCerca"
+        android:layout_below="@+id/buttonCerca"
+        android:layout_marginTop="20dp" >
+
+        <LinearLayout
+            android:id="@+id/risultati_ricerca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -209,7 +209,7 @@ public class CommunicationParser {
 					if (kv[1].compareTo("OK") != 0)
 						return null;
 					break;
-				case "account":
+				case "utente":
 					String[] acc = kv[1].split(",");
 					int id = Integer.parseInt(acc[1]);
 					Account a = new Account(id);

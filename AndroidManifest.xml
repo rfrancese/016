@@ -52,6 +52,10 @@
             android:name="it.unisa.mathchallenger.NuovaPartitaActivity"
             android:label="@string/title_activity_nuova_partita" >
         </activity>
+        <activity
+            android:name="it.unisa.mathchallenger.CercaUtenteActivity"
+            android:label="@string/title_activity_cerca_utente" >
+        </activity>
     </application>
 
 </manifest>
