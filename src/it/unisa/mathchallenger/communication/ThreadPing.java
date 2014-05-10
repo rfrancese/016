@@ -9,6 +9,8 @@ import java.io.IOException;
 public class ThreadPing extends Thread {
 
 	private static ThreadPing thread;
+	
+	private final static long SLEEP_TIME_PING=20000L; //20 secondi
 
 	public static ThreadPing getInstance() {
 		if (thread == null)
@@ -22,7 +24,7 @@ public class ThreadPing extends Thread {
 		Communication comm = Communication.getInstance();
 		while (true) {
 			try {
-				sleep(10000L);
+				sleep(SLEEP_TIME_PING);
 			}
 			catch (InterruptedException e) {
 				e.printStackTrace();
