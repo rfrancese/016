@@ -127,7 +127,9 @@ public class Status {
 		else
 			return null;
 	}
-
+	public ArrayList<Account> getElencoAmici(){
+		return amici;
+	}
 	public void aggiungiAmico(Account a) {
 		for (int i = 0; i < amici.size(); i++) {
 			if (amici.get(i).getID() == a.getID())

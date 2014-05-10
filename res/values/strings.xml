@@ -59,4 +59,7 @@
 	<string name="messagge_cerca_length">La stringa deve avere almeno 3 caratteri</string>
 	<string name="risultato_ricerca_nessun_risultato">Nessun risultato trovato</string>
 	<string name="risultato_ricerca_trovati">Trovati: </string>
+	<string name="errore_durante_creazione_partita">Si è verificato un errore durante la creazione della partita</string>
+	<string name="amico_aggiunto">Amico aggiunto!</string>
+	<string name="amico_non_aggiunto">Riprova. Amico non aggiunto :(</string>
 </resources>

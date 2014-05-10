@@ -293,4 +293,36 @@ public class CommunicationParser {
 		}
 		return false;
 	}
+	public boolean parseAggiungiAmico(Messaggio m){
+		String[] prop = m.getResponse().split(";");
+		for (int i = 0; i < prop.length; i++) {
+			String[] kv = prop[i].split("=");
+			switch (kv[0]) {
+				case "addfriend":
+					if (kv[1].compareTo("OK") == 0)
+						return true;
+					break;
+				case "message":
+					m.setErrorMessage(kv[1]);
+					break;
+			}
+		}
+		return false;
+	}
+	public boolean parseRimuoviAmico(Messaggio m){
+		String[] prop = m.getResponse().split(";");
+		for (int i = 0; i < prop.length; i++) {
+			String[] kv = prop[i].split("=");
+			switch (kv[0]) {
+				case "removefriend":
+					if (kv[1].compareTo("OK") == 0)
+						return true;
+					break;
+				case "message":
+					m.setErrorMessage(kv[1]);
+					break;
+			}
+		}
+		return false;
+	}
 }

@@ -66,4 +66,10 @@ public class CommunicationMessageCreator {
 	public Messaggio createPingMessage() {
 		return new Messaggio("ping");
 	}
+	public Messaggio createAggiungiAmico(int id_amico){
+		return new Messaggio("addfriend "+id_amico);
+	}
+	public Messaggio createRimuoviAmico(int id_amico){
+		return new Messaggio("removefriend "+id_amico);
+	}
 }

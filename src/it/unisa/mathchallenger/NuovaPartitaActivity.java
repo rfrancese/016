@@ -2,6 +2,7 @@
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import it.unisa.mathchallenger.communication.Communication;
 import it.unisa.mathchallenger.communication.CommunicationMessageCreator;
@@ -9,13 +10,21 @@ import it.unisa.mathchallenger.communication.CommunicationParser;
 import it.unisa.mathchallenger.communication.Messaggio;
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
+import it.unisa.mathchallenger.status.Account;
 import it.unisa.mathchallenger.status.Partita;
+import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
 public class NuovaPartitaActivity extends ActionBarActivity {
@@ -27,6 +36,8 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nuova_partita);
 		comm = Communication.getInstance();
+		
+		aggiungiAmiciUI();
 	}
 
 	@Override
@@ -79,6 +90,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 	}
 	public void onClickCercaUtente(View v){
 		Intent intent=new Intent(getApplicationContext(), CercaUtenteActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}
 
@@ -87,5 +99,66 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
+	}
+	
+	private void aggiungiAmiciUI(){
+		Log.d("", "AggiungiAmiciUI invoked");
+		final LinearLayout lay=(LinearLayout) findViewById(R.id.amici_elenco);
+		lay.removeAllViews();
+		ArrayList<Account> amici=Status.getInstance().getElencoAmici();
+		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+		int height = (int) (scale * 45 + 0.5f);
+		int width= (int) (scale*220 +0.5f);
+		for(int i=0;i<amici.size();i++){
+			final LinearLayout newLay=new LinearLayout(getApplicationContext());
+			newLay.setOrientation(LinearLayout.HORIZONTAL);
+			
+			final Account acc=amici.get(i);
+			Button btn_amico=new Button(getApplicationContext());
+			newLay.addView(btn_amico);
+			btn_amico.setText(acc.getUsername());
+			btn_amico.setTextColor(Color.BLACK);
+			btn_amico.setGravity(Gravity.CENTER);
+			btn_amico.setBackgroundResource(R.drawable.button_style);
+			LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(width, height);
+			btn_amico.setLayoutParams(params);
+			
+			Button btn_remove=new Button(getApplicationContext());
+			newLay.addView(btn_remove);
+			btn_remove.setText("X");
+			btn_remove.setTextColor(Color.BLACK);
+			btn_remove.setGravity(Gravity.CENTER);
+			btn_remove.setBackgroundResource(R.drawable.button_style);
+			LayoutParams params2=new LayoutParams(LayoutParams.WRAP_CONTENT, height);
+			btn_remove.setLayoutParams(params2);
+			btn_remove.setOnClickListener(new Button.OnClickListener(){
+				public void onClick(View v) {
+					Messaggio m=CommunicationMessageCreator.getInstance().createRimuoviAmico(acc.getID());
+					try {
+						comm.send(m);
+						if(CommunicationParser.getInstance().parseRimuoviAmico(m)){
+							Status.getInstance().rimuoviAmico(acc.getID());
+							lay.removeView(newLay);
+						}
+					}
+					catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					catch (LoginException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					catch (ConnectionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			});
+			
+			
+			lay.addView(newLay);
+		}
 	}
 }

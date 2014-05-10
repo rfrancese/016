@@ -44,6 +44,14 @@
         android:layout_marginTop="10dp"
         android:layout_weight="0.60" >
 
+        <LinearLayout
+            android:id="@+id/amici_elenco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>
