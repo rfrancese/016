@@ -137,6 +137,8 @@ public class HomeGiocoActivity extends ActionBarActivity {
 						Bundle bun = new Bundle();
 						bun.putInt("id_partita", p.getIDPartita());
 						intent.putExtras(bun);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						t_aggiorna_partite.interrupt();
 						startActivity(intent);
 					}
 				});
@@ -199,6 +201,8 @@ public class HomeGiocoActivity extends ActionBarActivity {
 						Bundle bun = new Bundle();
 						bun.putInt("id_partita", partita.getIDPartita());
 						intent.putExtras(bun);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						t_aggiorna_partite.interrupt();
 						startActivity(intent);
 					}
 				});

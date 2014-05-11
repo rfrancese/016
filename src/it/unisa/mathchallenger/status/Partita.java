@@ -66,6 +66,8 @@ public class Partita {
 	}
 	public void setDettagliPartita(StatoPartita p){
 		stato=p;
+		if(p!=null)
+			setStatoPartita(p.getStato());
 	}
 	public boolean haiVinto() throws DettagliNonPresentiException{
 		if(stato!=null){
@@ -84,5 +86,20 @@ public class Partita {
 	}
 	public boolean isPareggiata(){
 		return stato_partita==PAREGGIATA;
+	}
+	public boolean isAbbandonata() throws DettagliNonPresentiException{
+		if(stato!=null){
+			switch(stato.getUtente()){
+				case 1:
+					if(stato_partita==ABBANDONATA_1)
+						return true;
+					return false;
+				case 2:
+					if(stato_partita==ABBANDONATA_2)
+						return true;
+					return false;
+			}
+		}
+		throw new DettagliNonPresentiException("Devi richiedere lo stato della partita al server");
 	}
 }

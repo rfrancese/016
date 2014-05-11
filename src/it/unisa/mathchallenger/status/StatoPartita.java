@@ -3,7 +3,7 @@ package it.unisa.mathchallenger.status;
 
 public class StatoPartita {
 	private boolean haiRisposto, avversario_risposto;
-	private int n_domande, utente;
+	private int n_domande, utente, nuovo_stato;
 	private int[] tue_risposte, avversario_risposte;
 	
 	public StatoPartita(){}
@@ -12,6 +12,12 @@ public class StatoPartita {
 	}
 	public void setRisposteAvversario(int[] risposte){
 		avversario_risposte=risposte;
+	}
+	public int getStato(){
+		return nuovo_stato;
+	}
+	public void setStato(int s){
+		nuovo_stato=s;
 	}
 	public void setRisposteUtente(int[] risposte){
 		tue_risposte=risposte;

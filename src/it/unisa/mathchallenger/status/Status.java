@@ -99,6 +99,9 @@ public class Status {
 				p.getUtenteSfidato().getUsername(),
 				p.getStatoPartita());
 	}
+	public void aggiornaPartita(Partita p){
+		database.aggiornaPartita(p.getIDPartita(), getUtente().getID(), p.getUtenteSfidato().getID(), p.getUtenteSfidato().getUsername(), p.getStatoPartita());
+	}
 
 	public Partita getPartitaByID(int id) {
 		for (int i = 0; i < partite.size(); i++) {

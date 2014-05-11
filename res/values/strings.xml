@@ -65,7 +65,9 @@
 	<string name="gioca">Gioca</string>
 	<string name="in_attesa_dell_avversario">In attesa dell\'avversario</string>
 	<string name="pareggiata">Pareggiata :|</string>
-	<string name="persa">Hai perso :()</string>
+	<string name="persa">Hai perso :(</string>
 	<string name="vinto">HAI VINTO!</string>
 	<string name="tempo_scaduto">Tempo scaduto :S</string>
+	<string name="abbandonata_sfidante">Abbandonata dallo sfidante</string>
+	<string name="abbandonata">Hai abbandonato la partita</string>
 </resources>

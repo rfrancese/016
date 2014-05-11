@@ -393,6 +393,10 @@ public class CommunicationParser {
 					stato.setRisposteAvversario(avv_r);
 					break;
 				}
+				case "stato_partita":
+					int newStato=Integer.parseInt(kv[1]);
+					stato.setStato(newStato);
+					break;
 			}
 		}
 		return stato;
