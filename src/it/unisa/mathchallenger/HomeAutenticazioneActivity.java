@@ -46,7 +46,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		Status.getInstance(getApplicationContext());
 		AccountUser acc = Status.getInstance().getUtente();
 		boolean loginOK = false;
-		if (acc != null) {
+		if (acc != null && comm.isConnected()) {
 			Messaggio m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(),
 					acc.getAuthCode());
 			try {
