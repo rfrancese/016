@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.communication;
 
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
@@ -19,10 +18,10 @@ public class Communication implements Runnable {
 
 	private static Communication singleton;
 
-	private Socket socket;
-	private final static String HOSTNAME = "192.168.0.210";
+	private Socket			   socket;
+	private final static String  HOSTNAME	  = "192.168.0.210";
 	// private final static String HOSTNAME="172.19.253.48";
-	private final static int HOSTNAME_PORT = 50000;
+	private final static int	 HOSTNAME_PORT = 50000;
 
 	private Communication() {
 		super();
@@ -47,7 +46,7 @@ public class Communication implements Runnable {
 		}
 	}
 
-	private PrintWriter out;
+	private PrintWriter	out;
 	private BufferedReader in;
 
 	private boolean connect() throws UnknownHostException, IOException {
@@ -79,15 +78,14 @@ public class Communication implements Runnable {
 
 	public void restart() throws UnknownHostException, IOException, LoginException, ConnectionException {
 		connect();
-		AccountUser a=Status.getInstance().getUtente();
-		if(a!=null){
-			Messaggio relog=CommunicationMessageCreator.getInstance().createLoginAuthcode(a.getID(), a.getAuthCode());
+		AccountUser a = Status.getInstance().getUtente();
+		if (a != null) {
+			Messaggio relog = CommunicationMessageCreator.getInstance().createLoginAuthcode(a.getID(), a.getAuthCode());
 			send(relog);
 		}
 	}
 
-	public synchronized void send(Messaggio m) throws IOException,
-			LoginException, ConnectionException {
+	public synchronized void send(Messaggio m) throws IOException, LoginException, ConnectionException {
 		if (socket == null) {
 			connect();
 		}
@@ -101,8 +99,9 @@ public class Communication implements Runnable {
 		while ((r = in.readLine()) == null);
 		return r;
 	}
-	public boolean isConnected(){
-		if(socket!=null)
+
+	public boolean isConnected() {
+		if (socket != null)
 			return true;
 		return false;
 	}

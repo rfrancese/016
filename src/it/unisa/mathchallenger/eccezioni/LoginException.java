@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.eccezioni;
 
 public class LoginException extends Exception {

@@ -1,11 +1,10 @@
-
 package it.unisa.mathchallenger.status;
 
 public class Domanda {
 
-	private int num_domanda;
+	private int	num_domanda;
 	private String domanda;
-	private float risposta1, risposta2, risposta3, risposta4;
+	private float  risposta1, risposta2, risposta3, risposta4;
 
 	public Domanda() {}
 

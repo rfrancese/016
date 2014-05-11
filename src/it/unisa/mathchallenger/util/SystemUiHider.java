@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.util;
 
 import android.app.Activity;
@@ -38,14 +37,14 @@ public abstract class SystemUiHider {
 	 * bar</a>, the most important structural element of an Android app, should
 	 * be visible and not obscured by the system UI.
 	 */
-	public static final int FLAG_LAYOUT_IN_SCREEN_OLDER_DEVICES = 0x1;
+	public static final int			  FLAG_LAYOUT_IN_SCREEN_OLDER_DEVICES = 0x1;
 
 	/**
 	 * When this flag is set, {@link #show()} and {@link #hide()} will toggle
 	 * the visibility of the status bar. If there is a navigation bar, show and
 	 * hide will toggle low profile mode.
 	 */
-	public static final int FLAG_FULLSCREEN = 0x2;
+	public static final int			  FLAG_FULLSCREEN					 = 0x2;
 
 	/**
 	 * When this flag is set, {@link #show()} and {@link #hide()} will toggle
@@ -53,17 +52,17 @@ public abstract class SystemUiHider {
 	 * the device allows hiding it. In cases where the navigation bar is present
 	 * but cannot be hidden, show and hide will toggle low profile mode.
 	 */
-	public static final int FLAG_HIDE_NAVIGATION = FLAG_FULLSCREEN | 0x4;
+	public static final int			  FLAG_HIDE_NAVIGATION				= FLAG_FULLSCREEN | 0x4;
 
 	/**
 	 * The activity associated with this UI hider object.
 	 */
-	protected Activity mActivity;
+	protected Activity				   mActivity;
 
 	/**
 	 * The view on which {@link View#setSystemUiVisibility(int)} will be called.
 	 */
-	protected View mAnchorView;
+	protected View					   mAnchorView;
 
 	/**
 	 * The current UI hider flags.
@@ -72,12 +71,12 @@ public abstract class SystemUiHider {
 	 * @see #FLAG_HIDE_NAVIGATION
 	 * @see #FLAG_LAYOUT_IN_SCREEN_OLDER_DEVICES
 	 */
-	protected int mFlags;
+	protected int						mFlags;
 
 	/**
 	 * The current visibility callback.
 	 */
-	protected OnVisibilityChangeListener mOnVisibilityChangeListener = sDummyListener;
+	protected OnVisibilityChangeListener mOnVisibilityChangeListener		 = sDummyListener;
 
 	/**
 	 * Creates and returns an instance of {@link SystemUiHider} that is
@@ -96,8 +95,7 @@ public abstract class SystemUiHider {
 	 *            {@link #FLAG_HIDE_NAVIGATION}, and
 	 *            {@link #FLAG_LAYOUT_IN_SCREEN_OLDER_DEVICES}.
 	 */
-	public static SystemUiHider getInstance(Activity activity, View anchorView,
-			int flags) {
+	public static SystemUiHider getInstance(Activity activity, View anchorView, int flags) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			return new SystemUiHiderHoneycomb(activity, anchorView, flags);
 		}
@@ -149,8 +147,7 @@ public abstract class SystemUiHider {
 	 * Registers a callback, to be triggered when the system UI visibility
 	 * changes.
 	 */
-	public void setOnVisibilityChangeListener(
-			OnVisibilityChangeListener listener) {
+	public void setOnVisibilityChangeListener(OnVisibilityChangeListener listener) {
 		if (listener == null) {
 			listener = sDummyListener;
 		}
@@ -163,9 +160,9 @@ public abstract class SystemUiHider {
 	 */
 	private static OnVisibilityChangeListener sDummyListener = new OnVisibilityChangeListener() {
 
-		@Override
-		public void onVisibilityChange(boolean visible) {}
-	};
+																 @Override
+																 public void onVisibilityChange(boolean visible) {}
+															 };
 
 	/**
 	 * A callback interface used to listen for system UI visibility changes.

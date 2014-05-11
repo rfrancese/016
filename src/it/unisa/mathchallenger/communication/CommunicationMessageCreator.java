@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.communication;
 
 public class CommunicationMessageCreator {
@@ -17,8 +16,7 @@ public class CommunicationMessageCreator {
 		return new Messaggio("login " + username + " " + password);
 	}
 
-	public Messaggio createRegisterMessage(String username, String pass,
-			String email) {
+	public Messaggio createRegisterMessage(String username, String pass, String email) {
 		return new Messaggio("register " + username + " " + pass + " " + email);
 	}
 
@@ -38,8 +36,7 @@ public class CommunicationMessageCreator {
 		return new Messaggio("logout");
 	}
 
-	public Messaggio
-			createChangePasswordMessage(String oldPass, String newPass) {
+	public Messaggio createChangePasswordMessage(String oldPass, String newPass) {
 		return new Messaggio("change-psw " + oldPass + " " + newPass);
 	}
 
@@ -66,16 +63,20 @@ public class CommunicationMessageCreator {
 	public Messaggio createPingMessage() {
 		return new Messaggio("ping");
 	}
-	public Messaggio createAggiungiAmico(int id_amico){
-		return new Messaggio("addfriend "+id_amico);
+
+	public Messaggio createAggiungiAmico(int id_amico) {
+		return new Messaggio("addfriend " + id_amico);
 	}
-	public Messaggio createRimuoviAmico(int id_amico){
-		return new Messaggio("removefriend "+id_amico);
+
+	public Messaggio createRimuoviAmico(int id_amico) {
+		return new Messaggio("removefriend " + id_amico);
 	}
-	public Messaggio createGetMyFriends(){
+
+	public Messaggio createGetMyFriends() {
 		return new Messaggio("getMyFriends");
 	}
-	public Messaggio createGetDettagliPartita(int idP){
-		return new Messaggio("getDettagliPartita "+idP);
+
+	public Messaggio createGetDettagliPartita(int idP) {
+		return new Messaggio("getDettagliPartita " + idP);
 	}
 }

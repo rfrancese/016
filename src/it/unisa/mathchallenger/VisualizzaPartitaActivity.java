@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
@@ -31,21 +30,22 @@ import android.widget.Toast;
 
 public class VisualizzaPartitaActivity extends ActionBarActivity {
 	private Communication comm;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		comm=Communication.getInstance();
+		comm = Communication.getInstance();
 		setContentView(R.layout.activity_visualizza_partita);
-		int idPartita=getIntent().getIntExtra("id_partita", 0);
-		if(idPartita>0){
-			Partita p=Status.getInstance().getPartitaByID(idPartita);
-			if(p!=null){
-				Messaggio m=CommunicationMessageCreator.getInstance().createGetDettagliPartita(idPartita);
+		int idPartita = getIntent().getIntExtra("id_partita", 0);
+		if (idPartita > 0) {
+			Partita p = Status.getInstance().getPartitaByID(idPartita);
+			if (p != null) {
+				Messaggio m = CommunicationMessageCreator.getInstance().createGetDettagliPartita(idPartita);
 				try {
 					comm.send(m);
-					StatoPartita stato=CommunicationParser.getInstance().parseGetDettaglioPartita(m);
+					StatoPartita stato = CommunicationParser.getInstance().parseGetDettaglioPartita(m);
 					p.setDettagliPartita(stato);
-					
+
 					disegna(p);
 				}
 				catch (IOException | LoginException | ConnectionException e) {
@@ -78,21 +78,22 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	private void disegna(Partita p){
-		TextView tv_user_current=(TextView) findViewById(R.id.visualizzaUsernameProprioTV);
+
+	private void disegna(Partita p) {
+		TextView tv_user_current = (TextView) findViewById(R.id.visualizzaUsernameProprioTV);
 		tv_user_current.setText(Status.getInstance().getUtente().getUsername());
-		TextView tv_avversario=(TextView) findViewById(R.id.VisualizzaUsernameAvversarioTV);
+		TextView tv_avversario = (TextView) findViewById(R.id.VisualizzaUsernameAvversarioTV);
 		tv_avversario.setText(p.getUtenteSfidato().getUsername());
-		
-		LinearLayout azione_container=(LinearLayout) findViewById(R.id.visualizza_azione_container);
-		switch(p.getStatoPartita()){
+
+		LinearLayout azione_container = (LinearLayout) findViewById(R.id.visualizza_azione_container);
+		switch (p.getStatoPartita()) {
 			case Partita.CREATA:
 			case Partita.INIZIATA:
-				if(!p.getDettagliPartita().isUtenteRisposto()){
+				if (!p.getDettagliPartita().isUtenteRisposto()) {
 					float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 					int height = (int) (scale * 45 + 0.5f);
-					Button b_gioca=new Button(getApplicationContext());
-					LinearLayout.LayoutParams dim=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
+					Button b_gioca = new Button(getApplicationContext());
+					LinearLayout.LayoutParams dim = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
 					b_gioca.setLayoutParams(dim);
 					b_gioca.setTextColor(Color.BLACK);
 					b_gioca.setText(R.string.gioca);
@@ -105,7 +106,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					azione_container.addView(b_gioca);
 				}
 				else {
-					TextView in_attesa=new TextView(getApplicationContext());
+					TextView in_attesa = new TextView(getApplicationContext());
 					in_attesa.setGravity(Gravity.CENTER);
 					in_attesa.setTextColor(Color.BLACK);
 					in_attesa.setText(R.string.in_attesa_dell_avversario);
@@ -115,7 +116,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 				}
 				break;
 			case Partita.PAREGGIATA:
-				TextView pareggiata=new TextView(getApplicationContext());
+				TextView pareggiata = new TextView(getApplicationContext());
 				pareggiata.setText(R.string.pareggiata);
 				pareggiata.setGravity(Gravity.CENTER);
 				pareggiata.setTextColor(Color.BLACK);
@@ -126,8 +127,8 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 			case Partita.VINCITORE_1:
 			case Partita.VINCITORE_2:
 				try {
-					if(p.haiVinto()){
-						TextView vinta=new TextView(getApplicationContext());
+					if (p.haiVinto()) {
+						TextView vinta = new TextView(getApplicationContext());
 						vinta.setText(R.string.vinto);
 						vinta.setGravity(Gravity.CENTER);
 						vinta.setTextColor(Color.BLACK);
@@ -136,7 +137,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 						azione_container.addView(vinta);
 					}
 					else {
-						TextView persa=new TextView(getApplicationContext());
+						TextView persa = new TextView(getApplicationContext());
 						persa.setText(R.string.persa);
 						persa.setGravity(Gravity.CENTER);
 						persa.setTextColor(Color.BLACK);
@@ -146,7 +147,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					}
 				}
 				catch (DettagliNonPresentiException e) {
-					TextView errore=new TextView(getApplicationContext());
+					TextView errore = new TextView(getApplicationContext());
 					errore.setText(e.getMessage());
 					errore.setGravity(Gravity.CENTER);
 					errore.setTextColor(Color.BLACK);
@@ -157,7 +158,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 				}
 				break;
 			case Partita.TEMPO_SCADUTO:
-				TextView tempo_scaduto=new TextView(getApplicationContext());
+				TextView tempo_scaduto = new TextView(getApplicationContext());
 				tempo_scaduto.setText(R.string.tempo_scaduto);
 				tempo_scaduto.setGravity(Gravity.CENTER);
 				tempo_scaduto.setTextColor(Color.BLACK);
@@ -167,15 +168,15 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 				break;
 			case Partita.ABBANDONATA_1:
 			case Partita.ABBANDONATA_2:
-				TextView abbandonata=new TextView(getApplicationContext());
-				
+				TextView abbandonata = new TextView(getApplicationContext());
+
 				abbandonata.setGravity(Gravity.CENTER);
 				abbandonata.setTextColor(Color.BLACK);
 				abbandonata.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
 				abbandonata.setTypeface(null, Typeface.BOLD);
 				azione_container.addView(abbandonata);
 				try {
-					if(p.isAbbandonata()){
+					if (p.isAbbandonata()) {
 						abbandonata.setText(R.string.abbandonata);
 					}
 					else
@@ -188,9 +189,10 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 				break;
 		}
 	}
+
 	@Override
 	public void onBackPressed() {
-		Intent intent=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+		Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}

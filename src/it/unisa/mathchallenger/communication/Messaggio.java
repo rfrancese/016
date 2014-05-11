@@ -1,9 +1,8 @@
-
 package it.unisa.mathchallenger.communication;
 
 public class Messaggio {
 
-	private String comando, response, error_message;
+	private String  comando, response, error_message;
 	private boolean error = false;
 
 	public Messaggio(String m) {

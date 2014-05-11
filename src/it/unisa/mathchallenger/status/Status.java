@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.status;
 
 import it.unisa.mathchallenger.communication.ThreadPing;
@@ -10,16 +9,16 @@ import android.content.Context;
 
 public class Status {
 
-	private static Status status;
+	private static Status	  status;
 
-	private AccountUser utente;
+	private AccountUser		utente;
 	private ArrayList<Partita> partite;
 	private ArrayList<Account> amici;
-	private DBAdapter database;
+	private DBAdapter		  database;
 
-	private ThreadPing t_ping;
+	private ThreadPing		 t_ping;
 
-	private long last_update_game;
+	private long			   last_update_game;
 
 	public static Status getInstance() {
 		return status;
@@ -93,13 +92,10 @@ public class Status {
 			}
 		}
 		partite.add(p);
-		database.inserisciPartita(p.getIDPartita(),
-				getUtente().getID(),
-				p.getUtenteSfidato().getID(),
-				p.getUtenteSfidato().getUsername(),
-				p.getStatoPartita());
+		database.inserisciPartita(p.getIDPartita(), getUtente().getID(), p.getUtenteSfidato().getID(), p.getUtenteSfidato().getUsername(), p.getStatoPartita());
 	}
-	public void aggiornaPartita(Partita p){
+
+	public void aggiornaPartita(Partita p) {
 		database.aggiornaPartita(p.getIDPartita(), getUtente().getID(), p.getUtenteSfidato().getID(), p.getUtenteSfidato().getUsername(), p.getStatoPartita());
 	}
 
@@ -131,9 +127,11 @@ public class Status {
 		else
 			return null;
 	}
-	public ArrayList<Account> getElencoAmici(){
+
+	public ArrayList<Account> getElencoAmici() {
 		return amici;
 	}
+
 	public void aggiungiAmico(Account a) {
 		for (int i = 0; i < amici.size(); i++) {
 			if (amici.get(i).getID() == a.getID())

@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
@@ -29,41 +28,35 @@ import android.widget.Toast;
 
 public class NuovaPartitaActivity extends ActionBarActivity {
 
-	private Communication comm;
-	private static boolean firstStart=true;
+	private Communication  comm;
+	private static boolean firstStart = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nuova_partita);
 		comm = Communication.getInstance();
-		if(firstStart){
-			firstStart=false;
-			Messaggio m=CommunicationMessageCreator.getInstance().createGetMyFriends();
+		if (firstStart) {
+			firstStart = false;
+			Messaggio m = CommunicationMessageCreator.getInstance().createGetMyFriends();
 			try {
 				comm.send(m);
-				ArrayList<Account> friends=CommunicationParser.getInstance().parseGetMyFriends(m);
-				if(friends!=null){
-					for(int i=0;i<friends.size();i++)
+				ArrayList<Account> friends = CommunicationParser.getInstance().parseGetMyFriends(m);
+				if (friends != null) {
+					for (int i = 0; i < friends.size(); i++)
 						Status.getInstance().aggiungiAmico(friends.get(i));
 				}
 			}
 			catch (IOException e) {
-				Toast.makeText(getApplicationContext(),
-						e.getMessage(),
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			}
 			catch (LoginException e) {
-				Toast.makeText(getApplicationContext(),
-						e.getMessage(),
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			}
 			catch (ConnectionException e) {
-				Toast.makeText(getApplicationContext(),
-						e.getMessage(),
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			}
 		}
@@ -101,9 +94,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			// TODO avvio partita
 		}
 		catch (IOException e) {
-			Toast.makeText(getApplicationContext(),
-					e.getMessage(),
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 		catch (LoginException e) {
@@ -112,14 +103,13 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			startActivity(intent);
 		}
 		catch (ConnectionException e) {
-			Toast.makeText(getApplicationContext(),
-					e.getMessage(),
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 	}
-	public void onClickCercaUtente(View v){
-		Intent intent=new Intent(getApplicationContext(), CercaUtenteActivity.class);
+
+	public void onClickCercaUtente(View v) {
+		Intent intent = new Intent(getApplicationContext(), CercaUtenteActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}
@@ -130,68 +120,62 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}
-	
-	private void aggiungiAmiciUI(){
+
+	private void aggiungiAmiciUI() {
 		Log.d("", "AggiungiAmiciUI invoked");
-		final LinearLayout lay=(LinearLayout) findViewById(R.id.amici_elenco);
+		final LinearLayout lay = (LinearLayout) findViewById(R.id.amici_elenco);
 		lay.removeAllViews();
-		ArrayList<Account> amici=Status.getInstance().getElencoAmici();
+		ArrayList<Account> amici = Status.getInstance().getElencoAmici();
 		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 		int height = (int) (scale * 45 + 0.5f);
-		int width= (int) (scale*250 +0.5f);
-		for(int i=0;i<amici.size();i++){
-			final LinearLayout newLay=new LinearLayout(getApplicationContext());
+		int width = (int) (scale * 250 + 0.5f);
+		for (int i = 0; i < amici.size(); i++) {
+			final LinearLayout newLay = new LinearLayout(getApplicationContext());
 			newLay.setOrientation(LinearLayout.HORIZONTAL);
-			
-			final Account acc=amici.get(i);
-			Button btn_amico=new Button(getApplicationContext());
+
+			final Account acc = amici.get(i);
+			Button btn_amico = new Button(getApplicationContext());
 			newLay.addView(btn_amico);
 			btn_amico.setText(acc.getUsername());
 			btn_amico.setTextColor(Color.BLACK);
 			btn_amico.setGravity(Gravity.CENTER);
 			btn_amico.setBackgroundResource(R.drawable.button_style);
-			LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(width, height);
-			params.setMargins(0, (int) (10*scale), 0, 0);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+			params.setMargins(0, (int) (10 * scale), 0, 0);
 			btn_amico.setLayoutParams(params);
-			
-			Button btn_remove=new Button(getApplicationContext());
+
+			Button btn_remove = new Button(getApplicationContext());
 			newLay.addView(btn_remove);
 			btn_remove.setText("X");
 			btn_remove.setTextColor(Color.BLACK);
 			btn_remove.setGravity(Gravity.CENTER);
 			btn_remove.setBackgroundResource(R.drawable.button_style);
-			LayoutParams params2=new LayoutParams(LayoutParams.WRAP_CONTENT, height);
-			params2.setMargins(0, (int) (10*scale), 0, 0);
+			LayoutParams params2 = new LayoutParams(LayoutParams.WRAP_CONTENT, height);
+			params2.setMargins(0, (int) (10 * scale), 0, 0);
 			btn_remove.setLayoutParams(params2);
-			btn_remove.setOnClickListener(new Button.OnClickListener(){
+			btn_remove.setOnClickListener(new Button.OnClickListener() {
 				public void onClick(View v) {
-					Messaggio m=CommunicationMessageCreator.getInstance().createRimuoviAmico(acc.getID());
+					Messaggio m = CommunicationMessageCreator.getInstance().createRimuoviAmico(acc.getID());
 					try {
 						comm.send(m);
-						if(CommunicationParser.getInstance().parseRimuoviAmico(m)){
+						if (CommunicationParser.getInstance().parseRimuoviAmico(m)) {
 							Status.getInstance().rimuoviAmico(acc.getID());
 							lay.removeView(newLay);
 						}
 					}
 					catch (IOException e) {
-						Toast.makeText(getApplicationContext(),
-								e.getMessage(),
-								Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 						e.printStackTrace();
 					}
 					catch (LoginException e) {
-						Toast.makeText(getApplicationContext(),
-								e.getMessage(),
-								Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 						e.printStackTrace();
 					}
 					catch (ConnectionException e) {
-						Toast.makeText(getApplicationContext(),
-								e.getMessage(),
-								Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 						e.printStackTrace();
 					}
-					
+
 				}
 			});
 			lay.addView(newLay);

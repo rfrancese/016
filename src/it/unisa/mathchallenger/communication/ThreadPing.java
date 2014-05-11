@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.communication;
 
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
@@ -9,8 +8,8 @@ import java.io.IOException;
 public class ThreadPing extends Thread {
 
 	private static ThreadPing thread;
-	
-	private final static long SLEEP_TIME_PING=20000L; //20 secondi
+
+	private final static long SLEEP_TIME_PING = 20000L; // 20 secondi
 
 	public static ThreadPing getInstance() {
 		if (thread == null)

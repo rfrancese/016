@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
@@ -55,25 +54,18 @@ public class ActivityCambiaPassword extends ActionBarActivity {
 		String newPass1 = ((TextView) findViewById(R.id.pass1_cambia_text)).getText().toString();
 		String newPass2 = ((TextView) findViewById(R.id.pass2_cambia_text)).getText().toString();
 		if (newPass1.compareTo(newPass2) == 0) {
-			Messaggio m = CommunicationMessageCreator.getInstance().createChangePasswordMessage(oldPass_tv,
-					newPass1);
+			Messaggio m = CommunicationMessageCreator.getInstance().createChangePasswordMessage(oldPass_tv, newPass1);
 			try {
 				comm.send(m);
 				if (CommunicationParser.getInstance().parseChangePassword(m)) {
-					Toast.makeText(getApplicationContext(),
-							R.string.message_cambio_pass_ok,
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), R.string.message_cambio_pass_ok, Toast.LENGTH_LONG).show();
 				}
 				else {
-					Toast.makeText(getApplicationContext(),
-							m.getErrorMessage(),
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), m.getErrorMessage(), Toast.LENGTH_LONG).show();
 				}
 			}
 			catch (IOException e) {
-				Toast.makeText(getApplicationContext(),
-						e.getMessage(),
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			}
 			catch (LoginException e) {
@@ -82,16 +74,12 @@ public class ActivityCambiaPassword extends ActionBarActivity {
 				finish();
 			}
 			catch (ConnectionException e) {
-				Toast.makeText(getApplicationContext(),
-						e.getMessage(),
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			}
 		}
 		else {
-			Toast.makeText(getApplicationContext(),
-					R.string.message_cambio_pass_password_non_corrispondenti,
-					Toast.LENGTH_LONG).show();;
+			Toast.makeText(getApplicationContext(), R.string.message_cambio_pass_password_non_corrispondenti, Toast.LENGTH_LONG).show();;
 		}
 	}
 

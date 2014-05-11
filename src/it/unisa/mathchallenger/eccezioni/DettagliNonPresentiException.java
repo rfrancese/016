@@ -1,6 +1,5 @@
 package it.unisa.mathchallenger.eccezioni;
 
-
 public class DettagliNonPresentiException extends Exception {
 
 	/**

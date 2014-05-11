@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.status;
 
 public class AccountUser extends Account {

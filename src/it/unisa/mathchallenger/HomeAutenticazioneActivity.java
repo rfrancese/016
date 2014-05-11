@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
@@ -41,8 +40,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		AccountUser acc = Status.getInstance().getUtente();
 		boolean loginOK = false;
 		if (acc != null && comm.isConnected()) {
-			Messaggio m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(),
-					acc.getAuthCode());
+			Messaggio m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
 			try {
 				comm.send(m);
 				loginOK = CommunicationParser.getInstance().parseLoginAuthcode(m);
@@ -100,41 +98,31 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			String pass2 = pass2_tv.getText().toString();
 			String email = email_tv.getText().toString();
 			if (pass1.compareTo(pass2) != 0) {
-				Toast.makeText(getApplicationContext(),
-						R.string.reg_password_diverse,
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), R.string.reg_password_diverse, Toast.LENGTH_LONG).show();
 				return;
 			}
 			else {
-				Messaggio m = CommunicationMessageCreator.getInstance().createRegisterMessage(username,
-						pass1,
-						email);
+				Messaggio m = CommunicationMessageCreator.getInstance().createRegisterMessage(username, pass1, email);
 				try {
 					comm.send(m);
 					AccountUser acc = CommunicationParser.getInstance().parseRegister(m);
 					if (acc == null) {
 						if (m.hasError()) {
-							Toast.makeText(getApplicationContext(),
-									m.getErrorMessage(),
-									Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), m.getErrorMessage(), Toast.LENGTH_LONG).show();
 						}
 						else
-							Toast.makeText(getApplicationContext(),
-									R.string.error_unknown,
-									Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), R.string.error_unknown, Toast.LENGTH_LONG).show();
 					}
 					else {
 						acc.setUsername(username);
 						Status.getInstance().login(acc);
-						
+
 						Intent intent = new Intent(this, HomeGiocoActivity.class);
 						startActivity(intent);
 					}
 				}
 				catch (IOException e) {
-					Toast.makeText(getApplicationContext(),
-							R.string.communication_error,
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), R.string.communication_error, Toast.LENGTH_LONG).show();
 					e.printStackTrace();
 				}
 				catch (LoginException e) {
@@ -164,14 +152,10 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 					comm.send(msg);
 					boolean reset_psw = CommunicationParser.getInstance().parseResetPassword(msg);
 					if (reset_psw) {
-						Toast.makeText(getApplicationContext(),
-								R.string.reset_password_ok,
-								Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), R.string.reset_password_ok, Toast.LENGTH_LONG).show();
 					}
 					else {
-						Toast.makeText(getApplicationContext(),
-								R.string.reset_password_error,
-								Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), R.string.reset_password_error, Toast.LENGTH_LONG).show();
 					}
 				}
 				catch (IOException e) {
@@ -182,9 +166,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 					e.printStackTrace();
 				}
 				catch (ConnectionException e) {
-					Toast.makeText(getApplicationContext(),
-							e.getMessage(),
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 					e.printStackTrace();
 				}
 			}
@@ -198,14 +180,11 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		String pass = p_tv.getText().toString();
 
 		try {
-			Messaggio m = CommunicationMessageCreator.getInstance().createLoginMessage(username,
-					pass);
+			Messaggio m = CommunicationMessageCreator.getInstance().createLoginMessage(username, pass);
 			comm.send(m);
 			AccountUser acc = CommunicationParser.getInstance().parseLogin(m);
 			if (acc == null) {
-				Toast.makeText(getApplicationContext(),
-						R.string.login_fail_message,
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), R.string.login_fail_message, Toast.LENGTH_LONG).show();
 			}
 			else {
 				acc.setUsername(username);
@@ -216,9 +195,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			}
 		}
 		catch (IOException e) {
-			Toast.makeText(getApplicationContext(),
-					R.string.communication_error,
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), R.string.communication_error, Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 		catch (LoginException e) {
@@ -226,9 +203,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 		catch (ConnectionException e) {
-			Toast.makeText(getApplicationContext(),
-					e.getMessage(),
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 	}

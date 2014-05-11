@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.communication;
 
 import java.util.ArrayList;
@@ -294,7 +293,8 @@ public class CommunicationParser {
 		}
 		return false;
 	}
-	public boolean parseAggiungiAmico(Messaggio m){
+
+	public boolean parseAggiungiAmico(Messaggio m) {
 		String[] prop = m.getResponse().split(";");
 		for (int i = 0; i < prop.length; i++) {
 			String[] kv = prop[i].split("=");
@@ -310,7 +310,8 @@ public class CommunicationParser {
 		}
 		return false;
 	}
-	public boolean parseRimuoviAmico(Messaggio m){
+
+	public boolean parseRimuoviAmico(Messaggio m) {
 		String[] prop = m.getResponse().split(";");
 		for (int i = 0; i < prop.length; i++) {
 			String[] kv = prop[i].split("=");
@@ -326,26 +327,27 @@ public class CommunicationParser {
 		}
 		return false;
 	}
-	public ArrayList<Account> parseGetMyFriends(Messaggio m){
-		String[] prop=m.getResponse().split(";");
-		ArrayList<Account> amici=null;
-		for(int i=0;i<prop.length;i++){
-			String[] kv=prop[i].split("=");
-			switch(kv[0]){
+
+	public ArrayList<Account> parseGetMyFriends(Messaggio m) {
+		String[] prop = m.getResponse().split(";");
+		ArrayList<Account> amici = null;
+		for (int i = 0; i < prop.length; i++) {
+			String[] kv = prop[i].split("=");
+			switch (kv[0]) {
 				case "getMyFriends":
-					if(kv[1].compareTo("OK")==0){}
+					if (kv[1].compareTo("OK") == 0) {}
 					break;
 				case "trovati":
-					int size=Integer.parseInt(kv[1]);
-					if(size>0)
-						amici=new ArrayList<Account>(size);
+					int size = Integer.parseInt(kv[1]);
+					if (size > 0)
+						amici = new ArrayList<Account>(size);
 					break;
 				case "message":
 					m.setErrorMessage(kv[1]);
 					break;
 				case "account":
-					String[] d=kv[1].split(",");
-					Account a=new Account(Integer.parseInt(d[0]));
+					String[] d = kv[1].split(",");
+					Account a = new Account(Integer.parseInt(d[0]));
 					a.setUsername(d[1]);
 					amici.add(a);
 					break;
@@ -353,15 +355,16 @@ public class CommunicationParser {
 		}
 		return amici;
 	}
-	public StatoPartita parseGetDettaglioPartita(Messaggio m){
-		String[] prop=m.getResponse().split(";");
-		StatoPartita stato=null;
-		for(int i=0;i<prop.length;i++){
-			String[] kv=prop[i].split("=");
-			switch(kv[0]){
+
+	public StatoPartita parseGetDettaglioPartita(Messaggio m) {
+		String[] prop = m.getResponse().split(";");
+		StatoPartita stato = null;
+		for (int i = 0; i < prop.length; i++) {
+			String[] kv = prop[i].split("=");
+			switch (kv[0]) {
 				case "getDettagliPartita":
-					if(kv[1].compareTo("OK")==0)
-						stato=new StatoPartita();
+					if (kv[1].compareTo("OK") == 0)
+						stato = new StatoPartita();
 					break;
 				case "domande":
 					stato.setNumeroDomande(Integer.parseInt(kv[1]));
@@ -370,31 +373,31 @@ public class CommunicationParser {
 					stato.setUtente(Integer.parseInt(kv[1]));
 					break;
 				case "hai_risposto":
-					stato.setUtenteRisposto(Integer.parseInt(kv[1])==1?true:false);
+					stato.setUtenteRisposto(Integer.parseInt(kv[1]) == 1 ? true : false);
 					break;
-				case "tue_risposte":{
-					String[] r=kv[1].split(",");
-					int[] tue_r=new int[r.length];
-					for(int j=0;j<tue_r.length;j++){
-						tue_r[j]=Integer.parseInt(r[j]);
+				case "tue_risposte": {
+					String[] r = kv[1].split(",");
+					int[] tue_r = new int[r.length];
+					for (int j = 0; j < tue_r.length; j++) {
+						tue_r[j] = Integer.parseInt(r[j]);
 					}
 					stato.setRisposteUtente(tue_r);
 					break;
-				}	
+				}
 				case "avversario_risposto":
-					stato.setAvversarioRisposto(Integer.parseInt(kv[1])==1?true:false);
+					stato.setAvversarioRisposto(Integer.parseInt(kv[1]) == 1 ? true : false);
 					break;
-				case "avversario_risposte":{
-					String[] r=kv[1].split(",");
-					int[] avv_r=new int[r.length];
-					for(int j=0;j<avv_r.length;j++){
-						avv_r[j]=Integer.parseInt(r[j]);
+				case "avversario_risposte": {
+					String[] r = kv[1].split(",");
+					int[] avv_r = new int[r.length];
+					for (int j = 0; j < avv_r.length; j++) {
+						avv_r[j] = Integer.parseInt(r[j]);
 					}
 					stato.setRisposteAvversario(avv_r);
 					break;
 				}
 				case "stato_partita":
-					int newStato=Integer.parseInt(kv[1]);
+					int newStato = Integer.parseInt(kv[1]);
 					stato.setStato(newStato);
 					break;
 			}

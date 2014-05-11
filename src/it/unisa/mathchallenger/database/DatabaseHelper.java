@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.database;
 
 import android.content.Context;
@@ -7,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-	private final static String DB_NAME = "mathchallenger.sqlite";
-	private final static int db_version = 1;
+	private final static String DB_NAME	= "mathchallenger.sqlite";
+	private final static int	db_version = 1;
 
 	public DatabaseHelper(Context context) {
 		super(context, DB_NAME, null, db_version);

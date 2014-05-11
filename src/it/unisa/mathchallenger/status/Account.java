@@ -1,9 +1,8 @@
-
 package it.unisa.mathchallenger.status;
 
 public class Account {
 
-	private int id;
+	private int	id;
 	private String nomeutente;
 
 	public Account(int id) {

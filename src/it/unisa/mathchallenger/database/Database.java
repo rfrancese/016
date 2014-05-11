@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.database;
 
 public interface Database {

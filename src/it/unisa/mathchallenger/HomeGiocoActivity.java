@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
@@ -33,7 +32,7 @@ import android.widget.TextView;
 public class HomeGiocoActivity extends ActionBarActivity {
 
 	private Communication comm;
-	private Thread t_aggiorna_partite;
+	private Thread		t_aggiorna_partite;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +80,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 					startActivity(intent);
 				}
 				catch (ConnectionException e) {
-					Toast.makeText(getApplicationContext(),
-							e.getMessage(),
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 					e.printStackTrace();
 				}
 				break;
@@ -145,25 +142,23 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				b_prt.setOnLongClickListener(new Button.OnLongClickListener() {
 
 					public boolean onLongClick(View v) {
-						new AlertDialog.Builder(HomeGiocoActivity.this).setCancelable(false).setMessage(R.string.dialog_abbandona_partita).setPositiveButton(R.string.yes,
-								new DialogInterface.OnClickListener() {
+						new AlertDialog.Builder(HomeGiocoActivity.this).setCancelable(false).setMessage(R.string.dialog_abbandona_partita).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
-									public void onClick(DialogInterface dialog,
-											int which) {
-										Messaggio m = CommunicationMessageCreator.getInstance().createAbandonGame(p.getIDPartita());
-										try {
-											comm.send(m);
-											if (CommunicationParser.getInstance().parseAbandon(m)) {
-												Status.getInstance().rimuoviPartita(p.getIDPartita());
-												lay.removeView(b_prt);
-											}
-										}
-										catch (IOException | LoginException | ConnectionException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
+							public void onClick(DialogInterface dialog, int which) {
+								Messaggio m = CommunicationMessageCreator.getInstance().createAbandonGame(p.getIDPartita());
+								try {
+									comm.send(m);
+									if (CommunicationParser.getInstance().parseAbandon(m)) {
+										Status.getInstance().rimuoviPartita(p.getIDPartita());
+										lay.removeView(b_prt);
 									}
-								}).setNegativeButton(R.string.no, null).show();
+								}
+								catch (IOException | LoginException | ConnectionException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}).setNegativeButton(R.string.no, null).show();
 						return true;
 					}
 				});
@@ -242,9 +237,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			startActivity(intent);
 		}
 		catch (ConnectionException e) {
-			Toast.makeText(getApplicationContext(),
-					e.getMessage(),
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 	}

@@ -1,4 +1,3 @@
-
 package it.unisa.mathchallenger.util;
 
 import android.annotation.TargetApi;
@@ -19,20 +18,20 @@ public class SystemUiHiderHoneycomb extends SystemUiHiderBase {
 	 * Flags for {@link View#setSystemUiVisibility(int)} to use when showing the
 	 * system UI.
 	 */
-	private int mShowFlags;
+	private int	 mShowFlags;
 
 	/**
 	 * Flags for {@link View#setSystemUiVisibility(int)} to use when hiding the
 	 * system UI.
 	 */
-	private int mHideFlags;
+	private int	 mHideFlags;
 
 	/**
 	 * Flags to test against the first parameter in
 	 * {@link android.view.View.OnSystemUiVisibilityChangeListener#onSystemUiVisibilityChange(int)}
 	 * to determine the system UI visibility state.
 	 */
-	private int mTestFlags;
+	private int	 mTestFlags;
 
 	/**
 	 * Whether or not the system UI is currently visible. This is cached from
@@ -95,39 +94,89 @@ public class SystemUiHiderHoneycomb extends SystemUiHiderBase {
 
 	private View.OnSystemUiVisibilityChangeListener mSystemUiVisibilityChangeListener = new View.OnSystemUiVisibilityChangeListener() {
 
-		@Override
-		public void onSystemUiVisibilityChange(int vis) {
-			// Test against mTestFlags to see if the system UI is visible.
-			if ((vis & mTestFlags) != 0) {
-				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-					// Pre-Jelly Bean, we must manually hide the action bar
-					// and use the old window flags API.
-					mActivity.getActionBar().hide();
-					mActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-							WindowManager.LayoutParams.FLAG_FULLSCREEN);
-				}
+																						  @Override
+																						  public void onSystemUiVisibilityChange(int vis) {
+																							  // Test
+																							  // against
+																							  // mTestFlags
+																							  // to
+																							  // see
+																							  // if
+																							  // the
+																							  // system
+																							  // UI
+																							  // is
+																							  // visible.
+																							  if ((vis & mTestFlags) != 0) {
+																								  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+																									  // Pre-Jelly
+																									  // Bean,
+																									  // we
+																									  // must
+																									  // manually
+																									  // hide
+																									  // the
+																									  // action
+																									  // bar
+																									  // and
+																									  // use
+																									  // the
+																									  // old
+																									  // window
+																									  // flags
+																									  // API.
+																									  mActivity.getActionBar().hide();
+																									  mActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+																								  }
 
-				// Trigger the registered listener and cache the visibility
-				// state.
-				mOnVisibilityChangeListener.onVisibilityChange(false);
-				mVisible = false;
+																								  // Trigger
+																								  // the
+																								  // registered
+																								  // listener
+																								  // and
+																								  // cache
+																								  // the
+																								  // visibility
+																								  // state.
+																								  mOnVisibilityChangeListener.onVisibilityChange(false);
+																								  mVisible = false;
 
-			}
-			else {
-				mAnchorView.setSystemUiVisibility(mShowFlags);
-				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-					// Pre-Jelly Bean, we must manually show the action bar
-					// and use the old window flags API.
-					mActivity.getActionBar().show();
-					mActivity.getWindow().setFlags(0,
-							WindowManager.LayoutParams.FLAG_FULLSCREEN);
-				}
+																							  }
+																							  else {
+																								  mAnchorView.setSystemUiVisibility(mShowFlags);
+																								  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+																									  // Pre-Jelly
+																									  // Bean,
+																									  // we
+																									  // must
+																									  // manually
+																									  // show
+																									  // the
+																									  // action
+																									  // bar
+																									  // and
+																									  // use
+																									  // the
+																									  // old
+																									  // window
+																									  // flags
+																									  // API.
+																									  mActivity.getActionBar().show();
+																									  mActivity.getWindow().setFlags(0, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+																								  }
 
-				// Trigger the registered listener and cache the visibility
-				// state.
-				mOnVisibilityChangeListener.onVisibilityChange(true);
-				mVisible = true;
-			}
-		}
-	};
+																								  // Trigger
+																								  // the
+																								  // registered
+																								  // listener
+																								  // and
+																								  // cache
+																								  // the
+																								  // visibility
+																								  // state.
+																								  mOnVisibilityChangeListener.onVisibilityChange(true);
+																								  mVisible = true;
+																							  }
+																						  }
+																					  };
 }
