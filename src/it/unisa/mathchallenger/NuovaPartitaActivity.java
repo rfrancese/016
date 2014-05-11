@@ -138,7 +138,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		ArrayList<Account> amici=Status.getInstance().getElencoAmici();
 		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 		int height = (int) (scale * 45 + 0.5f);
-		int width= (int) (scale*220 +0.5f);
+		int width= (int) (scale*250 +0.5f);
 		for(int i=0;i<amici.size();i++){
 			final LinearLayout newLay=new LinearLayout(getApplicationContext());
 			newLay.setOrientation(LinearLayout.HORIZONTAL);
