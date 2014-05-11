@@ -101,4 +101,9 @@ public class Communication implements Runnable {
 		while ((r = in.readLine()) == null);
 		return r;
 	}
+	public boolean isConnected(){
+		if(socket!=null)
+			return true;
+		return false;
+	}
 }

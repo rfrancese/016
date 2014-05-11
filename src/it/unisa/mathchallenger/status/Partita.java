@@ -1,6 +1,8 @@
 
 package it.unisa.mathchallenger.status;
 
+import it.unisa.mathchallenger.eccezioni.DettagliNonPresentiException;
+
 import java.util.ArrayList;
 
 public class Partita {
@@ -12,6 +14,7 @@ public class Partita {
 	private ArrayList<Domanda> domande;
 	private int id_partita;
 	private int stato_partita;
+	private StatoPartita stato;
 
 	public Partita() {
 		domande = new ArrayList<Domanda>(6);
@@ -57,5 +60,29 @@ public class Partita {
 		if (getStatoPartita() != CREATA && getStatoPartita() != INIZIATA)
 			return true;
 		return false;
+	}
+	public StatoPartita getDettagliPartita(){
+		return stato;
+	}
+	public void setDettagliPartita(StatoPartita p){
+		stato=p;
+	}
+	public boolean haiVinto() throws DettagliNonPresentiException{
+		if(stato!=null){
+			switch(stato.getUtente()){
+				case 1:
+					if(stato_partita==VINCITORE_1)
+						return true;
+					return false;
+				case 2:
+					if(stato_partita==VINCITORE_2)
+						return true;
+					return false;
+			}
+		}
+		throw new DettagliNonPresentiException("Devi richiedere lo stato della partita al server");
+	}
+	public boolean isPareggiata(){
+		return stato_partita==PAREGGIATA;
 	}
 }

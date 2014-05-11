@@ -88,6 +88,7 @@ public class Status {
 			Partita partita = partite.get(i);
 			if (partita.getIDPartita() == p.getIDPartita()) {
 				partita.setStatoPartita(p.getStatoPartita());
+				database.aggiornaPartita(partita.getIDPartita(), getUtente().getID(), partita.getUtenteSfidato().getID(), partita.getUtenteSfidato().getUsername(), partita.getStatoPartita());
 				return;
 			}
 		}

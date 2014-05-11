@@ -75,4 +75,7 @@ public class CommunicationMessageCreator {
 	public Messaggio createGetMyFriends(){
 		return new Messaggio("getMyFriends");
 	}
+	public Messaggio createGetDettagliPartita(int idP){
+		return new Messaggio("getDettagliPartita "+idP);
+	}
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import it.unisa.mathchallenger.status.Account;
 import it.unisa.mathchallenger.status.AccountUser;
 import it.unisa.mathchallenger.status.Partita;
+import it.unisa.mathchallenger.status.StatoPartita;
 
 public class CommunicationParser {
 
@@ -351,5 +352,49 @@ public class CommunicationParser {
 			}
 		}
 		return amici;
+	}
+	public StatoPartita parseGetDettaglioPartita(Messaggio m){
+		String[] prop=m.getResponse().split(";");
+		StatoPartita stato=null;
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+				case "getDettagliPartita":
+					if(kv[1].compareTo("OK")==0)
+						stato=new StatoPartita();
+					break;
+				case "domande":
+					stato.setNumeroDomande(Integer.parseInt(kv[1]));
+					break;
+				case "utente":
+					stato.setUtente(Integer.parseInt(kv[1]));
+					break;
+				case "hai_risposto":
+					stato.setUtenteRisposto(Integer.parseInt(kv[1])==1?true:false);
+					break;
+				case "tue_risposte":{
+					String[] r=kv[1].split(",");
+					int[] tue_r=new int[r.length];
+					for(int j=0;j<tue_r.length;j++){
+						tue_r[j]=Integer.parseInt(r[j]);
+					}
+					stato.setRisposteUtente(tue_r);
+					break;
+				}	
+				case "avversario_risposto":
+					stato.setAvversarioRisposto(Integer.parseInt(kv[1])==1?true:false);
+					break;
+				case "avversario_risposte":{
+					String[] r=kv[1].split(",");
+					int[] avv_r=new int[r.length];
+					for(int j=0;j<avv_r.length;j++){
+						avv_r[j]=Integer.parseInt(r[j]);
+					}
+					stato.setRisposteAvversario(avv_r);
+					break;
+				}
+			}
+		}
+		return stato;
 	}
 }

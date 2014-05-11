@@ -133,7 +133,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				b_prt.setOnClickListener(new Button.OnClickListener() {
 
 					public void onClick(View v) {
-						Intent intent = new Intent(getApplicationContext(), GiocaPartitaActivity.class);
+						Intent intent = new Intent(getApplicationContext(), VisualizzaPartitaActivity.class);
 						Bundle bun = new Bundle();
 						bun.putInt("id_partita", p.getIDPartita());
 						intent.putExtras(bun);

@@ -62,4 +62,10 @@
 	<string name="errore_durante_creazione_partita">Si è verificato un errore durante la creazione della partita</string>
 	<string name="amico_aggiunto">Amico aggiunto!</string>
 	<string name="amico_non_aggiunto">Riprova. Amico non aggiunto :(</string>
+	<string name="gioca">Gioca</string>
+	<string name="in_attesa_dell_avversario">In attesa dell\'avversario</string>
+	<string name="pareggiata">Pareggiata :|</string>
+	<string name="persa">Hai perso :()</string>
+	<string name="vinto">HAI VINTO!</string>
+	<string name="tempo_scaduto">Tempo scaduto :S</string>
 </resources>
