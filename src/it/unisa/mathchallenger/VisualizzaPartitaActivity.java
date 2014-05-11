@@ -79,7 +79,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void disegna(Partita p) {
+	private void disegna(final Partita p) {
 		TextView tv_user_current = (TextView) findViewById(R.id.visualizzaUsernameProprioTV);
 		tv_user_current.setText(Status.getInstance().getUtente().getUsername());
 		TextView tv_avversario = (TextView) findViewById(R.id.VisualizzaUsernameAvversarioTV);
@@ -100,7 +100,10 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					b_gioca.setBackgroundResource(R.drawable.button_style);
 					b_gioca.setOnClickListener(new Button.OnClickListener() {
 						public void onClick(View v) {
-							Toast.makeText(getApplicationContext(), "Non disponibile", Toast.LENGTH_LONG).show();
+							Intent intent=new Intent(getApplicationContext(), GiocaPartitaActivity.class);
+							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							intent.putExtra("id_partita", p.getIDPartita());
+							startActivity(intent);
 						}
 					});
 					azione_container.addView(b_gioca);
