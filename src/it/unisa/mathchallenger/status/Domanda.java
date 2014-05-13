@@ -10,13 +10,13 @@ public class Domanda {
 
 	public float getRisposta(int i) {
 		switch (i) {
-			case 1:
+			case 0:
 				return risposta1;
-			case 2:
+			case 1:
 				return risposta2;
-			case 3:
+			case 2:
 				return risposta3;
-			case 4:
+			case 3:
 				return risposta4;
 			default:
 				throw new RuntimeException("Numero risposta non valida: " + i);
@@ -37,16 +37,16 @@ public class Domanda {
 
 	public void setRisposta(float r, int i) {
 		switch (i) {
-			case 1:
+			case 0:
 				risposta1 = r;
 				break;
-			case 2:
+			case 1:
 				risposta2 = r;
 				break;
-			case 3:
+			case 2:
 				risposta3 = r;
 				break;
-			case 4:
+			case 3:
 				risposta4 = r;
 				break;
 		}
