@@ -31,7 +31,7 @@ public class Status {
 		return status;
 	}
 
-	public Status(Context c) {
+	private Status(Context c) {
 		partite = new ArrayList<Partita>();
 		amici = new ArrayList<Account>();
 		database = new DBAdapter(c);
