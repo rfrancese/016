@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import it.unisa.mathchallenger.status.Account;
 import it.unisa.mathchallenger.status.AccountUser;
+import it.unisa.mathchallenger.status.Domanda;
 import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.StatoPartita;
 
@@ -404,4 +405,97 @@ public class CommunicationParser {
 		}
 		return stato;
 	}
+	
+	public ArrayList<Domanda> parseGetDomande(Messaggio m){
+		String[] prop = m.getResponse().split(";");
+		ArrayList<Domanda> list = null;
+		for (int i = 0; i < prop.length; i++) {
+			String[] kv = prop[i].split("=");
+			switch (kv[0]) {
+				case "getDomande":
+					if(kv[1].compareTo("OK")==0)
+						list = new ArrayList<>();
+					break;
+				case "message":
+						m.setErrorMessage(kv[1]);
+					break;
+				case "domanda1":
+						Domanda dom = new Domanda();
+						dom.setDomanda(kv[1]);
+						list.add(dom);
+					break;
+				case "domanda2":
+						Domanda dom2 = new Domanda();
+						dom2.setDomanda(kv[1]);
+						list.add(dom2);
+					break;
+				case "domanda3":
+					Domanda dom3 = new Domanda();
+					dom3.setDomanda(kv[1]);
+					list.add(dom3);
+				break;
+				case "domanda4":
+					Domanda dom4 = new Domanda();
+					dom4.setDomanda(kv[1]);
+					list.add(dom4);
+				break;
+				case "domanda5":
+					Domanda dom5 = new Domanda();
+					dom5.setDomanda(kv[1]);
+					list.add(dom5);
+				break;
+				case "domanda6":
+					Domanda dom6 = new Domanda();
+					dom6.setDomanda(kv[1]);
+					list.add(dom6);
+				break;
+				case "risposta1":{
+					String[] rs = kv[1].split(",");
+					Domanda d = list.get(0);
+					for(i=0;i<rs.length;i++)
+						d.setRisposta(Float.parseFloat(rs[i]), i);
+				break;
+				}
+				case "risposta2":{
+					String[] rs = kv[1].split(",");
+					Domanda d = list.get(0);
+					for(i=0;i<rs.length;i++)
+						d.setRisposta(Float.parseFloat(rs[i]), i);
+				break;
+				}
+				case "risposta3":{
+					String[] rs = kv[1].split(",");
+					Domanda d = list.get(0);
+					for(i=0;i<rs.length;i++)
+						d.setRisposta(Float.parseFloat(rs[i]), i);
+				break;
+				}
+				case "risposta4":{
+					String[] rs = kv[1].split(",");
+					Domanda d = list.get(0);
+					for(i=0;i<rs.length;i++)
+						d.setRisposta(Float.parseFloat(rs[i]), i);
+				break;
+				}
+				case "risposta5":{
+					String[] rs = kv[1].split(",");
+					Domanda d = list.get(0);
+					for(i=0;i<rs.length;i++)
+						d.setRisposta(Float.parseFloat(rs[i]), i);
+				break;
+				}
+				case "risposta6": {
+					String[] rs = kv[1].split(",");
+					Domanda d = list.get(0);
+					for(i=0;i<rs.length;i++)
+						d.setRisposta(Float.parseFloat(rs[i]), i);
+				break;
+				}
+			}		
+		}
+		return list;
+	}
 }
+	
+
+
