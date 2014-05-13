@@ -79,4 +79,8 @@ public class CommunicationMessageCreator {
 	public Messaggio createGetDettagliPartita(int idP) {
 		return new Messaggio("getDettagliPartita " + idP);
 	}
+	public Messaggio createGetDomande(int idP){
+		return new Messaggio("getDomande " + idP);
+	}
 }
+
