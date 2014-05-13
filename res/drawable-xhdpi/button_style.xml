@@ -2,5 +2,5 @@
     
     <item android:state_pressed="true" android:drawable="@drawable/button_premuto"></item>
     
-    <item android:drawable="@drawable/button"></item>
+    <item android:drawable="@drawable/button_mod"></item>
 </selector>

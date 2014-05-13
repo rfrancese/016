@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import android.util.Log;
+
 public class Communication implements Runnable {
 
 	private static Communication singleton;
@@ -51,6 +53,7 @@ public class Communication implements Runnable {
 
 	private boolean connect() throws UnknownHostException, IOException {
 		socket = new Socket(HOSTNAME, HOSTNAME_PORT);
+		socket.setSoTimeout(30000);
 		out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		return true;
@@ -77,6 +80,7 @@ public class Communication implements Runnable {
 	}
 
 	public void restart() throws UnknownHostException, IOException, LoginException, ConnectionException {
+		close();
 		connect();
 		AccountUser a = Status.getInstance().getUtente();
 		if (a != null) {
@@ -91,7 +95,13 @@ public class Communication implements Runnable {
 		}
 
 		out.println(m.getComando());
-		m.setResponse(read());
+		if(out.checkError()){
+			Log.d("", "Errore durante send()");
+			restart();
+			send(m);
+		}
+		else
+			m.setResponse(read());
 	}
 
 	private String read() throws IOException {
@@ -104,5 +114,13 @@ public class Communication implements Runnable {
 		if (socket != null)
 			return true;
 		return false;
+	}
+	public void close() throws IOException{
+		if(in!=null)
+			in.close();
+		if(out!=null)
+			out.close();
+		if(socket!=null)
+			socket.close();
 	}
 }

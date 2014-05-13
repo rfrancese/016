@@ -5,6 +5,8 @@ import it.unisa.mathchallenger.eccezioni.LoginException;
 
 import java.io.IOException;
 
+import android.util.Log;
+
 public class ThreadPing extends Thread {
 
 	private static ThreadPing thread;
@@ -30,6 +32,7 @@ public class ThreadPing extends Thread {
 			}
 			Messaggio m = new Messaggio("ping");
 			try {
+				Log.d("", "Invio messaggio ping");
 				comm.send(m);
 			}
 			catch (IOException | LoginException | ConnectionException e) {

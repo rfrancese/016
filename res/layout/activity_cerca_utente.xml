@@ -19,6 +19,7 @@
         android:layout_marginTop="28dp"
         android:background="@drawable/textfield"
         android:ems="10"
+        android:hint="@string/hint_cerca_utente"
         android:inputType="text"
         android:padding="5dp" >
 
