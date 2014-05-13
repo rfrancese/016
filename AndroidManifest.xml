@@ -36,25 +36,24 @@
         </activity>
         <activity
             android:name="it.unisa.mathchallenger.ActivityCambiaPassword"
-            android:label="@string/title_activity_activity_cambia_password" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="it.unisa.mathchallenger.GiocaPartitaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_gioca_partita"
-            android:theme="@style/FullscreenTheme" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name="it.unisa.mathchallenger.VisualizzaPartitaActivity"
-            android:label="@string/title_activity_visualizza_partita" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="it.unisa.mathchallenger.NuovaPartitaActivity"
-            android:label="@string/title_activity_nuova_partita" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="it.unisa.mathchallenger.CercaUtenteActivity"
-            android:label="@string/title_activity_cerca_utente" >
+            android:label="@string/app_name" >
         </activity>
     </application>
 
