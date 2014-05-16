@@ -58,7 +58,11 @@ public class Status {
 			ArrayList<Partita> partite = database.selezionaPartiteInCorso(user.getID());
 			for (Partita p : partite)
 				aggiungiPartita(p);
-
+			
+			ArrayList<Partita> partite_concluse=database.selezionaPartiteTerminate(user.getID());
+			for (Partita p : partite_concluse)
+				aggiungiPartita(p);
+			
 			ArrayList<Account> amici = database.selezionaAmici(user.getID());
 			for (Account a : amici)
 				aggiungiAmico(a);
