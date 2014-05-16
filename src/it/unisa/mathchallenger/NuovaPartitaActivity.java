@@ -88,10 +88,13 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		try {
 			comm.send(m);
 			Partita p = CommunicationParser.getInstance().parseNewGameRandom(m);
+			if(p!=null){
 			Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-			// TODO avvio partita
+			}
+			else 
+				Toast.makeText(getApplicationContext(), R.string.errore_durante_creazione_partita, Toast.LENGTH_LONG).show();
 		}
 		catch (IOException e) {
 			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -143,6 +146,26 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
 			params.setMargins(0, (int) (10 * scale), 0, 0);
 			btn_amico.setLayoutParams(params);
+			btn_amico.setOnClickListener(new Button.OnClickListener() {
+				public void onClick(View v) {
+					Messaggio m=CommunicationMessageCreator.getInstance().createNewGameMessage(acc.getID());
+					try {
+						comm.send(m);
+						Partita p=CommunicationParser.getInstance().parseNewGame(m);
+						if(p!=null){
+							Intent intent=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+						}
+						else {
+							Toast.makeText(getApplicationContext(), R.string.errore_durante_creazione_partita, Toast.LENGTH_LONG).show();
+						}
+					}
+					catch (IOException | LoginException | ConnectionException e) {
+						e.printStackTrace();
+					}
+				}
+			});
 
 			Button btn_remove = new Button(getApplicationContext());
 			newLay.addView(btn_remove);
