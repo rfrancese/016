@@ -84,6 +84,13 @@ public class GiocaPartitaActivity extends Activity {
 			risp4.setOnClickListener(new clickRisposta(d));
 		}
 		else {
+			Messaggio mess= CommunicationMessageCreator.getInstance().createRisposte(partita);
+			try {
+				comm.send(mess);
+			} catch (IOException | LoginException | ConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Intent intent = new Intent(getApplicationContext(), VisualizzaPartitaActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("id_partita", partita.getIDPartita());

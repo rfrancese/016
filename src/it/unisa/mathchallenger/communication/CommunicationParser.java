@@ -495,4 +495,10 @@ public class CommunicationParser {
 		}
 		return list;
 	}
+	public boolean parserAnswer(Messaggio mess){
+		if(mess.getResponse().compareTo("answer=OK")==0)
+			return true;
+		else
+			return false;
+	}
 }

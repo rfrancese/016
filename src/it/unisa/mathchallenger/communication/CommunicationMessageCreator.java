@@ -1,5 +1,7 @@
 package it.unisa.mathchallenger.communication;
 
+import it.unisa.mathchallenger.status.Partita;
+
 public class CommunicationMessageCreator {
 
 	private static CommunicationMessageCreator cms;
@@ -81,6 +83,13 @@ public class CommunicationMessageCreator {
 	}
 	public Messaggio createGetDomande(int idP){
 		return new Messaggio("getDomande " + idP);
+	}
+	public Messaggio createRisposte(Partita partita){
+		String ris = "answer "+partita.getIDPartita();
+		for( int i=0;i<partita.getNumDomande();i++){
+			ris+=" "+partita.getDomanda(i).getRispostaUtente();
+		}
+		return new Messaggio(ris);	
 	}
 }
 
