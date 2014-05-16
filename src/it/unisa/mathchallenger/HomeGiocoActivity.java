@@ -108,6 +108,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	private void aggiungiPartite(ArrayList<Partita> partite) {
 		if (partite == null || partite.size() == 0)
 			return;
+		
 		final LinearLayout lay = (LinearLayout) findViewById(R.id.layoutPartiteInCorso);
 		lay.removeAllViews();
 		ArrayList<Partita> terminate = new ArrayList<Partita>();
@@ -216,8 +217,8 @@ public class HomeGiocoActivity extends ActionBarActivity {
 
 	public void onClickNuovaPartita(View v) {
 		Intent intent = new Intent(getApplicationContext(), NuovaPartitaActivity.class);
-		// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		// t_aggiorna_partite.interrupt();
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		t_aggiorna_partite.interrupt();
 		startActivity(intent);
 	}
 
