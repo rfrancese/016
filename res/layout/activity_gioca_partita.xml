@@ -3,7 +3,7 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_opacita"
+    android:background="@drawable/prova2hd"
     android:orientation="vertical"
     tools:context="it.unisa.mathchallenger.GiocaPartitaActivity" >
 
