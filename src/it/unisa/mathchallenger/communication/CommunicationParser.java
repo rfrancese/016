@@ -414,7 +414,7 @@ public class CommunicationParser {
 			switch (kv[0]) {
 				case "getDomande":
 					if (kv[1].compareTo("OK") == 0)
-						list = new ArrayList<>();
+						list = new ArrayList<Domanda>();
 					break;
 				case "message":
 					m.setErrorMessage(kv[1]);
@@ -452,43 +452,43 @@ public class CommunicationParser {
 				case "risposta1": {
 					String[] rs = kv[1].split(",");
 					Domanda d = list.get(0);
-					for (i = 0; i < rs.length; i++)
-						d.setRisposta(Float.parseFloat(rs[i]), i);
+					for (int j = 0; j < rs.length; j++)
+						d.setRisposta(Float.parseFloat(rs[j]), j);
 					break;
 				}
 				case "risposta2": {
 					String[] rs = kv[1].split(",");
-					Domanda d = list.get(0);
-					for (i = 0; i < rs.length; i++)
-						d.setRisposta(Float.parseFloat(rs[i]), i);
+					Domanda d = list.get(1);
+					for (int j = 0; j < rs.length; j++)
+						d.setRisposta(Float.parseFloat(rs[j]), j);
 					break;
 				}
 				case "risposta3": {
 					String[] rs = kv[1].split(",");
-					Domanda d = list.get(0);
-					for (i = 0; i < rs.length; i++)
-						d.setRisposta(Float.parseFloat(rs[i]), i);
+					Domanda d = list.get(2);
+					for (int j = 0; j < rs.length; j++)
+						d.setRisposta(Float.parseFloat(rs[j]), j);
 					break;
 				}
 				case "risposta4": {
 					String[] rs = kv[1].split(",");
-					Domanda d = list.get(0);
-					for (i = 0; i < rs.length; i++)
-						d.setRisposta(Float.parseFloat(rs[i]), i);
+					Domanda d = list.get(3);
+					for (int j = 0; j < rs.length; j++)
+						d.setRisposta(Float.parseFloat(rs[j]), j);
 					break;
 				}
 				case "risposta5": {
 					String[] rs = kv[1].split(",");
-					Domanda d = list.get(0);
-					for (i = 0; i < rs.length; i++)
-						d.setRisposta(Float.parseFloat(rs[i]), i);
+					Domanda d = list.get(4);
+					for (int j = 0; j < rs.length; j++)
+						d.setRisposta(Float.parseFloat(rs[j]), j);
 					break;
 				}
 				case "risposta6": {
 					String[] rs = kv[1].split(",");
-					Domanda d = list.get(0);
-					for (i = 0; i < rs.length; i++)
-						d.setRisposta(Float.parseFloat(rs[i]), i);
+					Domanda d = list.get(5);
+					for (int j = 0; j < rs.length; j++)
+						d.setRisposta(Float.parseFloat(rs[j]), j);
 					break;
 				}
 			}
