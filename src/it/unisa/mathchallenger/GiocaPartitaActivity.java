@@ -18,10 +18,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 public class GiocaPartitaActivity extends Activity {
 	private Communication comm;
-
+	private final static int DURATA_DOMANDA = 10;
 	private Partita	   partita;
 	private int		   domanda_corrente = 0;
 
@@ -64,7 +65,7 @@ public class GiocaPartitaActivity extends Activity {
 		getMenuInflater().inflate(R.menu.gioca_partita, menu);
 		return true;
 	}
-
+	private Thread tempo=null; 
 	private void scriviDomanda() {
 		if (domanda_corrente < partita.getNumDomande()) {
 			Domanda d = partita.getDomanda(domanda_corrente);
@@ -82,13 +83,21 @@ public class GiocaPartitaActivity extends Activity {
 			risp2.setOnClickListener(new clickRisposta(d));
 			risp3.setOnClickListener(new clickRisposta(d));
 			risp4.setOnClickListener(new clickRisposta(d));
+			final ProgressBar bar=(ProgressBar) findViewById(R.id.progressBar1);
+			runOnUiThread(new Runnable() {
+				public void run() {
+					bar.setMax(DURATA_DOMANDA);
+				}
+			});
+			tempo=new timer_partita(bar);
+			tempo.start();
 		}
 		else {
 			Messaggio mess= CommunicationMessageCreator.getInstance().createRisposte(partita);
 			try {
 				comm.send(mess);
-			} catch (IOException | LoginException | ConnectionException e) {
-				// TODO Auto-generated catch block
+			} 
+			catch (IOException | LoginException | ConnectionException e) {
 				e.printStackTrace();
 			}
 			Intent intent = new Intent(getApplicationContext(), VisualizzaPartitaActivity.class);
@@ -106,6 +115,7 @@ public class GiocaPartitaActivity extends Activity {
 		}
 
 		public void onClick(View v) {
+			tempo.interrupt();
 			Button b = (Button) v;
 			String risposta = b.getText().toString();
 			float r = Float.parseFloat(risposta);
@@ -113,6 +123,41 @@ public class GiocaPartitaActivity extends Activity {
 			domanda_corrente++;
 			scriviDomanda();
 		}
-
+	}
+	class timer_partita extends Thread {
+		private ProgressBar progressbar;
+		public timer_partita(ProgressBar bar){
+			progressbar=bar;
+		}
+		public void run() {
+			int time=DURATA_DOMANDA;
+			while(time>0){
+				try {
+					sleep(1000L);
+				}
+				catch (InterruptedException e) {
+					e.printStackTrace();
+					return;
+				}
+				time--;
+				progressUpdater pu=new progressUpdater(progressbar, time);
+				runOnUiThread(pu);
+			}
+			domanda_corrente++;
+			//TODO assegna risposta sbagliata
+			scriviDomanda();
+		}
+	}
+	class progressUpdater implements Runnable {
+		int value;
+		ProgressBar p_bar;
+		public progressUpdater(ProgressBar bar, int val){
+			value=val;
+			p_bar=bar;
+		}
+		public void run() {
+			p_bar.setProgress(value);
+		}
+		
 	}
 }
