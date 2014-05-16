@@ -1,10 +1,12 @@
 package it.unisa.mathchallenger.status;
 
+import android.util.Log;
+
 public class Domanda {
 
 	private int	num_domanda;
 	private String domanda;
-	private float  risposta1, risposta2, risposta3, risposta4;
+	private float  risposta1, risposta2, risposta3, risposta4, risposta_utente;
 
 	public Domanda() {}
 
@@ -57,5 +59,12 @@ public class Domanda {
 
 	public void setNumeroDomanda(int i) {
 		num_domanda = i;
+	}
+	public void setRispostaUtente(float f){
+		Log.d("setRisposta", "Risposta " + f + " alla domanda "+ domanda);
+		risposta_utente=f;
+	}
+	public float getRispostaUtente(){
+		return risposta_utente;
 	}
 }
