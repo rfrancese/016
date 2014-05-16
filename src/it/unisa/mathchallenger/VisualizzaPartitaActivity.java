@@ -44,8 +44,11 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 				try {
 					comm.send(m);
 					StatoPartita stato = CommunicationParser.getInstance().parseGetDettaglioPartita(m);
+					int oldStat=p.getStatoPartita();
 					p.setDettagliPartita(stato);
-
+					int newStat=p.getStatoPartita();
+					if(oldStat!=newStat)
+						Status.getInstance().aggiornaPartita(p);
 					disegna(p);
 				}
 				catch (IOException | LoginException | ConnectionException e) {
