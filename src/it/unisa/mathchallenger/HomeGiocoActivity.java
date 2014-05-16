@@ -108,79 +108,94 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	private void aggiungiPartite(ArrayList<Partita> partite) {
 		if (partite == null || partite.size() == 0)
 			return;
-		final LinearLayout lay = (LinearLayout) findViewById(R.id.layoutPartiteInCorso);
-		lay.removeAllViews();
-		ArrayList<Partita> terminate = new ArrayList<Partita>();
-		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
-		int height = (int) (scale * 45 + 0.5f);
-		boolean inCorso = false;
-		for (int i = 0; i < partite.size(); i++) {
-			final Partita p = partite.get(i);
-			if (!p.isTerminata()) {
-				inCorso = true;
-				final Button b_prt = new Button(getApplicationContext());
-				Account acc = p.getUtenteSfidato();
-				b_prt.setText(acc == null ? "null" : acc.getUsername());
-				b_prt.setTextColor(Color.BLACK);
-				b_prt.setBackgroundResource(R.drawable.button_style);
-				LayoutParams dim = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
-				dim.setMargins(0, (int) (10 * scale), 0, 0);
-				b_prt.setLayoutParams(dim);
-				b_prt.setGravity(Gravity.CENTER);
-				b_prt.setOnClickListener(new Button.OnClickListener() {
 
-					public void onClick(View v) {
-						Intent intent = new Intent(getApplicationContext(), VisualizzaPartitaActivity.class);
-						Bundle bun = new Bundle();
-						bun.putInt("id_partita", p.getIDPartita());
-						intent.putExtras(bun);
-						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						t_aggiorna_partite.interrupt();
-						startActivity(intent);
-					}
-				});
-				b_prt.setOnLongClickListener(new Button.OnLongClickListener() {
+		ArrayList<Partita> p_terminate = new ArrayList<Partita>();
+		ArrayList<Partita> p_inCorso = Status.getInstance().getElencoPartite();
 
-					public boolean onLongClick(View v) {
-						new AlertDialog.Builder(HomeGiocoActivity.this).setCancelable(false).setMessage(R.string.dialog_abbandona_partita).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface dialog, int which) {
-								Messaggio m = CommunicationMessageCreator.getInstance().createAbandonGame(p.getIDPartita());
-								try {
-									comm.send(m);
-									if (CommunicationParser.getInstance().parseAbandon(m)) {
-										Status.getInstance().rimuoviPartita(p.getIDPartita());
-										lay.removeView(b_prt);
-									}
-								}
-								catch (IOException | LoginException | ConnectionException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-						}).setNegativeButton(R.string.no, null).show();
-						return true;
-					}
-				});
-				lay.addView(b_prt);
+		for (int i = 0; i < p_inCorso.size(); i++) {
+			Partita p = p_inCorso.get(i);
+			boolean found = false;
+			for (int j = 0; j < partite.size(); j++) {
+				Partita p1 = partite.get(j);
+				if (p.getIDPartita() == p1.getIDPartita()) {
+					found = true;
+					break;
+				}
 			}
-			else {
-				terminate.add(p);
+			if (!found) {
+				p_terminate.add(p_inCorso.remove(i));
 			}
 		}
-		if (inCorso) {
+
+		final LinearLayout lay = (LinearLayout) findViewById(R.id.layoutPartiteInCorso);
+		lay.removeAllViews();
+
+		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+		int height = (int) (scale * 45 + 0.5f);
+
+		if (p_inCorso.size() > 0) {
 			TextView label_incorso = new TextView(getApplicationContext());
 			label_incorso.setText(R.string.homegioco_partite_in_corso);
 			label_incorso.setTextColor(Color.BLACK);
 			lay.addView(label_incorso, 0);
 		}
-		if (terminate.size() > 0) {
+
+		for (int i = 0; i < p_inCorso.size(); i++) {
+			final Partita p = p_inCorso.get(i);
+			final Button b_prt = new Button(getApplicationContext());
+			Account acc = p.getUtenteSfidato();
+			b_prt.setText(acc == null ? "null" : acc.getUsername());
+			b_prt.setTextColor(Color.BLACK);
+			b_prt.setBackgroundResource(R.drawable.button_style);
+			LayoutParams dim = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
+			dim.setMargins(0, (int) (10 * scale), 0, 0);
+			b_prt.setLayoutParams(dim);
+			b_prt.setGravity(Gravity.CENTER);
+			b_prt.setOnClickListener(new Button.OnClickListener() {
+
+				public void onClick(View v) {
+					Intent intent = new Intent(getApplicationContext(), VisualizzaPartitaActivity.class);
+					Bundle bun = new Bundle();
+					bun.putInt("id_partita", p.getIDPartita());
+					intent.putExtras(bun);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					t_aggiorna_partite.interrupt();
+					startActivity(intent);
+				}
+			});
+			b_prt.setOnLongClickListener(new Button.OnLongClickListener() {
+
+				public boolean onLongClick(View v) {
+					new AlertDialog.Builder(HomeGiocoActivity.this).setCancelable(false).setMessage(R.string.dialog_abbandona_partita).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface dialog, int which) {
+							Messaggio m = CommunicationMessageCreator.getInstance().createAbandonGame(p.getIDPartita());
+							try {
+								comm.send(m);
+								if (CommunicationParser.getInstance().parseAbandon(m)) {
+									Status.getInstance().rimuoviPartita(p.getIDPartita());
+									lay.removeView(b_prt);
+								}
+							}
+							catch (IOException | LoginException | ConnectionException e) {
+								e.printStackTrace();
+							}
+						}
+					}).setNegativeButton(R.string.no, null).show();
+					return true;
+				}
+			});
+			lay.addView(b_prt);
+
+		}
+
+		if (p_terminate.size() > 0) {
 			TextView label_terminate = new TextView(getApplicationContext());
 			label_terminate.setText(R.string.homegioco_partite_terminate);
 			label_terminate.setTextColor(Color.BLACK);
 			lay.addView(label_terminate);
-			for (int i = 0; i < terminate.size(); i++) {
-				final Partita partita = terminate.get(i);
+			for (int i = 0; i < p_terminate.size(); i++) {
+				final Partita partita = p_terminate.get(i);
 				final Button b = new Button(getApplicationContext());
 				b.setBackgroundResource(R.drawable.button_style);
 				b.setText(partita.getUtenteSfidato().getUsername());
@@ -216,8 +231,8 @@ public class HomeGiocoActivity extends ActionBarActivity {
 
 	public void onClickNuovaPartita(View v) {
 		Intent intent = new Intent(getApplicationContext(), NuovaPartitaActivity.class);
-		// intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		// t_aggiorna_partite.interrupt();
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		t_aggiorna_partite.interrupt();
 		startActivity(intent);
 	}
 
