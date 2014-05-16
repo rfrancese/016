@@ -143,9 +143,13 @@ public class GiocaPartitaActivity extends Activity {
 				progressUpdater pu=new progressUpdater(progressbar, time);
 				runOnUiThread(pu);
 			}
-			domanda_corrente++;
 			//TODO assegna risposta sbagliata
-			scriviDomanda();
+			runOnUiThread(new Runnable() {
+				public void run() {
+					domanda_corrente++;
+					scriviDomanda();
+				}
+			});
 		}
 	}
 	class progressUpdater implements Runnable {
