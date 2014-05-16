@@ -234,6 +234,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		catch (LoginException e) {
 			Intent intent = new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			t_aggiorna_partite.interrupt();
 			startActivity(intent);
 		}
 		catch (ConnectionException e) {

@@ -7,15 +7,12 @@
     android:orientation="vertical"
     tools:context="it.unisa.mathchallenger.GiocaPartitaActivity" >
 
-  
-  
-
-    <ImageButton
-        android:id="@+id/imageButton1"
+    <Button
+        android:id="@+id/gioca_partita_domanda"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/abc_list_focused_holo" />
+        android:background="#fff" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +27,7 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/gioca_partita_risp1"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginRight="10dp"
@@ -44,7 +41,7 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/gioca_partita_risp2"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="10dp"
@@ -67,7 +64,7 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/Button3"
+                android:id="@+id/gioca_partita_risp3"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginRight="10dp"
@@ -80,7 +77,7 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/Button4"
+                android:id="@+id/gioca_partita_risp4"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="10dp"

@@ -49,8 +49,10 @@ public class Domanda {
 			case 3:
 				risposta4 = r;
 				break;
+			default:
+				throw new RuntimeException("Numero risposta non valida: " + i);
 		}
-		throw new RuntimeException("Numero risposta non valida: " + i);
+		
 	}
 
 	public void setNumeroDomanda(int i) {
