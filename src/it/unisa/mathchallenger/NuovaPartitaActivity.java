@@ -132,10 +132,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 		int height = (int) (scale * 45 + 0.5f);
 		int screen_w=getResources().getDisplayMetrics().widthPixels;
-		int screen_h=getResources().getDisplayMetrics().heightPixels;
-		Toast.makeText(getApplicationContext(), screen_w+"x"+screen_h, Toast.LENGTH_LONG).show();
-		
-		int width = (int) (/*scale * */((screen_w/100)*90));
+		int width = (int) (((screen_w/100)*90));
 		for (int i = 0; i < amici.size(); i++) {
 			final LinearLayout newLay = new LinearLayout(getApplicationContext());
 			newLay.setOrientation(LinearLayout.HORIZONTAL);
