@@ -34,8 +34,7 @@
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/button_style"
-                android:text="Button" />
+                android:background="@drawable/button_style" />
 
         </LinearLayout>
 
@@ -48,8 +47,7 @@
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/button_style"
-                android:text="Button" />
+                android:background="@drawable/button_style" />
 
         </LinearLayout>
 
@@ -71,8 +69,8 @@
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/button_style"
-                android:text="Button" />
+                android:background="@drawable/button_style" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -84,8 +82,8 @@
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/button_style"
-                android:text="Button" />
+                android:background="@drawable/button_style" />
+
         </LinearLayout>
     </LinearLayout>
 
