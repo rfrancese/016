@@ -8,17 +8,18 @@ import it.unisa.mathchallenger.communication.CommunicationParser;
 import it.unisa.mathchallenger.communication.Messaggio;
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActivityCambiaPassword extends Activity {
+public class ActivityCambiaPassword extends ActionBarActivity {
 
 	private Communication comm;
 
