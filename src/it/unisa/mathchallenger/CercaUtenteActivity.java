@@ -105,7 +105,8 @@ public class CercaUtenteActivity extends ActionBarActivity {
 			lay.addView(tv_res);
 			float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 			int height = (int) (scale * 45 + 0.5f);
-			int width = (int) (scale * 220 + 0.5f);
+			int screen_w=getResources().getDisplayMetrics().widthPixels;
+			int width = (int)((screen_w/100)*90);
 			for (int i = 0; i < res.size(); i++) {
 				final Account acc = res.get(i);
 				Button btn = new Button(getApplicationContext());
