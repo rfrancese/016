@@ -21,7 +21,7 @@ public class Communication implements Runnable {
 	private static Communication singleton;
 
 	private Socket			   socket;
-	private final static String  HOSTNAME	  = "192.168.0.207";
+	private final static String  HOSTNAME	  = "pinoelefante.no-ip.biz";
 	// private final static String HOSTNAME="172.19.253.48";
 	private final static int	 HOSTNAME_PORT = 50000;
 
