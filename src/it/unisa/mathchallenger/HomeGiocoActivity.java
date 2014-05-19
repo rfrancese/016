@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,17 @@ public class HomeGiocoActivity extends ActionBarActivity {
 
 		t_aggiorna_partite = new Thread(new t_aggiorna_partite());
 		t_aggiorna_partite.start();
+	}
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		View view = (View) findViewById(R.id.container);
+		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
+		} else {
+		    view.setBackgroundResource (R.drawable.prova2hd);
+		}
+		
 	}
 
 	@Override

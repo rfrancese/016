@@ -14,6 +14,7 @@ import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.Status;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -59,7 +60,17 @@ public class GiocaPartitaActivity extends Activity {
 			}
 		}
 	}
-
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		View view = (View) findViewById(R.id.container);
+		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
+		} else {
+		    view.setBackgroundResource (R.drawable.prova2hd);
+		}
+		
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.gioca_partita, menu);

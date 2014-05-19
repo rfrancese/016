@@ -12,6 +12,7 @@ import it.unisa.mathchallenger.status.AccountUser;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -59,7 +60,17 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			startActivity(intent);
 		}
 	}
-
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		View view = (View) findViewById(R.id.container);
+		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
+		} else {
+		    view.setBackgroundResource (R.drawable.prova2hd);
+		}
+		
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

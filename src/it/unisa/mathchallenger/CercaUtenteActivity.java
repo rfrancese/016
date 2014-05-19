@@ -14,6 +14,7 @@ import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -35,7 +36,17 @@ public class CercaUtenteActivity extends ActionBarActivity {
 		comm = Communication.getInstance();
 		setContentView(R.layout.activity_cerca_utente);
 	}
-
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		View view = (View) findViewById(R.id.container);
+		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
+		} else {
+		    view.setBackgroundResource (R.drawable.prova2hd);
+		}
+		
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

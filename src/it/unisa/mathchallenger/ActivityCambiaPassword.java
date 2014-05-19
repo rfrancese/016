@@ -34,7 +34,6 @@ public class ActivityCambiaPassword extends ActionBarActivity {
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		View view = (View) findViewById(R.id.cambiapasslayout);
-		int orientation = getResources().getConfiguration().orientation;
 		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
 		} else {
