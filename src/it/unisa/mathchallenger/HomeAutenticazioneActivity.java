@@ -11,6 +11,8 @@ import it.unisa.mathchallenger.eccezioni.LoginException;
 import it.unisa.mathchallenger.status.AccountUser;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build.VERSION;
@@ -93,7 +95,16 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 
 	@Override
 	public void onBackPressed() {
-		setContentView(R.layout.activity_home_autenticazione);
+	    new AlertDialog.Builder(this)
+	           .setMessage("Sei sicuro di voler uscire?")
+	           .setCancelable(false)
+	           .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+	               public void onClick(DialogInterface dialog, int id) {
+	                    HomeAutenticazioneActivity.this.finish();
+	               }
+	           })
+	           .setNegativeButton("No", null)
+	           .show();
 	}
 
 	public void onClickRegistra(View v) {
@@ -218,4 +229,5 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 	}
+	
 }
