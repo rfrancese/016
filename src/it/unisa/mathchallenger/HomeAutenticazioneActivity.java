@@ -95,10 +95,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 
 	@Override
 	public void onBackPressed() {
-	    new AlertDialog.Builder(this)
-	           .setMessage("Sei sicuro di voler uscire?")
-	           .setCancelable(false)
-	           .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+	    new AlertDialog.Builder(this).setMessage("Sei sicuro di voler uscire?").setCancelable(false).setPositiveButton("Si", new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int id) {
 	                    HomeAutenticazioneActivity.this.finish();
 	               }
