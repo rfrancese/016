@@ -3,7 +3,7 @@ package it.unisa.mathchallenger.status;
 import android.util.Log;
 
 public class Domanda {
-
+	public final static int NON_RISPOSTO=-1, ESATTA=0, SBAGLIATA=1;
 	private int	num_domanda;
 	private String domanda;
 	private float  risposta1, risposta2, risposta3, risposta4, risposta_utente;
