@@ -222,7 +222,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 		
 		for(int i=0;i<6;i++){			
 			switch(i){
-			case 1:
+			case 0:
 				ImageView risut = (ImageView) findViewById(R.id.risutente1);
 				ImageView risavv = (ImageView) findViewById(R.id.risavv1);
 			if(risposteutente[i]==Domanda.ESATTA)				
@@ -234,7 +234,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 			else if(risposteavversario[i]==Domanda.SBAGLIATA)
 				risavv.setBackgroundResource(R.drawable.risposta_wrong);			
 			break;
-			case 2:
+			case 1:
 				ImageView risut2 = (ImageView) findViewById(R.id.risutente2);
 				ImageView risavv2 = (ImageView) findViewById(R.id.risavv2);
 			if(risposteutente[i]==Domanda.ESATTA)				
@@ -246,7 +246,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 			else if(risposteavversario[i]==Domanda.SBAGLIATA)
 				risavv2.setBackgroundResource(R.drawable.risposta_wrong);			
 			break;
-			case 3:
+			case 2:
 				ImageView risut3 = (ImageView) findViewById(R.id.risutente3);
 				ImageView risavv3 = (ImageView) findViewById(R.id.risavv3);
 			if(risposteutente[i]==Domanda.ESATTA)				
@@ -258,7 +258,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 			else if(risposteavversario[i]==Domanda.SBAGLIATA)
 				risavv3.setBackgroundResource(R.drawable.risposta_wrong);			
 			break;
-			case 4:
+			case 3:
 				ImageView risut4 = (ImageView) findViewById(R.id.risutente4);
 				ImageView risavv4 = (ImageView) findViewById(R.id.risavv4);
 			if(risposteutente[i]==Domanda.ESATTA)				
@@ -270,7 +270,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 			else if(risposteavversario[i]==Domanda.SBAGLIATA)
 				risavv4.setBackgroundResource(R.drawable.risposta_wrong);			
 			break;
-			case 5:
+			case 4:
 				ImageView risut5 = (ImageView) findViewById(R.id.risutente5);
 				ImageView risavv5 = (ImageView) findViewById(R.id.risavv5);
 			if(risposteutente[i]==Domanda.ESATTA)				
@@ -282,7 +282,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 			else if(risposteavversario[i]==Domanda.SBAGLIATA)
 				risavv5.setBackgroundResource(R.drawable.risposta_wrong);			
 			break;
-			case 6:
+			case 5:
 				ImageView risut6 = (ImageView) findViewById(R.id.risutente6);
 				ImageView risavv6 = (ImageView) findViewById(R.id.risavv6);
 			if(risposteutente[i]==Domanda.ESATTA)				
