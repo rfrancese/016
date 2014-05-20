@@ -71,4 +71,5 @@
 	<string name="abbandonata_sfidante">Abbandonata dallo sfidante</string>
 	<string name="abbandonata">Hai abbandonato la partita</string>
 	<string name="hint_cerca_utente">Digita l\'username da cercare</string>
+	<string name="visualizza_errore_dettagli">Connessione assente</string>
 </resources>

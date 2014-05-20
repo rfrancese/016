@@ -165,7 +165,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 				}
 				catch (DettagliNonPresentiException e) {
 					TextView errore = new TextView(getApplicationContext());
-					errore.setText(e.getMessage());
+					errore.setText(R.string.visualizza_errore_dettagli);
 					errore.setGravity(Gravity.CENTER);
 					errore.setTextColor(Color.BLACK);
 					errore.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
@@ -200,7 +200,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 						abbandonata.setText(R.string.abbandonata_sfidante);
 				}
 				catch (DettagliNonPresentiException e) {
-					abbandonata.setText(e.getMessage());
+					abbandonata.setText(R.string.visualizza_errore_dettagli);
 					e.printStackTrace();
 				}
 				break;
