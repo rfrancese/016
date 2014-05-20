@@ -28,7 +28,12 @@ public class ActivityCambiaPassword extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cambia_password);
 		comm = Communication.getInstance();
-
+		View view = (View) findViewById(R.id.cambiapasslayout);
+		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
+		} else {
+		    view.setBackgroundResource (R.drawable.prova2hd);
+		}
 	}
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {

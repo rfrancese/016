@@ -43,6 +43,13 @@ public class HomeGiocoActivity extends ActionBarActivity {
 
 		t_aggiorna_partite = new Thread(new t_aggiorna_partite());
 		t_aggiorna_partite.start();
+		View view = (View) findViewById(R.id.container);
+		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
+		} else {
+		    view.setBackgroundResource (R.drawable.prova2hd);
+		}
+		
 	}
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {

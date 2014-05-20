@@ -59,6 +59,12 @@ public class GiocaPartitaActivity extends Activity {
 				e.printStackTrace();
 			}
 		}
+		View view = (View) findViewById(R.id.container);
+		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
+		} else {
+		    view.setBackgroundResource (R.drawable.prova2hd);
+		}
 	}
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
