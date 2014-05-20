@@ -72,4 +72,10 @@
 	<string name="abbandonata">Hai abbandonato la partita</string>
 	<string name="hint_cerca_utente">Digita l\'username da cercare</string>
 	<string name="visualizza_errore_dettagli">Connessione assente</string>
+	<string name="string_contains_spaces">Non è consentito inserire spazi</string>
+	<string name="exit_confirm">Sei sicuro di voler uscire?</string>
+	<string name="invalid_registration_username">L\'username non è valido (max 30 caratteri)</string>
+	<string name="invalid_registration_mail">La mail non è valida (max 100 caratteri)</string>
+	<string name="invalid_registration_password">La password non è valida (min 8 caratteri)</string>
+	<string name="empty_fields">Compilare tutti i campi</string>
 </resources>
