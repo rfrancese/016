@@ -81,7 +81,7 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/risutente2"
+                android:id="@+id/risavv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -89,7 +89,7 @@
                 android:layout_marginRight="26dp" />
 
             <ImageView
-                android:id="@+id/risavv2"
+                android:id="@+id/risutente2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
