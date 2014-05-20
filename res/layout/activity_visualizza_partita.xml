@@ -59,7 +59,7 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/risutente1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -68,7 +68,7 @@
                 android:src="@drawable/abc_ic_clear" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/risavv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/risutente2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -92,7 +92,7 @@
                 android:src="@drawable/abc_ic_clear" />
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/risavv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/risutente3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -116,7 +116,7 @@
                 android:src="@drawable/abc_ic_clear" />
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/risavv3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -131,14 +131,14 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/risutente4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="26dp"
                 android:src="@drawable/abc_ic_clear" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/risavv4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -153,14 +153,14 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/risutente5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="26dp"
                 android:src="@drawable/abc_ic_clear" />
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/risavv5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/imageView11"
+                android:id="@+id/risutente6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -184,7 +184,7 @@
                 android:src="@drawable/abc_ic_clear" />
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/risavv6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

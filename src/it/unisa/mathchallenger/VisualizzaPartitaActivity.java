@@ -9,6 +9,7 @@ import it.unisa.mathchallenger.communication.Messaggio;
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.DettagliNonPresentiException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
+import it.unisa.mathchallenger.status.Domanda;
 import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.StatoPartita;
 import it.unisa.mathchallenger.status.Status;
@@ -24,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -51,6 +53,8 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					if(oldStat!=newStat)
 						Status.getInstance().aggiornaPartita(p);
 					disegna(p);
+					if(p.getDettagliPartita()!=null)
+						visualizzaRisposte(stato);
 				}
 				catch (IOException | LoginException | ConnectionException e) {
 					// TODO Auto-generated catch block
@@ -210,6 +214,88 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					e.printStackTrace();
 				}
 				break;
+		}
+	}
+	private void visualizzaRisposte(StatoPartita p){
+		int risposteutente[] = p.getRisposteUtente();
+		int risposteavversario[] = p.getRisposteAvversario();
+		
+		for(int i=0;i<6;i++){			
+			switch(i){
+			case 1:
+				ImageView risut = (ImageView) findViewById(R.id.risutente1);
+				ImageView risavv = (ImageView) findViewById(R.id.risavv1);
+			if(risposteutente[i]==Domanda.ESATTA)				
+				risut.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteutente[i]==Domanda.SBAGLIATA)
+				risut.setBackgroundResource(R.drawable.risposta_wrong);
+			if(risposteavversario[i]==Domanda.ESATTA)				
+				risavv.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteavversario[i]==Domanda.SBAGLIATA)
+				risavv.setBackgroundResource(R.drawable.risposta_wrong);			
+			break;
+			case 2:
+				ImageView risut2 = (ImageView) findViewById(R.id.risutente2);
+				ImageView risavv2 = (ImageView) findViewById(R.id.risavv2);
+			if(risposteutente[i]==Domanda.ESATTA)				
+				risut2.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteutente[i]==Domanda.SBAGLIATA)
+				risut2.setBackgroundResource(R.drawable.risposta_wrong);
+			if(risposteavversario[i]==Domanda.ESATTA)				
+				risavv2.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteavversario[i]==Domanda.SBAGLIATA)
+				risavv2.setBackgroundResource(R.drawable.risposta_wrong);			
+			break;
+			case 3:
+				ImageView risut3 = (ImageView) findViewById(R.id.risutente3);
+				ImageView risavv3 = (ImageView) findViewById(R.id.risavv3);
+			if(risposteutente[i]==Domanda.ESATTA)				
+				risut3.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteutente[i]==Domanda.SBAGLIATA)
+				risut3.setBackgroundResource(R.drawable.risposta_wrong);
+			if(risposteavversario[i]==Domanda.ESATTA)				
+				risavv3.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteavversario[i]==Domanda.SBAGLIATA)
+				risavv3.setBackgroundResource(R.drawable.risposta_wrong);			
+			break;
+			case 4:
+				ImageView risut4 = (ImageView) findViewById(R.id.risutente4);
+				ImageView risavv4 = (ImageView) findViewById(R.id.risavv4);
+			if(risposteutente[i]==Domanda.ESATTA)				
+				risut4.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteutente[i]==Domanda.SBAGLIATA)
+				risut4.setBackgroundResource(R.drawable.risposta_wrong);
+			if(risposteavversario[i]==Domanda.ESATTA)				
+				risavv4.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteavversario[i]==Domanda.SBAGLIATA)
+				risavv4.setBackgroundResource(R.drawable.risposta_wrong);			
+			break;
+			case 5:
+				ImageView risut5 = (ImageView) findViewById(R.id.risutente5);
+				ImageView risavv5 = (ImageView) findViewById(R.id.risavv5);
+			if(risposteutente[i]==Domanda.ESATTA)				
+				risut5.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteutente[i]==Domanda.SBAGLIATA)
+				risut5.setBackgroundResource(R.drawable.risposta_wrong);
+			if(risposteavversario[i]==Domanda.ESATTA)				
+				risavv5.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteavversario[i]==Domanda.SBAGLIATA)
+				risavv5.setBackgroundResource(R.drawable.risposta_wrong);			
+			break;
+			case 6:
+				ImageView risut6 = (ImageView) findViewById(R.id.risutente6);
+				ImageView risavv6 = (ImageView) findViewById(R.id.risavv6);
+			if(risposteutente[i]==Domanda.ESATTA)				
+				risut6.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteutente[i]==Domanda.SBAGLIATA)
+				risut6.setBackgroundResource(R.drawable.risposta_wrong);
+			if(risposteavversario[i]==Domanda.ESATTA)				
+				risavv6.setBackgroundResource(R.drawable.risposta_ok);
+			else if(risposteavversario[i]==Domanda.SBAGLIATA)
+				risavv6.setBackgroundResource(R.drawable.risposta_wrong);			
+			break;
+		
+			}
 		}
 	}
 
