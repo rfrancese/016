@@ -21,8 +21,8 @@ public class Communication implements Runnable {
 	private static Communication singleton;
 
 	private Socket			   socket;
-	private final static String  HOSTNAME	  = "pinoelefante.no-ip.biz";
-	// private final static String HOSTNAME="172.19.253.48";
+	//private final static String  HOSTNAME	  = "pinoelefante.no-ip.biz";
+	private final static String  HOSTNAME	  = "192.168.0.207";
 	private final static int	 HOSTNAME_PORT = 50000;
 
 	private Communication() {
@@ -51,7 +51,7 @@ public class Communication implements Runnable {
 	private PrintWriter	out;
 	private BufferedReader in;
 
-	private boolean connect() throws UnknownHostException, IOException {
+	public boolean connect() throws UnknownHostException, IOException {
 		socket = new Socket(HOSTNAME, HOSTNAME_PORT);
 		socket.setSoTimeout(30000);
 		out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);

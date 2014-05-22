@@ -47,13 +47,13 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 				try {
 					comm.send(m);
 					StatoPartita stato = CommunicationParser.getInstance().parseGetDettaglioPartita(m);
-					int oldStat=p.getStatoPartita();
+					int oldStat = p.getStatoPartita();
 					p.setDettagliPartita(stato);
-					int newStat=p.getStatoPartita();
-					if(oldStat!=newStat)
+					int newStat = p.getStatoPartita();
+					if (oldStat != newStat)
 						Status.getInstance().aggiornaPartita(p);
 					disegna(p);
-					if(p.getDettagliPartita()!=null)
+					if (p.getDettagliPartita() != null)
 						visualizzaRisposte(stato);
 				}
 				catch (IOException | LoginException | ConnectionException e) {
@@ -66,23 +66,27 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 			Toast.makeText(getApplicationContext(), "bundle = null", Toast.LENGTH_LONG).show();
 		}
 		View view = (View) findViewById(R.id.container);
-		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+		}
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
 		}
 	}
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		View view = (View) findViewById(R.id.container);
-		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
-		
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
+		}
+
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -124,7 +128,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					b_gioca.setBackgroundResource(R.drawable.button_style);
 					b_gioca.setOnClickListener(new Button.OnClickListener() {
 						public void onClick(View v) {
-							Intent intent=new Intent(getApplicationContext(), GiocaPartitaActivity.class);
+							Intent intent = new Intent(getApplicationContext(), GiocaPartitaActivity.class);
 							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 							intent.putExtra("id_partita", p.getIDPartita());
 							startActivity(intent);
@@ -216,85 +220,86 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 				break;
 		}
 	}
-	private void visualizzaRisposte(StatoPartita p){
+
+	private void visualizzaRisposte(StatoPartita p) {
 		int risposteutente[] = p.getRisposteUtente();
 		int risposteavversario[] = p.getRisposteAvversario();
-		
-		for(int i=0;i<6;i++){			
-			switch(i){
-			case 0:
-				ImageView risut = (ImageView) findViewById(R.id.risutente1);
-				ImageView risavv = (ImageView) findViewById(R.id.risavv1);
-			if(risposteutente[i]==Domanda.ESATTA)				
-				risut.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteutente[i]==Domanda.SBAGLIATA)
-				risut.setBackgroundResource(R.drawable.risposta_wrong);
-			if(risposteavversario[i]==Domanda.ESATTA)				
-				risavv.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteavversario[i]==Domanda.SBAGLIATA)
-				risavv.setBackgroundResource(R.drawable.risposta_wrong);			
-			break;
-			case 1:
-				ImageView risut2 = (ImageView) findViewById(R.id.risutente2);
-				ImageView risavv2 = (ImageView) findViewById(R.id.risavv2);
-			if(risposteutente[i]==Domanda.ESATTA)				
-				risut2.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteutente[i]==Domanda.SBAGLIATA)
-				risut2.setBackgroundResource(R.drawable.risposta_wrong);
-			if(risposteavversario[i]==Domanda.ESATTA)				
-				risavv2.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteavversario[i]==Domanda.SBAGLIATA)
-				risavv2.setBackgroundResource(R.drawable.risposta_wrong);			
-			break;
-			case 2:
-				ImageView risut3 = (ImageView) findViewById(R.id.risutente3);
-				ImageView risavv3 = (ImageView) findViewById(R.id.risavv3);
-			if(risposteutente[i]==Domanda.ESATTA)				
-				risut3.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteutente[i]==Domanda.SBAGLIATA)
-				risut3.setBackgroundResource(R.drawable.risposta_wrong);
-			if(risposteavversario[i]==Domanda.ESATTA)				
-				risavv3.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteavversario[i]==Domanda.SBAGLIATA)
-				risavv3.setBackgroundResource(R.drawable.risposta_wrong);			
-			break;
-			case 3:
-				ImageView risut4 = (ImageView) findViewById(R.id.risutente4);
-				ImageView risavv4 = (ImageView) findViewById(R.id.risavv4);
-			if(risposteutente[i]==Domanda.ESATTA)				
-				risut4.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteutente[i]==Domanda.SBAGLIATA)
-				risut4.setBackgroundResource(R.drawable.risposta_wrong);
-			if(risposteavversario[i]==Domanda.ESATTA)				
-				risavv4.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteavversario[i]==Domanda.SBAGLIATA)
-				risavv4.setBackgroundResource(R.drawable.risposta_wrong);			
-			break;
-			case 4:
-				ImageView risut5 = (ImageView) findViewById(R.id.risutente5);
-				ImageView risavv5 = (ImageView) findViewById(R.id.risavv5);
-			if(risposteutente[i]==Domanda.ESATTA)				
-				risut5.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteutente[i]==Domanda.SBAGLIATA)
-				risut5.setBackgroundResource(R.drawable.risposta_wrong);
-			if(risposteavversario[i]==Domanda.ESATTA)				
-				risavv5.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteavversario[i]==Domanda.SBAGLIATA)
-				risavv5.setBackgroundResource(R.drawable.risposta_wrong);			
-			break;
-			case 5:
-				ImageView risut6 = (ImageView) findViewById(R.id.risutente6);
-				ImageView risavv6 = (ImageView) findViewById(R.id.risavv6);
-			if(risposteutente[i]==Domanda.ESATTA)				
-				risut6.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteutente[i]==Domanda.SBAGLIATA)
-				risut6.setBackgroundResource(R.drawable.risposta_wrong);
-			if(risposteavversario[i]==Domanda.ESATTA)				
-				risavv6.setBackgroundResource(R.drawable.risposta_ok);
-			else if(risposteavversario[i]==Domanda.SBAGLIATA)
-				risavv6.setBackgroundResource(R.drawable.risposta_wrong);			
-			break;
-		
+
+		for (int i = 0; i < 6; i++) {
+			switch (i) {
+				case 0:
+					ImageView risut = (ImageView) findViewById(R.id.risutente1);
+					ImageView risavv = (ImageView) findViewById(R.id.risavv1);
+					if (risposteutente[i] == Domanda.ESATTA)
+						risut.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteutente[i] == Domanda.SBAGLIATA)
+						risut.setBackgroundResource(R.drawable.risposta_wrong);
+					if (risposteavversario[i] == Domanda.ESATTA)
+						risavv.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteavversario[i] == Domanda.SBAGLIATA)
+						risavv.setBackgroundResource(R.drawable.risposta_wrong);
+					break;
+				case 1:
+					ImageView risut2 = (ImageView) findViewById(R.id.risutente2);
+					ImageView risavv2 = (ImageView) findViewById(R.id.risavv2);
+					if (risposteutente[i] == Domanda.ESATTA)
+						risut2.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteutente[i] == Domanda.SBAGLIATA)
+						risut2.setBackgroundResource(R.drawable.risposta_wrong);
+					if (risposteavversario[i] == Domanda.ESATTA)
+						risavv2.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteavversario[i] == Domanda.SBAGLIATA)
+						risavv2.setBackgroundResource(R.drawable.risposta_wrong);
+					break;
+				case 2:
+					ImageView risut3 = (ImageView) findViewById(R.id.risutente3);
+					ImageView risavv3 = (ImageView) findViewById(R.id.risavv3);
+					if (risposteutente[i] == Domanda.ESATTA)
+						risut3.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteutente[i] == Domanda.SBAGLIATA)
+						risut3.setBackgroundResource(R.drawable.risposta_wrong);
+					if (risposteavversario[i] == Domanda.ESATTA)
+						risavv3.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteavversario[i] == Domanda.SBAGLIATA)
+						risavv3.setBackgroundResource(R.drawable.risposta_wrong);
+					break;
+				case 3:
+					ImageView risut4 = (ImageView) findViewById(R.id.risutente4);
+					ImageView risavv4 = (ImageView) findViewById(R.id.risavv4);
+					if (risposteutente[i] == Domanda.ESATTA)
+						risut4.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteutente[i] == Domanda.SBAGLIATA)
+						risut4.setBackgroundResource(R.drawable.risposta_wrong);
+					if (risposteavversario[i] == Domanda.ESATTA)
+						risavv4.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteavversario[i] == Domanda.SBAGLIATA)
+						risavv4.setBackgroundResource(R.drawable.risposta_wrong);
+					break;
+				case 4:
+					ImageView risut5 = (ImageView) findViewById(R.id.risutente5);
+					ImageView risavv5 = (ImageView) findViewById(R.id.risavv5);
+					if (risposteutente[i] == Domanda.ESATTA)
+						risut5.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteutente[i] == Domanda.SBAGLIATA)
+						risut5.setBackgroundResource(R.drawable.risposta_wrong);
+					if (risposteavversario[i] == Domanda.ESATTA)
+						risavv5.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteavversario[i] == Domanda.SBAGLIATA)
+						risavv5.setBackgroundResource(R.drawable.risposta_wrong);
+					break;
+				case 5:
+					ImageView risut6 = (ImageView) findViewById(R.id.risutente6);
+					ImageView risavv6 = (ImageView) findViewById(R.id.risavv6);
+					if (risposteutente[i] == Domanda.ESATTA)
+						risut6.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteutente[i] == Domanda.SBAGLIATA)
+						risut6.setBackgroundResource(R.drawable.risposta_wrong);
+					if (risposteavversario[i] == Domanda.ESATTA)
+						risavv6.setBackgroundResource(R.drawable.risposta_ok);
+					else if (risposteavversario[i] == Domanda.SBAGLIATA)
+						risavv6.setBackgroundResource(R.drawable.risposta_wrong);
+					break;
+
 			}
 		}
 	}
