@@ -122,8 +122,9 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					int height = (int) (scale * 45 + 0.5f);
 					Button b_gioca = new Button(getApplicationContext());
 					LinearLayout.LayoutParams dim = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
+					dim.setMargins(0, 10, 0, 15);
 					b_gioca.setLayoutParams(dim);
-					b_gioca.setTextColor(Color.BLACK);
+					b_gioca.setTextColor(Color.WHITE);
 					b_gioca.setText(R.string.gioca);
 					b_gioca.setBackgroundResource(R.drawable.button_style);
 					b_gioca.setOnClickListener(new Button.OnClickListener() {

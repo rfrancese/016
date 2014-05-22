@@ -188,10 +188,9 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 
 			Button btn_remove = new Button(getApplicationContext());
 			newLay.addView(btn_remove);
-			btn_remove.setText("X");
 			btn_remove.setTextColor(Color.BLACK);
 			btn_remove.setGravity(Gravity.CENTER);
-			btn_remove.setBackgroundResource(R.drawable.button_style);
+			btn_remove.setBackgroundResource(R.drawable.bottone_cancella);
 			LayoutParams params2 = new LayoutParams(LayoutParams.WRAP_CONTENT, height);
 			params2.setMargins(0, (int) (10 * scale), 0, 0);
 			btn_remove.setLayoutParams(params2);
