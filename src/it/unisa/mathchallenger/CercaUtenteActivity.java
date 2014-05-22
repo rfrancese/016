@@ -118,7 +118,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 				tv_res = new TextView(getApplicationContext());
 				tv_res.setText(str);
 			}
-			tv_res.setTextColor(Color.BLACK);
+			tv_res.setTextColor(Color.WHITE);
 			lay.addView(tv_res);
 			float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 			int height = (int) (scale * 45 + 0.5f);
