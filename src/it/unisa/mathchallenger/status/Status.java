@@ -95,7 +95,7 @@ public class Status {
 				return;
 			}
 		}
-		partite.add(p);
+		partite.add(0,p);
 		database.inserisciPartita(p.getIDPartita(), getUtente().getID(), p.getUtenteSfidato().getID(), p.getUtenteSfidato().getUsername(), p.getStatoPartita());
 	}
 

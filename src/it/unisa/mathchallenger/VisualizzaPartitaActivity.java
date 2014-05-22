@@ -47,14 +47,19 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 				try {
 					comm.send(m);
 					StatoPartita stato = CommunicationParser.getInstance().parseGetDettaglioPartita(m);
-					int oldStat = p.getStatoPartita();
-					p.setDettagliPartita(stato);
-					int newStat = p.getStatoPartita();
-					if (oldStat != newStat)
-						Status.getInstance().aggiornaPartita(p);
-					disegna(p);
-					if (p.getDettagliPartita() != null)
-						visualizzaRisposte(stato);
+					if(stato!=null){
+    					int oldStat = p.getStatoPartita();
+    					p.setDettagliPartita(stato);
+    					int newStat = p.getStatoPartita();
+    					if (oldStat != newStat)
+    						Status.getInstance().aggiornaPartita(p);
+    					disegna(p);
+    					if (p.getDettagliPartita() != null)
+    						visualizzaRisposte(stato);
+					}
+					else {
+						Toast.makeText(getApplicationContext(), m.getErrorMessage(), Toast.LENGTH_LONG).show();
+					}
 				}
 				catch (IOException | LoginException | ConnectionException e) {
 					// TODO Auto-generated catch block
