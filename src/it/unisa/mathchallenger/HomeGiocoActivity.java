@@ -191,13 +191,13 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		if (inCorso) {
 			TextView label_incorso = new TextView(getApplicationContext());
 			label_incorso.setText(R.string.homegioco_partite_in_corso);
-			label_incorso.setTextColor(Color.BLACK);
+			label_incorso.setTextColor(Color.WHITE);
 			lay.addView(label_incorso, 0);
 		}
 		if (terminate.size() > 0) {
 			TextView label_terminate = new TextView(getApplicationContext());
 			label_terminate.setText(R.string.homegioco_partite_terminate);
-			label_terminate.setTextColor(Color.BLACK);
+			label_terminate.setTextColor(Color.WHITE);
 			lay.addView(label_terminate);
 			for (int i = 0; i < terminate.size(); i++) {
 				final Partita partita = terminate.get(i);
