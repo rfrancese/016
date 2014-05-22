@@ -22,10 +22,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 public class GiocaPartitaActivity extends Activity {
-	private Communication comm;
-	private final static int DURATA_DOMANDA = 10;
-	private Partita	   partita;
-	private int		   domanda_corrente = 0;
+	private Communication	comm;
+	private final static int DURATA_DOMANDA   = 10;
+	private Partita		  partita;
+	private int			  domanda_corrente = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,32 +60,25 @@ public class GiocaPartitaActivity extends Activity {
 			}
 		}
 		View view = (View) findViewById(R.id.container);
-		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+		}
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
 		}
 	}
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		View view = (View) findViewById(R.id.container);
-		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
-		}
-		
-	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.gioca_partita, menu);
 		return true;
 	}
+
 	public void onBackPressed() {
-		
+
 	};
-	private Thread tempo=null; 
+
+	private Thread tempo = null;
 	private void scriviDomanda() {
 		if (domanda_corrente < partita.getNumDomande()) {
 			Domanda d = partita.getDomanda(domanda_corrente);
@@ -95,33 +88,33 @@ public class GiocaPartitaActivity extends Activity {
 			Button risp3 = (Button) findViewById(R.id.gioca_partita_risp3);
 			Button risp4 = (Button) findViewById(R.id.gioca_partita_risp4);
 			domanda.setText(d.getDomanda());
-			String r1=(d.getRisposta(0)+"").endsWith(".0")?(d.getRisposta(0)+"").substring(0, (d.getRisposta(0)+"").length()-2):d.getRisposta(0)+"";
+			String r1 = (d.getRisposta(0) + "").endsWith(".0") ? (d.getRisposta(0) + "").substring(0, (d.getRisposta(0) + "").length() - 2) : d.getRisposta(0) + "";
 			risp1.setText(r1);
-			String r2=(d.getRisposta(1)+"").endsWith(".0")?(d.getRisposta(1)+"").substring(0, (d.getRisposta(1)+"").length()-2):d.getRisposta(1)+"";
+			String r2 = (d.getRisposta(1) + "").endsWith(".0") ? (d.getRisposta(1) + "").substring(0, (d.getRisposta(1) + "").length() - 2) : d.getRisposta(1) + "";
 			risp2.setText(r2);
-			String r3=(d.getRisposta(2)+"").endsWith(".0")?(d.getRisposta(2)+"").substring(0, (d.getRisposta(2)+"").length()-2):d.getRisposta(2)+"";
+			String r3 = (d.getRisposta(2) + "").endsWith(".0") ? (d.getRisposta(2) + "").substring(0, (d.getRisposta(2) + "").length() - 2) : d.getRisposta(2) + "";
 			risp3.setText(r3);
-			String r4=(d.getRisposta(3)+"").endsWith(".0")?(d.getRisposta(3)+"").substring(0, (d.getRisposta(3)+"").length()-2):d.getRisposta(3)+"";
+			String r4 = (d.getRisposta(3) + "").endsWith(".0") ? (d.getRisposta(3) + "").substring(0, (d.getRisposta(3) + "").length() - 2) : d.getRisposta(3) + "";
 			risp4.setText(r4);
-			risp1.setOnClickListener(new clickRisposta(d,d.getRisposta(0)));
-			risp2.setOnClickListener(new clickRisposta(d,d.getRisposta(1)));
-			risp3.setOnClickListener(new clickRisposta(d,d.getRisposta(2)));
-			risp4.setOnClickListener(new clickRisposta(d,d.getRisposta(3)));
-			final ProgressBar bar=(ProgressBar) findViewById(R.id.progressBar1);
+			risp1.setOnClickListener(new clickRisposta(d, d.getRisposta(0)));
+			risp2.setOnClickListener(new clickRisposta(d, d.getRisposta(1)));
+			risp3.setOnClickListener(new clickRisposta(d, d.getRisposta(2)));
+			risp4.setOnClickListener(new clickRisposta(d, d.getRisposta(3)));
+			final ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar1);
 			runOnUiThread(new Runnable() {
 				public void run() {
 					bar.setMax(DURATA_DOMANDA);
 				}
 			});
-			
-    		tempo=new timer_partita(bar);
-    		tempo.start();
+
+			tempo = new timer_partita(bar);
+			tempo.start();
 		}
 		else {
-			Messaggio mess= CommunicationMessageCreator.getInstance().createRisposte(partita);
+			Messaggio mess = CommunicationMessageCreator.getInstance().createRisposte(partita);
 			try {
 				comm.send(mess);
-			} 
+			}
 			catch (IOException | LoginException | ConnectionException e) {
 				e.printStackTrace();
 			}
@@ -134,10 +127,11 @@ public class GiocaPartitaActivity extends Activity {
 
 	class clickRisposta implements Button.OnClickListener {
 		Domanda domanda;
-		float risposta;
+		float   risposta;
+
 		public clickRisposta(Domanda d, float risposta) {
 			domanda = d;
-			this.risposta=risposta;
+			this.risposta = risposta;
 		}
 
 		public void onClick(View v) {
@@ -147,14 +141,17 @@ public class GiocaPartitaActivity extends Activity {
 			scriviDomanda();
 		}
 	}
+
 	class timer_partita extends Thread {
 		private ProgressBar progressbar;
-		public timer_partita(ProgressBar bar){
-			progressbar=bar;
+
+		public timer_partita(ProgressBar bar) {
+			progressbar = bar;
 		}
+
 		public void run() {
-			int time=DURATA_DOMANDA;
-			while(time>0){
+			int time = DURATA_DOMANDA;
+			while (time > 0) {
 				try {
 					sleep(1000L);
 				}
@@ -163,10 +160,10 @@ public class GiocaPartitaActivity extends Activity {
 					return;
 				}
 				time--;
-				progressUpdater pu=new progressUpdater(progressbar, time);
+				progressUpdater pu = new progressUpdater(progressbar, time);
 				runOnUiThread(pu);
 			}
-			//TODO assegna risposta sbagliata
+			// TODO assegna risposta sbagliata
 			runOnUiThread(new Runnable() {
 				public void run() {
 					domanda_corrente++;
@@ -175,16 +172,19 @@ public class GiocaPartitaActivity extends Activity {
 			});
 		}
 	}
+
 	class progressUpdater implements Runnable {
-		int value;
+		int		 value;
 		ProgressBar p_bar;
-		public progressUpdater(ProgressBar bar, int val){
-			value=val;
-			p_bar=bar;
+
+		public progressUpdater(ProgressBar bar, int val) {
+			value = val;
+			p_bar = bar;
 		}
+
 		public void run() {
 			p_bar.setProgress(value);
 		}
-		
+
 	}
 }
