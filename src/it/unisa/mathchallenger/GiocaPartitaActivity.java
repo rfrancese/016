@@ -142,8 +142,6 @@ public class GiocaPartitaActivity extends Activity {
 
 		public void onClick(View v) {
 			tempo.interrupt();
-			//Button b = (Button) v;
-			//String risposta = b.getText().toString();
 			domanda.setRispostaUtente(this.risposta);
 			domanda_corrente++;
 			scriviDomanda();
