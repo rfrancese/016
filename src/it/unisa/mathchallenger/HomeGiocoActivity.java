@@ -139,10 +139,10 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				final Button b_prt = new Button(getApplicationContext());
 				Account acc = p.getUtenteSfidato();
 				b_prt.setText(acc == null ? "null" : acc.getUsername());
-				b_prt.setTextColor(Color.BLACK);
+				b_prt.setTextColor(Color.WHITE);
 				b_prt.setBackgroundResource(R.drawable.button_style);
 				LayoutParams dim = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
-				dim.setMargins(0, (int) (10 * scale), 0, 0);
+				dim.setMargins(0, (int) (2 * scale), 0, 0);
 				b_prt.setLayoutParams(dim);
 				b_prt.setGravity(Gravity.CENTER);
 				b_prt.setOnClickListener(new Button.OnClickListener() {
@@ -202,10 +202,10 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				final Button b = new Button(getApplicationContext());
 				b.setBackgroundResource(R.drawable.button_style);
 				b.setText(partita.getUtenteSfidato().getUsername());
-				b.setTextColor(Color.BLACK);
+				b.setTextColor(Color.WHITE);
 				b.setGravity(Gravity.CENTER);
 				LayoutParams dim = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
-				dim.setMargins(0, (int) (10 * scale), 0, 0);
+				dim.setMargins(0, (int) (2 * scale), 0, 0);
 				b.setLayoutParams(dim);
 				b.setOnClickListener(new Button.OnClickListener() {
 
