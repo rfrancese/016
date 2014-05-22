@@ -51,7 +51,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 		} else {
 		    view.setBackgroundResource (R.drawable.prova2hd);
 		}
-		
+		addResToLay(res);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,7 +72,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	ArrayList<Account> res;
 	public void onClickCerca(View v) {
 		TextView tv = (TextView) findViewById(R.id.textfield_cerca);
 		String text = tv.getText().toString();
@@ -86,7 +86,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 			Messaggio m = CommunicationMessageCreator.getInstance().createSearchUserMessage(text);
 			try {
 				comm.send(m);
-				ArrayList<Account> res = CommunicationParser.getInstance().parseSearchUser(m);
+				res = CommunicationParser.getInstance().parseSearchUser(m);
 				addResToLay(res);
 			}
 			catch (IOException e) {

@@ -114,10 +114,15 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 		tv_avversario.setText(p.getUtenteSfidato().getUsername());
 
 		LinearLayout azione_container = (LinearLayout) findViewById(R.id.visualizza_azione_container);
+		StatoPartita dett=p.getDettagliPartita();
+		if(dett==null){
+			Toast.makeText(getApplicationContext(), "Dettagli partita = null", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		switch (p.getStatoPartita()) {
 			case Partita.CREATA:
 			case Partita.INIZIATA:
-				if (!p.getDettagliPartita().isUtenteRisposto()) {
+				if (dett!=null && !p.getDettagliPartita().isUtenteRisposto()) {
 					float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 					int height = (int) (scale * 45 + 0.5f);
 					Button b_gioca = new Button(getApplicationContext());
@@ -300,7 +305,6 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					else if (risposteavversario[i] == Domanda.SBAGLIATA)
 						risavv6.setBackgroundResource(R.drawable.risposta_wrong);
 					break;
-
 			}
 		}
 	}
