@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/register_title_tv"
+        android:textColor="@color/White"
         android:textSize="@dimen/size_default_title"
         android:textStyle="bold" />
 
@@ -27,6 +28,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/username_tv"
+            android:textColor="@color/White"
             android:textStyle="bold" />
 
         <EditText
@@ -55,6 +57,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/password_tv"
+            android:textColor="@color/White"
             android:textStyle="bold" />
 
         <EditText
@@ -82,6 +85,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/password_tv"
+            android:textColor="@color/White"
             android:textStyle="bold" />
 
         <EditText
@@ -109,6 +113,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/email_tv"
+            android:textColor="@color/White"
             android:textStyle="bold" />
 
         <EditText

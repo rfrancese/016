@@ -35,7 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/elenco_amici" />
+        android:text="@string/elenco_amici"
+        android:textColor="@color/White" />
 
     <ScrollView
         android:id="@+id/elenco_amici_scroll"

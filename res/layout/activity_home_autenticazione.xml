@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/home_login_tv"
+        android:textColor="@color/White"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -78,6 +79,7 @@
         android:gravity="center_horizontal"
         android:padding="5dp"
         android:text="@string/text_registrazione_home"
+        android:textColor="@color/White"
         android:textSize="@dimen/size_default_text"
         android:textStyle="bold" />
 
@@ -97,6 +99,7 @@
         android:gravity="center"
         android:padding="5dp"
         android:text="@string/lost_password_tv"
+        android:textColor="@color/White"
         android:textSize="@dimen/size_default_text"
         android:textStyle="bold" />
 
