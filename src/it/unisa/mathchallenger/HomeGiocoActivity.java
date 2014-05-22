@@ -111,9 +111,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			case R.id.action_exit_menu:
 				t_aggiorna_partite.interrupt();
 				comm.disconnect();
-				Intent intent = new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+				System.exit(0);
 				break;
 		}
 		return super.onOptionsItemSelected(item);

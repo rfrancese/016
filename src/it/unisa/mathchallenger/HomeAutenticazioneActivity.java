@@ -31,11 +31,12 @@ import android.widget.Toast;
 public class HomeAutenticazioneActivity extends ActionBarActivity {
 
 	Communication comm;
-
+	private int current_layout=0;
+	private final static int HOME=0, REGISTRA=1, RECUPERA=2;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		current_layout=HOME;
 		if (VERSION.SDK_INT >= 9) {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
@@ -56,21 +57,22 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			}
 		}
 
-		if (!loginOK){
+		if (!loginOK) {
 			setContentView(R.layout.activity_home_autenticazione);
-    		View view = (View) findViewById(R.id.ScrollView2);
-    		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-    			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
-    		}
-    		else {
-    			view.setBackgroundResource(R.drawable.prova2hd);
-    		}
+			View view = (View) findViewById(R.id.ScrollView2);
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+				view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+			}
+			else {
+				view.setBackgroundResource(R.drawable.prova2hd);
+			}
 		}
 		else {
 			Status.getInstance().loginAuth(acc);
 			Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
+			finish();
 		}
 	}
 
@@ -109,16 +111,23 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 
 	@Override
 	public void onBackPressed() {
-		new AlertDialog.Builder(this).setMessage(R.string.exit_confirm).setCancelable(false).setPositiveButton("Si", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				HomeAutenticazioneActivity.this.finish();
-			}
-		}).setNegativeButton("No", null).show();
+		if (current_layout==HOME) {
+			new AlertDialog.Builder(this).setMessage(R.string.exit_confirm).setCancelable(false).setPositiveButton("Si", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					HomeAutenticazioneActivity.this.finish();
+				}
+			}).setNegativeButton("No", null).show();
+		}
+		else {
+			setContentView(R.layout.activity_home_autenticazione);
+			current_layout=HOME;
+		}
 	}
 
 	public void onClickRegistra(View v) {
 		if (v.getId() == R.id.button_registrazione_home) {
 			setContentView(R.layout.activity_register_layout);
+			current_layout=REGISTRA;
 			EditText user = (EditText) findViewById(R.id.reg_username_text);
 			EditText pass = (EditText) findViewById(R.id.reg_pass1_text);
 			EditText mail = (EditText) findViewById(R.id.reg_email_text);
@@ -258,8 +267,10 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 	}
 
 	public void onClickResetPassword(View v) {
-		if (v.getId() == R.id.button_recupera_pass_home)
+		if (v.getId() == R.id.button_recupera_pass_home){
+			current_layout=RECUPERA;
 			setContentView(R.layout.activity_reset_password);
+		}
 		else if (v.getId() == R.id.reg_reset_pass_button) {
 			TextView user_tv = (TextView) findViewById(R.id.reset_username_text);
 			String user = user_tv.getText().toString();
