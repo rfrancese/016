@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -93,15 +94,24 @@ public class Communication implements Runnable {
 		if (socket == null) {
 			connect();
 		}
-
-		out.println(m.getComando());
+		try {
+    		write(m.getComando());
+    		m.setResponse(read());
+		}
+		catch(IOException e){
+			restart();
+			send(m);
+		}
+		//out.println(m.getComando());
+		/*
 		if(out.checkError()){
 			Log.d("", "Errore durante send()");
 			restart();
 			send(m);
 		}
 		else
-			m.setResponse(read());
+		*/
+		
 	}
 
 	private String read() throws IOException {
@@ -122,5 +132,10 @@ public class Communication implements Runnable {
 			out.close();
 		if(socket!=null)
 			socket.close();
+	}
+	private void write(String s) throws IOException{
+		OutputStream out=socket.getOutputStream();
+		out.write((s+"\n").getBytes());
+		out.flush();
 	}
 }
