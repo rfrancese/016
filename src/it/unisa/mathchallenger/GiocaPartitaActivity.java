@@ -82,6 +82,9 @@ public class GiocaPartitaActivity extends Activity {
 		getMenuInflater().inflate(R.menu.gioca_partita, menu);
 		return true;
 	}
+	public void onBackPressed() {
+		
+	};
 	private Thread tempo=null; 
 	private void scriviDomanda() {
 		if (domanda_corrente < partita.getNumDomande()) {
