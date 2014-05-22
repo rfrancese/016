@@ -78,6 +78,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		} else {
 		    view.setBackgroundResource (R.drawable.prova2hd);
 		}
+		aggiungiAmiciUI();
 		
 	}
 	@Override
