@@ -207,7 +207,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 			}
 		}
 		else {
-			Toast.makeText(getApplicationContext(), R.string.cerca_nessun_utente_trovato, Toast.LENGTH_LONG);
+			Toast.makeText(getApplicationContext(), R.string.cerca_nessun_utente_trovato, Toast.LENGTH_LONG).show();;
 		}
 	}
 
