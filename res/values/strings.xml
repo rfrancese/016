@@ -78,4 +78,5 @@
 	<string name="invalid_registration_mail">La mail non è valida (max 100 caratteri)</string>
 	<string name="invalid_registration_password">La password non è valida (min 8 caratteri)</string>
 	<string name="empty_fields">Compilare tutti i campi</string>
+	<string name="cerca_nessun_utente_trovato">Nessun utente trovato</string>
 </resources>
