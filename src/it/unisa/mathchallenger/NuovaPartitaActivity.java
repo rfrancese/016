@@ -159,7 +159,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			Button btn_amico = new Button(getApplicationContext());
 			newLay.addView(btn_amico);
 			btn_amico.setText(acc.getUsername());
-			btn_amico.setTextColor(Color.BLACK);
+			btn_amico.setTextColor(Color.WHITE);
 			btn_amico.setGravity(Gravity.CENTER);
 			btn_amico.setBackgroundResource(R.drawable.button_style);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);

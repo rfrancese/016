@@ -1,2 +1,1 @@
-Rotazione layout "autenticazione", "gioco", "nuova partita", "cerca utente"
-Modificare i colori delle textview per essere visibili sullo sfondo
+sistemare layout in cerca amici
