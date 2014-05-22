@@ -95,22 +95,27 @@ public class GiocaPartitaActivity extends Activity {
 			Button risp3 = (Button) findViewById(R.id.gioca_partita_risp3);
 			Button risp4 = (Button) findViewById(R.id.gioca_partita_risp4);
 			domanda.setText(d.getDomanda());
-			risp1.setText(d.getRisposta(0) + "");
-			risp2.setText(d.getRisposta(1) + "");
-			risp3.setText(d.getRisposta(2) + "");
-			risp4.setText(d.getRisposta(3) + "");
-			risp1.setOnClickListener(new clickRisposta(d));
-			risp2.setOnClickListener(new clickRisposta(d));
-			risp3.setOnClickListener(new clickRisposta(d));
-			risp4.setOnClickListener(new clickRisposta(d));
+			String r1=(d.getRisposta(0)+"").endsWith(".0")?(d.getRisposta(0)+"").substring(0, (d.getRisposta(0)+"").length()-2):d.getRisposta(0)+"";
+			risp1.setText(r1);
+			String r2=(d.getRisposta(1)+"").endsWith(".0")?(d.getRisposta(1)+"").substring(0, (d.getRisposta(1)+"").length()-2):d.getRisposta(1)+"";
+			risp2.setText(r2);
+			String r3=(d.getRisposta(2)+"").endsWith(".0")?(d.getRisposta(2)+"").substring(0, (d.getRisposta(2)+"").length()-2):d.getRisposta(2)+"";
+			risp3.setText(r3);
+			String r4=(d.getRisposta(3)+"").endsWith(".0")?(d.getRisposta(3)+"").substring(0, (d.getRisposta(3)+"").length()-2):d.getRisposta(3)+"";
+			risp4.setText(r4);
+			risp1.setOnClickListener(new clickRisposta(d,d.getRisposta(0)));
+			risp2.setOnClickListener(new clickRisposta(d,d.getRisposta(1)));
+			risp3.setOnClickListener(new clickRisposta(d,d.getRisposta(2)));
+			risp4.setOnClickListener(new clickRisposta(d,d.getRisposta(3)));
 			final ProgressBar bar=(ProgressBar) findViewById(R.id.progressBar1);
 			runOnUiThread(new Runnable() {
 				public void run() {
 					bar.setMax(DURATA_DOMANDA);
 				}
 			});
-			tempo=new timer_partita(bar);
-			tempo.start();
+			
+    		tempo=new timer_partita(bar);
+    		tempo.start();
 		}
 		else {
 			Messaggio mess= CommunicationMessageCreator.getInstance().createRisposte(partita);
@@ -129,17 +134,15 @@ public class GiocaPartitaActivity extends Activity {
 
 	class clickRisposta implements Button.OnClickListener {
 		Domanda domanda;
-
-		public clickRisposta(Domanda d) {
+		float risposta;
+		public clickRisposta(Domanda d, float risposta) {
 			domanda = d;
+			this.risposta=risposta;
 		}
 
 		public void onClick(View v) {
 			tempo.interrupt();
-			Button b = (Button) v;
-			String risposta = b.getText().toString();
-			float r = Float.parseFloat(risposta);
-			domanda.setRispostaUtente(r);
+			domanda.setRispostaUtente(this.risposta);
 			domanda_corrente++;
 			scriviDomanda();
 		}
