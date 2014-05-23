@@ -28,23 +28,27 @@ public class ActivityCambiaPassword extends ActionBarActivity {
 		setContentView(R.layout.activity_cambia_password);
 		comm = Communication.getInstance();
 		View view = (View) findViewById(R.id.cambiapasslayout);
-		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+		}
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
 		}
 	}
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		View view = (View) findViewById(R.id.cambiapasslayout);
-		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
-		
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
+		}
+
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

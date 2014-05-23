@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 public class NuovaPartitaActivity extends ActionBarActivity {
 
-	private Communication  comm;
+	private Communication comm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +39,23 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		aggiornaAmici();
 		aggiungiAmiciUI();
 		View view = (View) findViewById(R.id.container);
-		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
 	}
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		View view = (View) findViewById(R.id.container);
-		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
-		aggiungiAmiciUI();
-		
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
+		}
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -80,12 +81,12 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		try {
 			comm.send(m);
 			Partita p = CommunicationParser.getInstance().parseNewGameRandom(m);
-			if(p!=null){
-			Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			if (p != null) {
+				Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
 			}
-			else 
+			else
 				Toast.makeText(getApplicationContext(), R.string.errore_durante_creazione_partita, Toast.LENGTH_LONG).show();
 		}
 		catch (IOException e) {
@@ -123,8 +124,8 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		ArrayList<Account> amici = Status.getInstance().getElencoAmici();
 		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 		int height = (int) (scale * 40 + 0.5f);
-		int screen_w=getResources().getDisplayMetrics().widthPixels;
-		int width = (int) (((screen_w/100)*90));
+		int screen_w = getResources().getDisplayMetrics().widthPixels;
+		int width = (int) (((screen_w / 100) * 90));
 		for (int i = 0; i < amici.size(); i++) {
 			final RelativeLayout newLay = new RelativeLayout(getApplicationContext());
 			final Account acc = amici.get(i);
@@ -140,12 +141,12 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			btn_amico.setLayoutParams(params);
 			btn_amico.setOnClickListener(new Button.OnClickListener() {
 				public void onClick(View v) {
-					Messaggio m=CommunicationMessageCreator.getInstance().createNewGameMessage(acc.getID());
+					Messaggio m = CommunicationMessageCreator.getInstance().createNewGameMessage(acc.getID());
 					try {
 						comm.send(m);
-						Partita p=CommunicationParser.getInstance().parseNewGame(m);
-						if(p!=null){
-							Intent intent=new Intent(getApplicationContext(), HomeGiocoActivity.class);
+						Partita p = CommunicationParser.getInstance().parseNewGame(m);
+						if (p != null) {
+							Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 							startActivity(intent);
 						}
@@ -160,9 +161,9 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			});
 
 			Button btn_remove = new Button(getApplicationContext());
-			btn_remove.setId(i*2+1);
-			params.addRule(RelativeLayout.LEFT_OF, i*2+1);
-			
+			btn_remove.setId(i * 2 + 1);
+			params.addRule(RelativeLayout.LEFT_OF, i * 2 + 1);
+
 			btn_remove.setTextColor(Color.BLACK);
 			btn_remove.setGravity(Gravity.CENTER);
 			btn_remove.setBackgroundResource(R.drawable.button_rimuovi);
@@ -180,7 +181,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 							Status.getInstance().rimuoviAmico(acc.getID());
 							lay.removeView(newLay);
 						}
-						else 
+						else
 							Toast.makeText(getApplicationContext(), R.string.error_delete_friend_error, Toast.LENGTH_LONG).show();
 					}
 					catch (IOException e) {
@@ -203,7 +204,8 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			lay.addView(newLay);
 		}
 	}
-	private void aggiornaAmici(){
+
+	private void aggiornaAmici() {
 		if (Status.getInstance().isFriendUpdated()) {
 			Status.getInstance().setFriendUpdated(true);
 			Messaggio m = CommunicationMessageCreator.getInstance().createGetMyFriends();

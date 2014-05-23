@@ -21,7 +21,7 @@ public class Communication implements Runnable {
 
 	private Socket			   socket;
 	private final static String  HOSTNAME	  = "pinoelefante.no-ip.biz";
-	//private final static String  HOSTNAME	  = "192.168.0.207";
+	// private final static String HOSTNAME = "192.168.0.207";
 	private final static int	 HOSTNAME_PORT = 50000;
 
 	private Communication() {
@@ -93,23 +93,19 @@ public class Communication implements Runnable {
 			connect();
 		}
 		try {
-    		write(m.getComando());
-    		m.setResponse(read());
+			write(m.getComando());
+			m.setResponse(read());
 		}
-		catch(IOException e){
+		catch (IOException e) {
 			restart();
 			send(m);
 		}
-		//out.println(m.getComando());
+		// out.println(m.getComando());
 		/*
-		if(out.checkError()){
-			Log.d("", "Errore durante send()");
-			restart();
-			send(m);
-		}
-		else
-		*/
-		
+		 * if(out.checkError()){ Log.d("", "Errore durante send()"); restart();
+		 * send(m); } else
+		 */
+
 	}
 
 	private String read() throws IOException {
@@ -123,17 +119,19 @@ public class Communication implements Runnable {
 			return true;
 		return false;
 	}
-	public void close() throws IOException{
-		if(in!=null)
+
+	public void close() throws IOException {
+		if (in != null)
 			in.close();
-		if(out!=null)
+		if (out != null)
 			out.close();
-		if(socket!=null)
+		if (socket != null)
 			socket.close();
 	}
-	private void write(String s) throws IOException{
-		OutputStream out=socket.getOutputStream();
-		out.write((s+"\n").getBytes());
+
+	private void write(String s) throws IOException {
+		OutputStream out = socket.getOutputStream();
+		out.write((s + "\n").getBytes());
 		out.flush();
 	}
 }

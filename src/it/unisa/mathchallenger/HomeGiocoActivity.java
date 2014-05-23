@@ -32,8 +32,8 @@ import android.widget.TextView;
 
 public class HomeGiocoActivity extends ActionBarActivity {
 
-	private Communication comm;
-	private ThreadAggiornaPartite	t_aggiorna_partite;
+	private Communication		 comm;
+	private ThreadAggiornaPartite t_aggiorna_partite;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,23 +44,26 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		t_aggiorna_partite = new ThreadAggiornaPartite();
 		t_aggiorna_partite.start();
 		View view = (View) findViewById(R.id.container);
-		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
-		
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
+		}
+
 	}
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		View view = (View) findViewById(R.id.container);
-		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
-		
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
+		}
+
 	}
 
 	@Override
@@ -125,7 +128,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	private void aggiungiPartite(ArrayList<Partita> partite) {
 		if (partite == null || partite.size() == 0)
 			return;
-		
+
 		final LinearLayout lay = (LinearLayout) findViewById(R.id.layoutPartiteInCorso);
 		lay.removeAllViews();
 		ArrayList<Partita> terminate = new ArrayList<Partita>();
@@ -275,7 +278,8 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				}
 			}
 		}
-		public void aggiorna(){
+
+		public void aggiorna() {
 			Messaggio m = CommunicationMessageCreator.getInstance().createGetPartiteInCorso();
 			try {
 				comm.send(m);
@@ -296,7 +300,8 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			});
 		}
 	}
-	public void aggiorna(View v){
+
+	public void aggiorna(View v) {
 		t_aggiorna_partite.aggiorna();
 	}
 }

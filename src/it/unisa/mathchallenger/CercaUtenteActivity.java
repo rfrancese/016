@@ -36,23 +36,26 @@ public class CercaUtenteActivity extends ActionBarActivity {
 		comm = Communication.getInstance();
 		setContentView(R.layout.activity_cerca_utente);
 		View view = (View) findViewById(R.id.container);
-		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+		}
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
 		}
 	}
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		View view = (View) findViewById(R.id.container);
-		if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-		    view.setBackgroundResource (R.drawable.prova2hdhorizontal);
-		} else {
-		    view.setBackgroundResource (R.drawable.prova2hd);
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
-		addResToLay(res);
+		else {
+			view.setBackgroundResource(R.drawable.prova2hd);
+		}
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -72,7 +75,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	ArrayList<Account> res;
+
 	public void onClickCerca(View v) {
 		TextView tv = (TextView) findViewById(R.id.textfield_cerca);
 		String text = tv.getText().toString();
@@ -86,7 +89,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 			Messaggio m = CommunicationMessageCreator.getInstance().createSearchUserMessage(text);
 			try {
 				comm.send(m);
-				res = CommunicationParser.getInstance().parseSearchUser(m);
+				ArrayList<Account> res = CommunicationParser.getInstance().parseSearchUser(m);
 				addResToLay(res);
 			}
 			catch (IOException e) {
@@ -122,16 +125,16 @@ public class CercaUtenteActivity extends ActionBarActivity {
 			lay.addView(tv_res);
 			float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 			int height = (int) (scale * 40 + 0.5f);
-			int screen_w=getResources().getDisplayMetrics().widthPixels;
-			int width = (int)((screen_w/100)*87);
+			int screen_w = getResources().getDisplayMetrics().widthPixels;
+			int width = (int) ((screen_w / 100) * 87);
 			for (int i = 0; i < res.size(); i++) {
 				final Account acc = res.get(i);
 				Button btn = new Button(getApplicationContext());
-				btn.setId(i*2);
-				RelativeLayout.LayoutParams dim_r=new RelativeLayout.LayoutParams(width, height);
+				btn.setId(i * 2);
+				RelativeLayout.LayoutParams dim_r = new RelativeLayout.LayoutParams(width, height);
 				dim_r.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
 				dim_r.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-				dim_r.setMargins(0, (int) (5*scale), 0, 0);
+				dim_r.setMargins(0, (int) (5 * scale), 0, 0);
 				btn.setLayoutParams(dim_r);
 				btn.setText(acc.getUsername());
 				btn.setBackgroundResource(R.drawable.button_amico);
@@ -167,11 +170,11 @@ public class CercaUtenteActivity extends ActionBarActivity {
 					}
 				});
 				Button btn_friend = new Button(getApplicationContext());
-				btn_friend.setId(i*2+1);
-				RelativeLayout.LayoutParams dim_r2=new RelativeLayout.LayoutParams(height, height);
+				btn_friend.setId(i * 2 + 1);
+				RelativeLayout.LayoutParams dim_r2 = new RelativeLayout.LayoutParams(height, height);
 				dim_r2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
 				dim_r2.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-				dim_r2.setMargins(0, (int) (5*scale), 0, 0);
+				dim_r2.setMargins(0, (int) (5 * scale), 0, 0);
 				btn_friend.setLayoutParams(dim_r2);
 				btn_friend.setBackgroundResource(R.drawable.button_aggiungi);
 				btn_friend.setTextColor(Color.BLACK);
@@ -203,8 +206,8 @@ public class CercaUtenteActivity extends ActionBarActivity {
 						}
 					}
 				});
-				dim_r.addRule(RelativeLayout.LEFT_OF, i*2+1);
-				RelativeLayout n_lay=new RelativeLayout(getApplicationContext());
+				dim_r.addRule(RelativeLayout.LEFT_OF, i * 2 + 1);
+				RelativeLayout n_lay = new RelativeLayout(getApplicationContext());
 				n_lay.addView(btn);
 				n_lay.addView(btn_friend);
 				lay.addView(n_lay);

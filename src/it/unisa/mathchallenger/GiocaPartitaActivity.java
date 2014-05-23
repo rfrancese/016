@@ -80,6 +80,7 @@ public class GiocaPartitaActivity extends Activity {
 	};
 
 	private Thread tempo = null;
+
 	private void scriviDomanda() {
 		if (domanda_corrente < partita.getNumDomande()) {
 			Domanda d = partita.getDomanda(domanda_corrente);
@@ -98,15 +99,15 @@ public class GiocaPartitaActivity extends Activity {
 			String r3 = (d.getRisposta(2) + "").endsWith(".0") ? (d.getRisposta(2) + "").substring(0, (d.getRisposta(2) + "").length() - 2) : d.getRisposta(2) + "";
 			risp3.setText(r3);
 			risp3.setTextColor(Color.WHITE);
-			String r4=(d.getRisposta(3)+"").endsWith(".0")?(d.getRisposta(3)+"").substring(0, (d.getRisposta(3)+"").length()-2):d.getRisposta(3)+"";
+			String r4 = (d.getRisposta(3) + "").endsWith(".0") ? (d.getRisposta(3) + "").substring(0, (d.getRisposta(3) + "").length() - 2) : d.getRisposta(3) + "";
 			risp4.setText(r4);
 			risp4.setTextColor(Color.WHITE);
-			
-			risp1.setOnClickListener(new clickRisposta(d,d.getRisposta(0)));
-			risp2.setOnClickListener(new clickRisposta(d,d.getRisposta(1)));
-			risp3.setOnClickListener(new clickRisposta(d,d.getRisposta(2)));
-			risp4.setOnClickListener(new clickRisposta(d,d.getRisposta(3)));
-			final ProgressBar bar=(ProgressBar) findViewById(R.id.progressBar1);
+
+			risp1.setOnClickListener(new clickRisposta(d, d.getRisposta(0)));
+			risp2.setOnClickListener(new clickRisposta(d, d.getRisposta(1)));
+			risp3.setOnClickListener(new clickRisposta(d, d.getRisposta(2)));
+			risp4.setOnClickListener(new clickRisposta(d, d.getRisposta(3)));
+			final ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar1);
 			runOnUiThread(new Runnable() {
 				public void run() {
 					bar.setMax(DURATA_DOMANDA);

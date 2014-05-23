@@ -19,8 +19,8 @@ public class Status {
 	private ThreadPing		 t_ping;
 
 	private long			   last_update_game;
-	
-	private boolean friendUpdated=false;
+
+	private boolean			friendUpdated = false;
 
 	public static Status getInstance() {
 		return status;
@@ -60,11 +60,11 @@ public class Status {
 			ArrayList<Partita> partite = database.selezionaPartiteInCorso(user.getID());
 			for (Partita p : partite)
 				aggiungiPartita(p);
-			
-			ArrayList<Partita> partite_concluse=database.selezionaPartiteTerminate(user.getID());
+
+			ArrayList<Partita> partite_concluse = database.selezionaPartiteTerminate(user.getID());
 			for (Partita p : partite_concluse)
 				aggiungiPartita(p);
-			
+
 			ArrayList<Account> amici = database.selezionaAmici(user.getID());
 			for (Account a : amici)
 				aggiungiAmico(a);
@@ -97,7 +97,7 @@ public class Status {
 				return;
 			}
 		}
-		partite.add(0,p);
+		partite.add(0, p);
 		database.inserisciPartita(p.getIDPartita(), getUtente().getID(), p.getUtenteSfidato().getID(), p.getUtenteSfidato().getUsername(), p.getStatoPartita());
 	}
 
@@ -172,10 +172,12 @@ public class Status {
 	public void closeDB() {
 		database.close();
 	}
-	public boolean isFriendUpdated(){
+
+	public boolean isFriendUpdated() {
 		return friendUpdated;
 	}
-	public void setFriendUpdated(boolean b){
-		friendUpdated=b;
+
+	public void setFriendUpdated(boolean b) {
+		friendUpdated = b;
 	}
 }

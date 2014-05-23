@@ -81,15 +81,16 @@ public class CommunicationMessageCreator {
 	public Messaggio createGetDettagliPartita(int idP) {
 		return new Messaggio("getDettagliPartita " + idP);
 	}
-	public Messaggio createGetDomande(int idP){
+
+	public Messaggio createGetDomande(int idP) {
 		return new Messaggio("getDomande " + idP);
 	}
-	public Messaggio createRisposte(Partita partita){
-		String ris = "answer "+partita.getIDPartita();
-		for( int i=0;i<partita.getNumDomande();i++){
-			ris+=" "+partita.getDomanda(i).getRispostaUtente();
+
+	public Messaggio createRisposte(Partita partita) {
+		String ris = "answer " + partita.getIDPartita();
+		for (int i = 0; i < partita.getNumDomande(); i++) {
+			ris += " " + partita.getDomanda(i).getRispostaUtente();
 		}
-		return new Messaggio(ris);	
+		return new Messaggio(ris);
 	}
 }
-
