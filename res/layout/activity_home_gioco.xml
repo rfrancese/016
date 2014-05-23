@@ -8,17 +8,22 @@
     tools:context="it.unisa.mathchallenger.HomeGiocoActivity"
     tools:ignore="MergeRootFrame" >
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" >
 
         <Button
             android:id="@+id/homegioco_nuovapartita"
             style="?android:attr/buttonStyle"
-            android:layout_width="235dp"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/buttonaggiorna"
             android:background="@drawable/barra_amico"
             android:onClick="onClickNuovaPartita"
             android:text="@string/homegioco_nuovapartita"
@@ -26,14 +31,14 @@
 
         <Button
             android:id="@+id/buttonaggiorna"
-            android:layout_width="match_parent"
+            android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:background="@drawable/button_refresh"
             android:onClick="aggiorna" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -49,9 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="147dp"
             android:orientation="vertical" >
-
         </LinearLayout>
-
     </ScrollView>
 
     <Button
