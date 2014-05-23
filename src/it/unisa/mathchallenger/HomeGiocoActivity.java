@@ -33,7 +33,7 @@ import android.widget.TextView;
 public class HomeGiocoActivity extends ActionBarActivity {
 
 	private Communication comm;
-	private Thread		t_aggiorna_partite;
+	private ThreadAggiornaPartite	t_aggiorna_partite;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		comm = Communication.getInstance();
 		setContentView(R.layout.activity_home_gioco);
 
-		t_aggiorna_partite = new Thread(new t_aggiorna_partite());
+		t_aggiorna_partite = new ThreadAggiornaPartite();
 		t_aggiorna_partite.start();
 		View view = (View) findViewById(R.id.container);
 		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -261,30 +261,12 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		}
 	}
 
-	class t_aggiorna_partite implements Runnable {
-
+	class ThreadAggiornaPartite extends Thread {
 		private static final long time_sleep = 10 * 60 * 1000;
 
 		public void run() {
 			while (true) {
-				Messaggio m = CommunicationMessageCreator.getInstance().createGetPartiteInCorso();
-				try {
-					comm.send(m);
-					ArrayList<Partita> partite = CommunicationParser.getInstance().parseGetPartiteInCorso(m);
-					if (partite != null) {
-						for (int i = 0; i < partite.size(); i++)
-							Status.getInstance().aggiungiPartita(partite.get(i));
-					}
-				}
-				catch (IOException | LoginException | ConnectionException e1) {
-					e1.printStackTrace();
-				}
-				runOnUiThread(new Runnable() {
-
-					public void run() {
-						aggiungiPartite(Status.getInstance().getElencoPartite());
-					}
-				});
+				aggiorna();
 				try {
 					Thread.sleep(time_sleep);
 				}
@@ -293,8 +275,28 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				}
 			}
 		}
+		public void aggiorna(){
+			Messaggio m = CommunicationMessageCreator.getInstance().createGetPartiteInCorso();
+			try {
+				comm.send(m);
+				ArrayList<Partita> partite = CommunicationParser.getInstance().parseGetPartiteInCorso(m);
+				if (partite != null) {
+					for (int i = 0; i < partite.size(); i++)
+						Status.getInstance().aggiungiPartita(partite.get(i));
+				}
+			}
+			catch (IOException | LoginException | ConnectionException e1) {
+				e1.printStackTrace();
+			}
+			runOnUiThread(new Runnable() {
+
+				public void run() {
+					aggiungiPartite(Status.getInstance().getElencoPartite());
+				}
+			});
+		}
 	}
 	public void aggiorna(View v){
-		
+		t_aggiorna_partite.aggiorna();
 	}
 }
