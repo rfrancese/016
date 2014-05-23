@@ -132,7 +132,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 				dim.setMargins(0, (int) (10 * scale), 0, 0);
 				btn.setLayoutParams(dim);
 				btn.setText(acc.getUsername());
-				btn.setBackgroundResource(R.drawable.barra_utenti);
+				btn.setBackgroundResource(R.drawable.barra_amico);
 				btn.setTextColor(Color.WHITE);
 				btn.setGravity(Gravity.CENTER);
 				btn.setOnClickListener(new Button.OnClickListener() {
