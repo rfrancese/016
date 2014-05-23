@@ -30,37 +30,13 @@ import android.widget.Toast;
 public class NuovaPartitaActivity extends ActionBarActivity {
 
 	private Communication  comm;
-	private static boolean firstStart = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nuova_partita);
 		comm = Communication.getInstance();
-		if (firstStart) {
-			firstStart = false;
-			Messaggio m = CommunicationMessageCreator.getInstance().createGetMyFriends();
-			try {
-				comm.send(m);
-				ArrayList<Account> friends = CommunicationParser.getInstance().parseGetMyFriends(m);
-				if (friends != null) {
-					for (int i = 0; i < friends.size(); i++)
-						Status.getInstance().aggiungiAmico(friends.get(i));
-				}
-			}
-			catch (IOException e) {
-				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-				e.printStackTrace();
-			}
-			catch (LoginException e) {
-				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-				e.printStackTrace();
-			}
-			catch (ConnectionException e) {
-				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-				e.printStackTrace();
-			}
-		}
+		aggiornaAmici();
 		aggiungiAmiciUI();
 		View view = (View) findViewById(R.id.container);
 		if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -220,6 +196,32 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 				}
 			});
 			lay.addView(newLay);
+		}
+	}
+	private void aggiornaAmici(){
+		if (Status.getInstance().isFriendUpdated()) {
+			Status.getInstance().setFriendUpdated(true);
+			Messaggio m = CommunicationMessageCreator.getInstance().createGetMyFriends();
+			try {
+				comm.send(m);
+				ArrayList<Account> friends = CommunicationParser.getInstance().parseGetMyFriends(m);
+				if (friends != null) {
+					for (int i = 0; i < friends.size(); i++)
+						Status.getInstance().aggiungiAmico(friends.get(i));
+				}
+			}
+			catch (IOException e) {
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+			catch (LoginException e) {
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+			catch (ConnectionException e) {
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
 		}
 	}
 }

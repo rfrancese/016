@@ -19,6 +19,8 @@ public class Status {
 	private ThreadPing		 t_ping;
 
 	private long			   last_update_game;
+	
+	private boolean friendUpdated=false;
 
 	public static Status getInstance() {
 		return status;
@@ -169,5 +171,11 @@ public class Status {
 
 	public void closeDB() {
 		database.close();
+	}
+	public boolean isFriendUpdated(){
+		return friendUpdated;
+	}
+	public void setFriendUpdated(boolean b){
+		friendUpdated=b;
 	}
 }
