@@ -79,4 +79,5 @@
 	<string name="invalid_registration_password">La password non è valida (min 8 caratteri)</string>
 	<string name="empty_fields">Compilare tutti i campi</string>
 	<string name="cerca_nessun_utente_trovato">Nessun utente trovato</string>
+	<string name="error_delete_friend_error">Si è verificato un errore durante l\'eliminazione</string>
 </resources>

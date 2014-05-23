@@ -24,7 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class NuovaPartitaActivity extends ActionBarActivity {
@@ -126,17 +126,16 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		int screen_w=getResources().getDisplayMetrics().widthPixels;
 		int width = (int) (((screen_w/100)*90));
 		for (int i = 0; i < amici.size(); i++) {
-			final LinearLayout newLay = new LinearLayout(getApplicationContext());
-			newLay.setOrientation(LinearLayout.HORIZONTAL);
-
+			final RelativeLayout newLay = new RelativeLayout(getApplicationContext());
 			final Account acc = amici.get(i);
 			Button btn_amico = new Button(getApplicationContext());
-			newLay.addView(btn_amico);
 			btn_amico.setText(acc.getUsername());
 			btn_amico.setTextColor(Color.WHITE);
 			btn_amico.setGravity(Gravity.CENTER);
 			btn_amico.setBackgroundResource(R.drawable.button_amico);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+			params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+			params.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
 			params.setMargins(0, (int) (5 * scale), 0, 0);
 			btn_amico.setLayoutParams(params);
 			btn_amico.setOnClickListener(new Button.OnClickListener() {
@@ -161,11 +160,15 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			});
 
 			Button btn_remove = new Button(getApplicationContext());
-			newLay.addView(btn_remove);
+			btn_remove.setId(i*2+1);
+			params.addRule(RelativeLayout.LEFT_OF, i*2+1);
+			
 			btn_remove.setTextColor(Color.BLACK);
 			btn_remove.setGravity(Gravity.CENTER);
 			btn_remove.setBackgroundResource(R.drawable.button_rimuovi);
-			LayoutParams params2 = new LayoutParams(LayoutParams.WRAP_CONTENT, height);
+			RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(height, height);
+			params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+			params2.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
 			params2.setMargins(0, (int) (5 * scale), 0, 0);
 			btn_remove.setLayoutParams(params2);
 			btn_remove.setOnClickListener(new Button.OnClickListener() {
@@ -177,6 +180,8 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 							Status.getInstance().rimuoviAmico(acc.getID());
 							lay.removeView(newLay);
 						}
+						else 
+							Toast.makeText(getApplicationContext(), R.string.error_delete_friend_error, Toast.LENGTH_LONG).show();
 					}
 					catch (IOException e) {
 						Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -193,6 +198,8 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 
 				}
 			});
+			newLay.addView(btn_amico);
+			newLay.addView(btn_remove);
 			lay.addView(newLay);
 		}
 	}
