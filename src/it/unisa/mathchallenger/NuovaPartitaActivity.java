@@ -161,7 +161,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			btn_amico.setText(acc.getUsername());
 			btn_amico.setTextColor(Color.WHITE);
 			btn_amico.setGravity(Gravity.CENTER);
-			btn_amico.setBackgroundResource(R.drawable.button_style);
+			btn_amico.setBackgroundResource(R.drawable.button_amico);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
 			params.setMargins(0, (int) (10 * scale), 0, 0);
 			btn_amico.setLayoutParams(params);
@@ -190,7 +190,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			newLay.addView(btn_remove);
 			btn_remove.setTextColor(Color.BLACK);
 			btn_remove.setGravity(Gravity.CENTER);
-			btn_remove.setBackgroundResource(R.drawable.bottone_cancella);
+			btn_remove.setBackgroundResource(R.drawable.button_rimuovi);
 			LayoutParams params2 = new LayoutParams(LayoutParams.WRAP_CONTENT, height);
 			params2.setMargins(0, (int) (10 * scale), 0, 0);
 			btn_remove.setLayoutParams(params2);

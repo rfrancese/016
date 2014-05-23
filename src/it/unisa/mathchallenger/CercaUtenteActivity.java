@@ -129,10 +129,10 @@ public class CercaUtenteActivity extends ActionBarActivity {
 				Button btn = new Button(getApplicationContext());
 
 				LayoutParams dim = new LinearLayout.LayoutParams(width, height);
-				dim.setMargins(0, (int) (10 * scale), 0, 0);
+				dim.setMargins(0, (int) (5 * scale), 0, 0);
 				btn.setLayoutParams(dim);
 				btn.setText(acc.getUsername());
-				btn.setBackgroundResource(R.drawable.barra_utenti);
+				btn.setBackgroundResource(R.drawable.button_amico);
 				btn.setTextColor(Color.WHITE);
 				btn.setGravity(Gravity.CENTER);
 				btn.setOnClickListener(new Button.OnClickListener() {
@@ -165,10 +165,10 @@ public class CercaUtenteActivity extends ActionBarActivity {
 					}
 				});
 				Button btn_friend = new Button(getApplicationContext());
-				LayoutParams dim2 = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height);
-				dim2.setMargins(0, (int) (10 * scale), 0, 0);
+				LayoutParams dim2 = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, height);
+				dim2.setMargins(0, (int) (5 * scale), 0, 0);
 				btn_friend.setLayoutParams(dim2);
-				btn_friend.setBackgroundResource(R.drawable.bottone_aggiungi);
+				btn_friend.setBackgroundResource(R.drawable.button_aggiungi);
 				btn_friend.setTextColor(Color.BLACK);
 				btn_friend.setOnClickListener(new Button.OnClickListener() {
 					public void onClick(View v) {
