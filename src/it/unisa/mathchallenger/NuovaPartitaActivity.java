@@ -148,7 +148,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		lay.removeAllViews();
 		ArrayList<Account> amici = Status.getInstance().getElencoAmici();
 		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
-		int height = (int) (scale * 45 + 0.5f);
+		int height = (int) (scale * 40 + 0.5f);
 		int screen_w=getResources().getDisplayMetrics().widthPixels;
 		int width = (int) (((screen_w/100)*90));
 		for (int i = 0; i < amici.size(); i++) {
@@ -163,7 +163,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			btn_amico.setGravity(Gravity.CENTER);
 			btn_amico.setBackgroundResource(R.drawable.button_amico);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
-			params.setMargins(0, (int) (10 * scale), 0, 0);
+			params.setMargins(0, (int) (5 * scale), 0, 0);
 			btn_amico.setLayoutParams(params);
 			btn_amico.setOnClickListener(new Button.OnClickListener() {
 				public void onClick(View v) {
@@ -192,7 +192,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 			btn_remove.setGravity(Gravity.CENTER);
 			btn_remove.setBackgroundResource(R.drawable.button_rimuovi);
 			LayoutParams params2 = new LayoutParams(LayoutParams.WRAP_CONTENT, height);
-			params2.setMargins(0, (int) (10 * scale), 0, 0);
+			params2.setMargins(0, (int) (5 * scale), 0, 0);
 			btn_remove.setLayoutParams(params2);
 			btn_remove.setOnClickListener(new Button.OnClickListener() {
 				public void onClick(View v) {
