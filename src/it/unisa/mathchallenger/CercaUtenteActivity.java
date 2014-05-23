@@ -23,9 +23,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.LinearLayout.LayoutParams;
 
 public class CercaUtenteActivity extends ActionBarActivity {
 	private Communication comm;
@@ -127,10 +127,12 @@ public class CercaUtenteActivity extends ActionBarActivity {
 			for (int i = 0; i < res.size(); i++) {
 				final Account acc = res.get(i);
 				Button btn = new Button(getApplicationContext());
-
-				LayoutParams dim = new LinearLayout.LayoutParams(width, height);
-				dim.setMargins(0, (int) (5 * scale), 0, 0);
-				btn.setLayoutParams(dim);
+				btn.setId(i*2);
+				RelativeLayout.LayoutParams dim_r=new RelativeLayout.LayoutParams(width, height);
+				dim_r.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+				dim_r.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+				dim_r.setMargins(0, (int) (5*scale), 0, 0);
+				btn.setLayoutParams(dim_r);
 				btn.setText(acc.getUsername());
 				btn.setBackgroundResource(R.drawable.button_amico);
 				btn.setTextColor(Color.WHITE);
@@ -165,9 +167,12 @@ public class CercaUtenteActivity extends ActionBarActivity {
 					}
 				});
 				Button btn_friend = new Button(getApplicationContext());
-				LayoutParams dim2 = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, height);
-				dim2.setMargins(0, (int) (5 * scale), 0, 0);
-				btn_friend.setLayoutParams(dim2);
+				btn_friend.setId(i*2+1);
+				RelativeLayout.LayoutParams dim_r2=new RelativeLayout.LayoutParams(height, height);
+				dim_r2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+				dim_r2.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+				dim_r2.setMargins(0, (int) (5*scale), 0, 0);
+				btn_friend.setLayoutParams(dim_r2);
 				btn_friend.setBackgroundResource(R.drawable.button_aggiungi);
 				btn_friend.setTextColor(Color.BLACK);
 				btn_friend.setOnClickListener(new Button.OnClickListener() {
@@ -198,11 +203,11 @@ public class CercaUtenteActivity extends ActionBarActivity {
 						}
 					}
 				});
-				LinearLayout lay_r = new LinearLayout(getApplicationContext());
-				lay_r.setOrientation(LinearLayout.HORIZONTAL);
-				lay_r.addView(btn);
-				lay_r.addView(btn_friend);
-				lay.addView(lay_r);
+				dim_r.addRule(RelativeLayout.LEFT_OF, i*2+1);
+				RelativeLayout n_lay=new RelativeLayout(getApplicationContext());
+				n_lay.addView(btn);
+				n_lay.addView(btn_friend);
+				lay.addView(n_lay);
 			}
 		}
 		else {

@@ -15,8 +15,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import android.util.Log;
-
 public class Communication implements Runnable {
 
 	private static Communication singleton;
