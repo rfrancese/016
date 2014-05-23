@@ -294,4 +294,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			}
 		}
 	}
+	public void aggiorna(View v){
+		
+	}
 }
