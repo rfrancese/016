@@ -14,6 +14,7 @@ import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.StatoPartita;
 import it.unisa.mathchallenger.status.Status;
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -54,8 +55,10 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 						if (oldStat != newStat)
 							Status.getInstance().aggiornaPartita(p);
 						disegna(p);
-						if (p.getDettagliPartita() != null)
+						if (p.getDettagliPartita() != null){
 							visualizzaRisposte(stato);
+							aggiungiListenerShowDomande(p);
+						}
 					}
 					else {
 						Toast.makeText(getApplicationContext(), m.getErrorMessage(), Toast.LENGTH_LONG).show();
@@ -317,5 +320,100 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 		Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
+	}
+	private void aggiungiListenerShowDomande(final Partita p){
+		if(p!=null && p.getDettagliPartita()!=null){
+			if(p.getStatoPartita()>Partita.INIZIATA || p.getDettagliPartita().isUtenteRisposto()){
+				ImageView risut1 = (ImageView) findViewById(R.id.risutente1);
+				if(risut1!=null)
+    				risut1.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(0).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				ImageView risavv1 = (ImageView) findViewById(R.id.risavv1);
+				if(risavv1!=null)
+					risavv1.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(0).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				
+				ImageView risut2 = (ImageView) findViewById(R.id.risutente2);
+				if(risut2!=null)
+    				risut2.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(1).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				ImageView risavv2 = (ImageView) findViewById(R.id.risavv2);
+				if(risavv2!=null)
+					risavv2.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(1).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				
+				ImageView risut3 = (ImageView) findViewById(R.id.risutente3);
+				if(risut3!=null)
+    				risut3.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(2).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				ImageView risavv3 = (ImageView) findViewById(R.id.risavv3);
+				if(risavv3!=null)
+					risavv3.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(2).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				
+				ImageView risut4 = (ImageView) findViewById(R.id.risutente4);
+				if(risut4!=null)
+    				risut4.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(3).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				ImageView risavv4 = (ImageView) findViewById(R.id.risavv4);
+				if(risavv4!=null)
+					risavv4.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(3).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				
+				ImageView risut5 = (ImageView) findViewById(R.id.risutente5);
+				if(risut5!=null)
+    				risut5.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(4).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				ImageView risavv5 = (ImageView) findViewById(R.id.risavv5);
+				if(risavv5!=null)
+					risavv5.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(4).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				
+				ImageView risut6 = (ImageView) findViewById(R.id.risutente6);
+				if(risut6!=null)
+    				risut6.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(5).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+				ImageView risavv6 = (ImageView) findViewById(R.id.risavv6);
+				if(risavv6!=null)
+					risavv6.setOnClickListener(new ImageView.OnClickListener(){
+    					public void onClick(View v) {
+    						new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(p.getDomanda(5).getDomanda()).setCancelable(true).setNegativeButton("OK", null).show();
+    					}
+    				});
+			}
+		}
 	}
 }

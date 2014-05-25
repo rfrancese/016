@@ -23,7 +23,7 @@ public class Communication implements Runnable {
 
 	private Socket			   socket;
 	private final static String  HOSTNAME	  = "pinoelefante.no-ip.biz";
-	//private final static String HOSTNAME = "192.168.0.207";
+	// private final static String HOSTNAME = "192.168.0.207";
 	private final static int	 HOSTNAME_PORT = 50000;
 
 	private Communication() {
@@ -38,6 +38,8 @@ public class Communication implements Runnable {
 	}
 
 	public void run() {
+		if (isConnected())
+			return;
 		try {
 			connect();
 		}
@@ -53,10 +55,13 @@ public class Communication implements Runnable {
 	private BufferedReader in;
 
 	public boolean connect() throws UnknownHostException, IOException {
-		socket = new Socket(HOSTNAME, HOSTNAME_PORT);
-		socket.setSoTimeout(30000);
-		out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		if (socket == null) {
+			socket = new Socket(HOSTNAME, HOSTNAME_PORT);
+			socket.setSoTimeout(30000);
+			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			return true;
+		}
 		return true;
 	}
 
@@ -84,7 +89,7 @@ public class Communication implements Runnable {
 		try {
 			send(CommunicationMessageCreator.getInstance().createPingMessage());
 		}
-		catch(IOException e){
+		catch (IOException e) {
 			close();
 			connect();
 			AccountUser a = Status.getInstance().getUtente();
@@ -94,19 +99,20 @@ public class Communication implements Runnable {
 			}
 		}
 	}
+
 	public synchronized void send(Messaggio m) throws IOException, LoginException, ConnectionException {
 		if (socket == null) {
 			connect();
 		}
-		for(int i=0;i<5;i++){
-    		try {
-    			write(m.getComando());
-    			m.setResponse(read());
-    			return;
-    		}
-    		catch (IOException e) {
-    			restart();
-    		}
+		for (int i = 0; i < 5; i++) {
+			try {
+				write(m.getComando());
+				m.setResponse(read());
+				return;
+			}
+			catch (IOException e) {
+				restart();
+			}
 		}
 		throw new ConnectionException();
 	}
@@ -129,8 +135,10 @@ public class Communication implements Runnable {
 			in.close();
 		if (out != null)
 			out.close();
-		if (socket != null)
+		if (socket != null) {
 			socket.close();
+			socket = null;
+		}
 	}
 
 	private void write(String s) throws IOException {

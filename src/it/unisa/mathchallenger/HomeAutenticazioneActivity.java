@@ -43,20 +43,21 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		new Thread(Communication.getInstance()).start();
-		comm = Communication.getInstance();
+		//comm = Communication.getInstance();
 		Status.getInstance(getApplicationContext());
 		AccountUser acc = Status.getInstance().getUtente();
 		boolean loginOK = false;
 		if (acc != null) {
 			Messaggio m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
 			try {
-				comm.send(m);
+				Communication.getInstance().send(m);
 				loginOK = CommunicationParser.getInstance().parseLoginAuthcode(m);
 			}
 			catch (IOException | LoginException | ConnectionException e) {
 				e.printStackTrace();
 			}
 		}
+		comm = Communication.getInstance();
 
 		if (!loginOK) {
 			setContentView(R.layout.activity_home_autenticazione);
