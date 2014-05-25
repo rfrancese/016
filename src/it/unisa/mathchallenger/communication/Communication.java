@@ -15,6 +15,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import android.util.Log;
+
 public class Communication implements Runnable {
 
 	private static Communication singleton;
@@ -79,38 +81,40 @@ public class Communication implements Runnable {
 	}
 
 	public void restart() throws UnknownHostException, IOException, LoginException, ConnectionException {
-		close();
-		connect();
-		AccountUser a = Status.getInstance().getUtente();
-		if (a != null) {
-			Messaggio relog = CommunicationMessageCreator.getInstance().createLoginAuthcode(a.getID(), a.getAuthCode());
-			send(relog);
+		try {
+			send(CommunicationMessageCreator.getInstance().createPingMessage());
+		}
+		catch(IOException e){
+			close();
+			connect();
+			AccountUser a = Status.getInstance().getUtente();
+			if (a != null) {
+				Messaggio relog = CommunicationMessageCreator.getInstance().createLoginAuthcode(a.getID(), a.getAuthCode());
+				send(relog);
+			}
 		}
 	}
-
 	public synchronized void send(Messaggio m) throws IOException, LoginException, ConnectionException {
 		if (socket == null) {
 			connect();
 		}
-		try {
-			write(m.getComando());
-			m.setResponse(read());
+		for(int i=0;i<5;i++){
+    		try {
+    			write(m.getComando());
+    			m.setResponse(read());
+    			return;
+    		}
+    		catch (IOException e) {
+    			restart();
+    		}
 		}
-		catch (IOException e) {
-			restart();
-			send(m);
-		}
-		// out.println(m.getComando());
-		/*
-		 * if(out.checkError()){ Log.d("", "Errore durante send()"); restart();
-		 * send(m); } else
-		 */
-
+		throw new ConnectionException();
 	}
 
 	private String read() throws IOException {
 		String r = "";
 		while ((r = in.readLine()) == null);
+		Log.d("Communication_R", r);
 		return r;
 	}
 
@@ -132,6 +136,7 @@ public class Communication implements Runnable {
 	private void write(String s) throws IOException {
 		OutputStream out = socket.getOutputStream();
 		out.write((s + "\n").getBytes());
+		Log.d("Communication_W", s);
 		out.flush();
 	}
 }
