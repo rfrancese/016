@@ -80,4 +80,14 @@
 	<string name="empty_fields">Compilare tutti i campi</string>
 	<string name="cerca_nessun_utente_trovato">Nessun utente trovato</string>
 	<string name="error_delete_friend_error">Si è verificato un errore durante l\'eliminazione</string>
+	<string name="errore_0"></string>
+	<string name="errore_1"></string>
+	<string name="errore_2"></string>
+	<string name="errore_3"></string>
+	<string name="errore_4"></string>
+	<string name="errore_5"></string>
+	<string name="errore_6"></string>
+	<string name="errore_7"></string>
+	<string name="errore_8"></string>
+	<string name="errore_9"></string>
 </resources>
