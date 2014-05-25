@@ -30,7 +30,7 @@ public class Communication implements Runnable {
 		super();
 	}
 
-	public static Communication getInstance() {
+	public static synchronized Communication getInstance() {
 		if (singleton == null) {
 			singleton = new Communication();
 		}

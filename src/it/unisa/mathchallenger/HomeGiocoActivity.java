@@ -122,7 +122,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	public void onBackPressed() {
 		new AlertDialog.Builder(this).setMessage(R.string.exit_confirm).setCancelable(false).setPositiveButton("Si", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				HomeGiocoActivity.this.finish();
+				System.exit(0);
 			}
 		}).setNegativeButton("No", null).show();
 	}
