@@ -51,7 +51,8 @@ public class Status {
 		setAccount(u);
 		database.inserisciAccount(u.getID(), u.getUsername(), u.getAuthCode());
 		initUser();
-		t_ping.start();
+		if(t_ping!=null && !t_ping.isAlive())
+			t_ping.start();
 	}
 
 	private void initUser() {

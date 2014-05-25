@@ -55,7 +55,7 @@ public class Communication implements Runnable {
 	private BufferedReader in;
 
 	public boolean connect() throws UnknownHostException, IOException {
-		if (socket == null) {
+		if (socket == null || socket.isClosed()) {
 			socket = new Socket(HOSTNAME, HOSTNAME_PORT);
 			socket.setSoTimeout(30000);
 			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
@@ -101,7 +101,7 @@ public class Communication implements Runnable {
 	}
 
 	public synchronized void send(Messaggio m) throws IOException, LoginException, ConnectionException {
-		if (socket == null) {
+		if (socket == null || socket.isClosed()) {
 			connect();
 		}
 		for (int i = 0; i < 5; i++) {
@@ -137,7 +137,6 @@ public class Communication implements Runnable {
 			out.close();
 		if (socket != null) {
 			socket.close();
-			socket = null;
 		}
 	}
 

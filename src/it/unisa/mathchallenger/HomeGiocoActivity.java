@@ -87,6 +87,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 						Intent intent = new Intent(this, HomeAutenticazioneActivity.class);
 						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						t_aggiorna_partite.interrupt();
+						comm.close();
 						startActivity(intent);
 					}
 				}
@@ -277,6 +278,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				}
 				catch (InterruptedException e) {
 					Log.d("", "thread update interrotto");
+					return;
 				}
 			}
 		}

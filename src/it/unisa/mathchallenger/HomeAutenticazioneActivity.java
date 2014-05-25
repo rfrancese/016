@@ -33,7 +33,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 	Communication comm;
 	private int   current_layout = 0;
 	private final static int HOME = 0, REGISTRA = 1, RECUPERA = 2;
-
+	private static boolean socketOk=false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,21 +42,22 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		Thread t=new Thread(Communication.getInstance());
-		t.start();
-		boolean connected=false;
-		try {
-			t.join();
-			connected=true;
-		}
-		catch (InterruptedException e1) {
-			e1.printStackTrace();
+		if(!socketOk){
+    		Thread t=new Thread(Communication.getInstance());
+    		t.start();
+    		try {
+    			t.join();
+    			socketOk=true;
+    		}
+    		catch (InterruptedException e1) {
+    			e1.printStackTrace();
+    		}
 		}
 		comm = Communication.getInstance();
 		Status.getInstance(getApplicationContext());
 		AccountUser acc = Status.getInstance().getUtente();
 		boolean loginOK = false;
-		if (acc != null && connected) {
+		if (acc != null && socketOk) {
 			Messaggio m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
 			try {
 				comm.send(m);
@@ -77,7 +78,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			else {
 				view.setBackgroundResource(R.drawable.prova2hd);
 			}
-			if(!connected)
+			if(!socketOk)
 				Toast.makeText(getApplicationContext(), R.string.errore_verificare_connessione, Toast.LENGTH_LONG).show();
 		}
 		else {
