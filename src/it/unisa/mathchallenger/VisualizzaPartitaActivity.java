@@ -1,6 +1,7 @@
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import it.unisa.mathchallenger.communication.Communication;
 import it.unisa.mathchallenger.communication.CommunicationMessageCreator;
@@ -324,6 +325,19 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 	private void aggiungiListenerShowDomande(final Partita p){
 		if(p!=null && p.getDettagliPartita()!=null){
 			if(p.getStatoPartita()>Partita.INIZIATA || p.getDettagliPartita().isUtenteRisposto()){
+				if(!p.hasDomande()){
+					Messaggio m=CommunicationMessageCreator.getInstance().createGetDomande(p.getIDPartita());
+					try {
+						comm.send(m);
+						ArrayList<Domanda> dom=CommunicationParser.getInstance().parseGetDomande(m);
+						p.aggiungiDomande(dom);
+					}
+					catch (IOException | LoginException | ConnectionException e) {
+						e.printStackTrace();
+						Toast.makeText(getApplicationContext(), R.string.errore_connessione, Toast.LENGTH_LONG).show();
+						return;
+					}
+				}
 				ImageView risut1 = (ImageView) findViewById(R.id.risutente1);
 				if(risut1!=null)
     				risut1.setOnClickListener(new ImageView.OnClickListener(){

@@ -106,4 +106,14 @@ public class Partita {
 		}
 		throw new DettagliNonPresentiException("Devi richiedere lo stato della partita al server");
 	}
+	public boolean hasDomande(){
+		if(domande.size()==6)
+			return true;
+		return false;
+	}
+	public void aggiungiDomande(ArrayList<Domanda> d){
+		domande.clear();
+		domande=null;
+		domande=d;
+	}
 }
