@@ -120,7 +120,11 @@ public class HomeGiocoActivity extends ActionBarActivity {
 
 	@Override
 	public void onBackPressed() {
-		// TODO Auto-generated method stub
+		new AlertDialog.Builder(this).setMessage(R.string.exit_confirm).setCancelable(false).setPositiveButton("Si", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				HomeGiocoActivity.this.finish();
+			}
+		}).setNegativeButton("No", null).show();
 	}
 
 	private void aggiungiPartite(ArrayList<Partita> partite) {
