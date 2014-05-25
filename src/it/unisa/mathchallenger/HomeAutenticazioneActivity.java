@@ -42,15 +42,24 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		new Thread(Communication.getInstance()).start();
-		//comm = Communication.getInstance();
+		Thread t=new Thread(Communication.getInstance());
+		t.start();
+		boolean connected=false;
+		try {
+			t.join();
+			connected=true;
+		}
+		catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		comm = Communication.getInstance();
 		Status.getInstance(getApplicationContext());
 		AccountUser acc = Status.getInstance().getUtente();
 		boolean loginOK = false;
-		if (acc != null) {
+		if (acc != null && connected) {
 			Messaggio m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
 			try {
-				Communication.getInstance().send(m);
+				comm.send(m);
 				loginOK = CommunicationParser.getInstance().parseLoginAuthcode(m);
 			}
 			catch (IOException | LoginException | ConnectionException e) {
@@ -68,6 +77,8 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			else {
 				view.setBackgroundResource(R.drawable.prova2hd);
 			}
+			if(!connected)
+				Toast.makeText(getApplicationContext(), R.string.errore_verificare_connessione, Toast.LENGTH_LONG).show();
 		}
 		else {
 			Status.getInstance().loginAuth(acc);

@@ -81,6 +81,7 @@
 	<string name="cerca_nessun_utente_trovato">Nessun utente trovato</string>
 	<string name="error_delete_friend_error">Si è verificato un errore durante l\'eliminazione</string>
 	<string name="errore_connessione">Errore di connessione</string>
+	<string name="errore_verificare_connessione">Verificare che la connessione sia attiva</string>
 	<string name="errore_0"></string>
 	<string name="errore_1"></string>
 	<string name="errore_2"></string>
