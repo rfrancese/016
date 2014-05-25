@@ -35,6 +35,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		comm = Communication.getInstance();
 		setContentView(R.layout.activity_cerca_utente);
+		
 		View view = (View) findViewById(R.id.container);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);

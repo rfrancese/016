@@ -40,7 +40,6 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		comm = Communication.getInstance();
 		setContentView(R.layout.activity_home_gioco);
-
 		t_aggiorna_partite = new ThreadAggiornaPartite();
 		t_aggiorna_partite.start();
 		View view = (View) findViewById(R.id.container);
@@ -50,7 +49,6 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		else {
 			view.setBackgroundResource(R.drawable.prova2hd);
 		}
-
 	}
 
 	@Override

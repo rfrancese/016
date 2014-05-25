@@ -42,8 +42,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		new Thread(Communication.getInstance()).start();;
-
+		new Thread(Communication.getInstance()).start();
 		comm = Communication.getInstance();
 		Status.getInstance(getApplicationContext());
 		AccountUser acc = Status.getInstance().getUtente();
@@ -340,5 +339,4 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 	}
-
 }

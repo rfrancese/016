@@ -192,6 +192,5 @@ public class GiocaPartitaActivity extends Activity {
 		public void run() {
 			p_bar.setProgress(value);
 		}
-
 	}
 }
