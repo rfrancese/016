@@ -25,9 +25,11 @@ public class Communication implements Runnable {
 	private final static String  HOSTNAME	  = "pinoelefante.no-ip.biz";
 	// private final static String HOSTNAME = "192.168.0.207";
 	private final static int	 HOSTNAME_PORT = 50000;
-
+	private static ThreadPing t_ping;
+	
 	private Communication() {
 		super();
+		t_ping=ThreadPing.getInstance();
 	}
 
 	public static synchronized Communication getInstance() {
@@ -62,9 +64,11 @@ public class Communication implements Runnable {
 			socket.setSoTimeout(30000);
 			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			if(t_ping!=null && !t_ping.isAlive())
+				t_ping.start();
 			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public void disconnect() {

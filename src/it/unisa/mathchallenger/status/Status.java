@@ -16,8 +16,6 @@ public class Status {
 	private ArrayList<Account> amici;
 	private DBAdapter		  database;
 
-	private ThreadPing		 t_ping;
-
 	private long			   last_update_game;
 
 	private boolean			friendUpdated = false;
@@ -40,7 +38,6 @@ public class Status {
 		database.open();
 		AccountUser user = database.selezionaAccount();
 		setAccount(user);
-		t_ping = ThreadPing.getInstance();
 	}
 
 	private void setAccount(AccountUser u) {
@@ -51,8 +48,6 @@ public class Status {
 		setAccount(u);
 		database.inserisciAccount(u.getID(), u.getUsername(), u.getAuthCode());
 		initUser();
-		if(t_ping!=null && !t_ping.isAlive())
-			t_ping.start();
 	}
 
 	private void initUser() {
@@ -75,7 +70,6 @@ public class Status {
 	public void loginAuth(AccountUser u) {
 		setAccount(u);
 		initUser();
-		t_ping.start();
 	}
 
 	public AccountUser getUtente() {
