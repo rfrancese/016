@@ -71,7 +71,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 
 		if (!loginOK) {
 			setContentView(R.layout.activity_home_autenticazione);
-			View view = (View) findViewById(R.id.ScrollView2);
+			View view = (View) findViewById(R.id.ScrollHomeAutenticazione);
 			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 				view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 			}
@@ -93,14 +93,23 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		View view = (View) findViewById(R.id.ScrollView2);
-		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+		
+		View view=null;
+		if(current_layout==HOME)
+			view = (View) findViewById(R.id.ScrollHomeAutenticazione);
+		else if(current_layout==REGISTRA)
+			view = (View) findViewById(R.id.ContainerRegistra);
+		else if(current_layout==RECUPERA)
+			view = (View) findViewById(R.id.ContainerRecupera);
+		
+		if(view!=null){
+    		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+    		}
+    		else {
+    			view.setBackgroundResource(R.drawable.prova2hd);
+    		}
 		}
-		else {
-			view.setBackgroundResource(R.drawable.prova2hd);
-		}
-
 	}
 
 	@Override

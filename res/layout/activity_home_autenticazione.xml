@@ -1,6 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ScrollView2"
+    android:id="@+id/ScrollHomeAutenticazione"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/prova2hd" >
@@ -8,7 +8,7 @@
 <LinearLayout
     android:id="@+id/container"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context="it.unisa.mathchallenger.HomeAutenticazioneActivity" >
@@ -111,6 +111,7 @@
         android:id="@+id/button_recupera_pass_home"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/button_style"
