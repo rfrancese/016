@@ -204,7 +204,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 	}
 
 	private void aggiornaAmici() {
-		if (Status.getInstance().isFriendUpdated()) {
+		if (!Status.getInstance().isFriendUpdated()) {
 			Status.getInstance().setFriendUpdated(true);
 			Messaggio m = CommunicationMessageCreator.getInstance().createGetMyFriends();
 			try {

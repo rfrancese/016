@@ -141,6 +141,10 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					b_gioca.setBackgroundResource(R.drawable.button_style);
 					b_gioca.setOnClickListener(new Button.OnClickListener() {
 						public void onClick(View v) {
+							int cur_orientation=getResources().getConfiguration().orientation;
+							if(cur_orientation==Configuration.ORIENTATION_LANDSCAPE){
+								new AlertDialog.Builder(VisualizzaPartitaActivity.this).setMessage(R.string.partita_avviso_landscape).setCancelable(false).setNegativeButton("OK", null).show();
+							}
 							Intent intent = new Intent(getApplicationContext(), GiocaPartitaActivity.class);
 							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 							intent.putExtra("id_partita", p.getIDPartita());
