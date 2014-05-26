@@ -38,6 +38,7 @@ public class Communication implements Runnable {
 	}
 
 	public void run() {
+		/*
 		if (isConnected())
 			return;
 		try {
@@ -49,6 +50,7 @@ public class Communication implements Runnable {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 
 	private PrintWriter	out;
