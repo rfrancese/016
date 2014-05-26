@@ -22,9 +22,11 @@
         android:layout_marginBottom="15dp"
         android:gravity="center_horizontal|center"
         android:orientation="vertical" >
+
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/visualizza_nomi_utente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -46,9 +48,11 @@
     </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/ScrollView1"
+        android:id="@+id/ScrollContainerDomande"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/visualizza_azione_container"
+        android:layout_below="@id/visualizza_nomi_utente"
         android:layout_marginTop="20dp" >
 
         <LinearLayout
