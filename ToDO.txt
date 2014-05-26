@@ -1,1 +1,1 @@
-sistemare layout in cerca amici
+Mostrare un dialog prima di iniziare una partita e lo schermo è in landscape

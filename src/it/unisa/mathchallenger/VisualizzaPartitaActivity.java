@@ -62,7 +62,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 						}
 					}
 					else {
-						Toast.makeText(getApplicationContext(), m.getErrorMessage(), Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), m.getErrorID()>=0?getResources().getString(m.getErrorID()):m.getErrorMessage(), Toast.LENGTH_LONG).show();
 					}
 				}
 				catch (IOException | LoginException | ConnectionException e) {

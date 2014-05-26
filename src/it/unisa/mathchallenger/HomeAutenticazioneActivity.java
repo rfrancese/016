@@ -251,7 +251,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 					AccountUser acc = CommunicationParser.getInstance().parseRegister(m);
 					if (acc == null) {
 						if (m.hasError()) {
-							Toast.makeText(getApplicationContext(), m.getErrorMessage(), Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), m.getErrorID()>=0?getResources().getString(m.getErrorID()):m.getErrorMessage(), Toast.LENGTH_LONG).show();
 						}
 						else
 							Toast.makeText(getApplicationContext(), R.string.error_unknown, Toast.LENGTH_LONG).show();

@@ -4,6 +4,7 @@ public class Messaggio {
 
 	private String  comando, response, error_message;
 	private boolean error = false;
+	private int error_id_string=-1;
 
 	public Messaggio(String m) {
 		comando = m;
@@ -35,5 +36,11 @@ public class Messaggio {
 
 	public boolean hasError() {
 		return error;
+	}
+	public void setErrorID(int i){
+		error_id_string=i;
+	}
+	public int getErrorID(){
+		return error_id_string;
 	}
 }

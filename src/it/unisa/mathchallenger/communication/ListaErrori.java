@@ -34,6 +34,8 @@ public class ListaErrori {
 					return R.string.errore_8;
 				case 9:
 					return R.string.errore_9;
+				case 10:
+					return R.string.errore_10;
 				default:
 			}
 		}

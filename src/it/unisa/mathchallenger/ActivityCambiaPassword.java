@@ -79,7 +79,7 @@ public class ActivityCambiaPassword extends ActionBarActivity {
 					Toast.makeText(getApplicationContext(), R.string.message_cambio_pass_ok, Toast.LENGTH_LONG).show();
 				}
 				else {
-					Toast.makeText(getApplicationContext(), m.getErrorMessage(), Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), m.getErrorID()>=0?getResources().getString(m.getErrorID()):m.getErrorMessage(), Toast.LENGTH_LONG).show();
 				}
 			}
 			catch (IOException e) {

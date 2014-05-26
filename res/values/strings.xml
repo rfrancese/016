@@ -83,13 +83,14 @@
 	<string name="errore_connessione">Errore di connessione</string>
 	<string name="errore_verificare_connessione">Verificare che la connessione sia attiva</string>
 	<string name="errore_0"></string>
-	<string name="errore_1"></string>
-	<string name="errore_2"></string>
-	<string name="errore_3"></string>
-	<string name="errore_4"></string>
-	<string name="errore_5"></string>
-	<string name="errore_6"></string>
-	<string name="errore_7"></string>
-	<string name="errore_8"></string>
-	<string name="errore_9"></string>
+	<string name="errore_1">Devi essere loggato per compiere quest\'azione</string>
+	<string name="errore_2">Sei già loggato</string>
+	<string name="errore_3">Codice autenticazione non valido</string>
+	<string name="errore_4">La vecchia password non corrisponde</string>
+	<string name="errore_5">Username già utilizzato</string>
+	<string name="errore_6">Non puoi sfidare questo utente</string>
+	<string name="errore_7">Non è una tua partita</string>
+	<string name="errore_8">Partita non trovata</string>
+	<string name="errore_9">Riprova più tardi</string>
+	<string name="errore_10">Non puoi aggiungere questo utente agli amici</string>
 </resources>
