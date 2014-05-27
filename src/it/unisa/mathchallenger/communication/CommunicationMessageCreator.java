@@ -93,4 +93,7 @@ public class CommunicationMessageCreator {
 		}
 		return new Messaggio(ris);
 	}
+	public Messaggio createGetStatistiche(){
+		return new Messaggio("getStatistiche");
+	}
 }

@@ -6,6 +6,7 @@ import it.unisa.mathchallenger.status.Account;
 import it.unisa.mathchallenger.status.AccountUser;
 import it.unisa.mathchallenger.status.Domanda;
 import it.unisa.mathchallenger.status.Partita;
+import it.unisa.mathchallenger.status.Statistiche;
 import it.unisa.mathchallenger.status.StatoPartita;
 
 public class CommunicationParser {
@@ -501,5 +502,37 @@ public class CommunicationParser {
 			return true;
 		else
 			return false;
+	}
+	public Statistiche parseGetStatistiche(Messaggio msg){
+		Statistiche stat=null;
+		String[] prop = msg.getResponse().split(";");
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+				case "getStatistiche":
+					if(kv[1].compareTo("OK")==0)
+						stat=new Statistiche();
+					break;
+				case "giocate":
+					stat.setPartite_giocate(Integer.parseInt(kv[1]));
+					break;
+				case "vinte":
+					stat.setVittorie(Integer.parseInt(kv[1]));
+					break;
+				case "perse":
+					stat.setSconfitte(Integer.parseInt(kv[1]));
+					break;
+				case "pareggi":
+					stat.setPareggi(Integer.parseInt(kv[1]));
+					break;
+				case "abbandoni":
+					stat.setAbbandonate(Integer.parseInt(kv[1]));
+					break;
+				case "punti":
+					stat.setPunti(Integer.parseInt(kv[1]));
+					break;
+			}
+		}
+		return stat;
 	}
 }
