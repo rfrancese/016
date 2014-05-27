@@ -60,7 +60,7 @@ public class GiocaPartitaActivity extends Activity {
 				e.printStackTrace();
 			}
 		}
-		View view = (View) findViewById(R.id.container);
+		View view = (View) findViewById(R.id.containerGiocaPartita);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}

@@ -42,7 +42,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_home_gioco);
 		t_aggiorna_partite = new ThreadAggiornaPartite();
 		t_aggiorna_partite.start();
-		View view = (View) findViewById(R.id.container);
+		View view = (View) findViewById(R.id.containerGiocaPartita);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
@@ -54,7 +54,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		View view = (View) findViewById(R.id.container);
+		View view = (View) findViewById(R.id.containerGiocaPartita);
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}

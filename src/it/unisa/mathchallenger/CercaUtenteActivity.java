@@ -36,7 +36,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 		comm = Communication.getInstance();
 		setContentView(R.layout.activity_cerca_utente);
 		
-		View view = (View) findViewById(R.id.container);
+		View view = (View) findViewById(R.id.containerGiocaPartita);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
@@ -48,7 +48,7 @@ public class CercaUtenteActivity extends ActionBarActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		View view = (View) findViewById(R.id.container);
+		View view = (View) findViewById(R.id.containerGiocaPartita);
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
