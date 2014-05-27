@@ -200,7 +200,7 @@ public class GiocaPartitaActivity extends Activity {
 			final ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar1);
 			runOnUiThread(new Runnable() {
 				public void run() {
-					bar.setMax(DURATA_DOMANDA);
+					bar.setMax(DURATA_DOMANDA*1000);
 				}
 			});
 
@@ -248,16 +248,20 @@ public class GiocaPartitaActivity extends Activity {
 
 		public void run() {
 			int time = DURATA_DOMANDA;
+			int sleep_time=time*1000;;
 			while (time > 0) {
 				try {
-					sleep(1000L);
+					sleep(100L);
+					sleep_time-=100;
 				}
 				catch (InterruptedException e) {
 					e.printStackTrace();
 					return;
 				}
-				time--;
-				progressUpdater pu = new progressUpdater(progressbar, time);
+				if(sleep_time%1000==0){
+					time--;
+				}
+				progressUpdater pu = new progressUpdater(progressbar, sleep_time);
 				runOnUiThread(pu);
 			}
 			// TODO assegna risposta sbagliata
