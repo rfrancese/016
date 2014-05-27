@@ -38,7 +38,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 		comm = Communication.getInstance();
 		aggiornaAmici();
 		aggiungiAmiciUI();
-		View view = (View) findViewById(R.id.containerGiocaPartita);
+		View view = (View) findViewById(R.id.containerNuovaPartita);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
@@ -47,7 +47,7 @@ public class NuovaPartitaActivity extends ActionBarActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		View view = (View) findViewById(R.id.containerGiocaPartita);
+		View view = (View) findViewById(R.id.containerNuovaPartita);
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
