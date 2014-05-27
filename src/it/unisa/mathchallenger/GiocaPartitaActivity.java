@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 public class GiocaPartitaActivity extends Activity {
@@ -84,12 +86,100 @@ public class GiocaPartitaActivity extends Activity {
 	private void scriviDomanda() {
 		if (domanda_corrente < partita.getNumDomande()) {
 			Domanda d = partita.getDomanda(domanda_corrente);
-			Button domanda = (Button) findViewById(R.id.gioca_partita_domanda);
+			//Button domanda = (Button) findViewById(R.id.gioca_partita_domanda);
 			Button risp1 = (Button) findViewById(R.id.gioca_partita_risp1);
 			Button risp2 = (Button) findViewById(R.id.gioca_partita_risp2);
 			Button risp3 = (Button) findViewById(R.id.gioca_partita_risp3);
 			Button risp4 = (Button) findViewById(R.id.gioca_partita_risp4);
-			domanda.setText(d.getDomanda());
+			//domanda.setText(d.getDomanda());
+			String dom = d.getDomanda();
+			LinearLayout contdom = (LinearLayout) findViewById(R.id.contdomanda);
+			contdom.removeAllViews();
+			for(int i=0;i<dom.length();i++){				
+				switch(dom.charAt(i)){
+					case '0': 
+						ImageView q0 = new ImageView(this);
+						q0.setImageResource(R.drawable.q0);
+						contdom.addView(q0);
+						break;
+					case '1': 
+						ImageView q1 = new ImageView(this);
+						q1.setImageResource(R.drawable.q1);
+						contdom.addView(q1);
+						break;
+					case '2': 
+						ImageView q2 = new ImageView(this);
+						q2.setImageResource(R.drawable.q2);
+						contdom.addView(q2);
+						break;
+					case '3': 
+						ImageView q3 = new ImageView(this);
+						q3.setImageResource(R.drawable.q3);
+						contdom.addView(q3);
+						break;
+					case '4': 
+						ImageView q4 = new ImageView(this);
+						q4.setImageResource(R.drawable.q4);
+						contdom.addView(q4);
+						break;
+					case '5': 
+						ImageView q5 = new ImageView(this);
+						q5.setImageResource(R.drawable.q5);
+						contdom.addView(q5);
+						break;
+					case '6': 
+						ImageView q6 = new ImageView(this);
+						q6.setImageResource(R.drawable.q6);
+						contdom.addView(q6);
+						break;
+					case '7': 
+						ImageView q7 = new ImageView(this);
+						q7.setImageResource(R.drawable.q7);
+						contdom.addView(q7);
+						break;
+					case '8': 
+						ImageView q8 = new ImageView(this);
+						q8.setImageResource(R.drawable.q8);
+						contdom.addView(q8);
+						break;
+					case '9': 
+						ImageView q9 = new ImageView(this);
+						q9.setImageResource(R.drawable.q9);
+						contdom.addView(q9);
+						break;
+					case '+': 
+						ImageView q10 = new ImageView(this);
+						q10.setImageResource(R.drawable.q10);
+						contdom.addView(q10);
+						break;
+					case '-': 
+						ImageView q11 = new ImageView(this);
+						q11.setImageResource(R.drawable.q11);
+						contdom.addView(q11);
+						break;
+					case ':': 
+						ImageView q12 = new ImageView(this);
+						q12.setImageResource(R.drawable.q12);
+						contdom.addView(q12);
+						break;
+					case 'x': 
+						ImageView q13 = new ImageView(this);
+						q13.setImageResource(R.drawable.q13);
+						contdom.addView(q13);
+						break;
+					case '(': 
+						ImageView q14 = new ImageView(this);
+						q14.setImageResource(R.drawable.q14);
+						contdom.addView(q14);
+						break;
+					case ')': 
+						ImageView q15 = new ImageView(this);
+						q15.setImageResource(R.drawable.q15);
+						contdom.addView(q15);
+						break;
+				
+				}
+			}
 			String r1 = (d.getRisposta(0) + "").endsWith(".0") ? (d.getRisposta(0) + "").substring(0, (d.getRisposta(0) + "").length() - 2) : d.getRisposta(0) + "";
 			risp1.setText(r1);
 			risp1.setTextColor(Color.WHITE);
