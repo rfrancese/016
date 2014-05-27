@@ -76,7 +76,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 		else {
 			Toast.makeText(getApplicationContext(), "bundle = null", Toast.LENGTH_LONG).show();
 		}
-		View view = (View) findViewById(R.id.containerGiocaPartita);
+		View view = (View) findViewById(R.id.containerVisualizzaPartita);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
@@ -88,7 +88,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		View view = (View) findViewById(R.id.containerGiocaPartita);
+		View view = (View) findViewById(R.id.containerVisualizzaPartita);
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
