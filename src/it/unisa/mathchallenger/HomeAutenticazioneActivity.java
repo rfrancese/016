@@ -76,7 +76,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 			}
 			else {
-				view.setBackgroundResource(R.drawable.prova2hd);
+				view.setBackgroundResource(R.drawable.sfondohome);
 			}
 			if(!socketOk)
 				Toast.makeText(getApplicationContext(), R.string.errore_verificare_connessione, Toast.LENGTH_LONG).show();
