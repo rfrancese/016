@@ -191,7 +191,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			}
 		else if(p.isInAttesa()){ 
 				inattesa.add(p);
-		}else{
+		}else if(p.isTerminata()){
 				terminate.add(p);
 			}
 		}
@@ -231,8 +231,23 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				b.setOnLongClickListener(new Button.OnLongClickListener() {
 
 					public boolean onLongClick(View v) {
-						Status.getInstance().rimuoviPartita(partita.getIDPartita());
-						lay.removeView(b);
+						new AlertDialog.Builder(HomeGiocoActivity.this).setCancelable(false).setMessage(R.string.dialog_abbandona_partita).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog, int which) {
+								Messaggio m = CommunicationMessageCreator.getInstance().createAbandonGame(partita.getIDPartita());
+								try {
+									comm.send(m);
+									if (CommunicationParser.getInstance().parseAbandon(m)) {
+										Status.getInstance().rimuoviPartita(partita.getIDPartita());
+										lay.removeView(b);
+									}
+								}
+								catch (IOException | LoginException | ConnectionException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}).setNegativeButton(R.string.no, null).show();
 						return true;
 					}
 				});
