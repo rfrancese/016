@@ -8,7 +8,8 @@ public class ListaErrori {
 			USERNAME_IN_USO = 5, NON_PUOI_SFIDARE_QUESTO_UTENTE = 6,
 			NON_E_UNA_TUA_PARTITA = 7, PARTITA_NON_TROVATA = 8,
 			RIPROVA_PIU_TARDI = 9,
-			NON_PUOI_AGGIUNGERE_QUESTO_ACCOUNT_AGLI_AMICI = 10;
+			NON_PUOI_AGGIUNGERE_QUESTO_ACCOUNT_AGLI_AMICI = 10,
+			VERSIONE_NON_VALIDA = 11;
 	
 	public int getMessage(String m){
 		try {
@@ -36,6 +37,8 @@ public class ListaErrori {
 					return R.string.errore_9;
 				case 10:
 					return R.string.errore_10;
+				case 11:
+					return R.string.errore_11;
 				default:
 			}
 		}

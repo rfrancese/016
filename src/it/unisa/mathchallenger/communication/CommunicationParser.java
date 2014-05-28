@@ -537,4 +537,20 @@ public class CommunicationParser {
 		}
 		return stat;
 	}
+	public boolean parseValidateVersion(Messaggio m){
+		String[] prop=m.getResponse().split(";");
+		for(int i=0;i<prop.length;i++){
+			String[] kv=prop[i].split("=");
+			switch(kv[0]){
+				case "validateVersion":
+					if(kv[1].compareTo("OK")==0)
+						return true;
+					break;
+				case "message":
+					m.setErrorMessage(kv[1]);
+					break;
+			}
+		}
+		return false;
+	}
 }

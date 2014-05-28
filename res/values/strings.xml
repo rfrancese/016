@@ -94,5 +94,6 @@
 	<string name="errore_8">Partita non trovata</string>
 	<string name="errore_9">Riprova più tardi</string>
 	<string name="errore_10">Non puoi aggiungere questo utente agli amici</string>
+	<string name="errore_11">Per poter effettuare l\'accesso, scarica l\'ultima versione di Math Challenger dal Play Store</string>
 	<string name="partita_avviso_landscape">Posiziona il dispositivo in posizione Portrait</string>
 </resources>
