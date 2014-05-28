@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class GiocaPartitaActivity extends Activity {
 	private Communication	comm;
@@ -86,13 +88,15 @@ public class GiocaPartitaActivity extends Activity {
 	private void scriviDomanda() {
 		if (domanda_corrente < partita.getNumDomande()) {
 			Domanda d = partita.getDomanda(domanda_corrente);
-			//Button domanda = (Button) findViewById(R.id.gioca_partita_domanda);
+			TextView domanda = (TextView) findViewById(R.id.contdomanda);
 			Button risp1 = (Button) findViewById(R.id.gioca_partita_risp1);
 			Button risp2 = (Button) findViewById(R.id.gioca_partita_risp2);
 			Button risp3 = (Button) findViewById(R.id.gioca_partita_risp3);
 			Button risp4 = (Button) findViewById(R.id.gioca_partita_risp4);
-			//domanda.setText(d.getDomanda());
-			String dom = d.getDomanda();
+			Typeface font = Typeface.createFromAsset(getAssets(), "fonts/EraserDust.ttf");
+			domanda.setTypeface(font);
+			domanda.setText(d.getDomanda());
+			/*String dom = d.getDomanda();
 			LinearLayout contdom = (LinearLayout) findViewById(R.id.contdomanda);
 			contdom.removeAllViews();
 			for(int i=0;i<dom.length();i++){				
@@ -179,7 +183,7 @@ public class GiocaPartitaActivity extends Activity {
 						break;
 				
 				}
-			}
+			}*/
 			String r1 = (d.getRisposta(0) + "").endsWith(".0") ? (d.getRisposta(0) + "").substring(0, (d.getRisposta(0) + "").length() - 2) : d.getRisposta(0) + "";
 			risp1.setText(r1);
 			risp1.setTextColor(Color.WHITE);
