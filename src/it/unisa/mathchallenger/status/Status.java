@@ -18,6 +18,8 @@ public class Status {
 	private long			   last_update_game;
 
 	private boolean			friendUpdated = false;
+	private boolean isValidVersion=true;
+	public final static int CURRENT_VERSION = 1;
 
 	public static Status getInstance() {
 		return status;
@@ -174,5 +176,11 @@ public class Status {
 
 	public void setFriendUpdated(boolean b) {
 		friendUpdated = b;
+	}
+	public boolean isValidVersion(){
+		return isValidVersion;
+	}
+	public void setValidVersion(boolean b){
+		isValidVersion=b;
 	}
 }

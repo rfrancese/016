@@ -96,4 +96,7 @@ public class CommunicationMessageCreator {
 	public Messaggio createGetStatistiche(){
 		return new Messaggio("getStatistiche");
 	}
+	public Messaggio createIsValidVersion(int v){
+		return new Messaggio("validateVersion "+v);
+	}
 }
