@@ -50,10 +50,26 @@
         android:layout_weight="0.58" >
 
         <LinearLayout
-            android:id="@+id/layoutPartiteInCorso"
+            android:id="@+id/layoutcont"
             android:layout_width="match_parent"
-            android:layout_height="147dp"
+            android:layout_height="match_parent"
             android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/layoutPartiteInCorso"
+                android:layout_width="match_parent"
+                android:layout_height="147dp"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutPartiteInAttesa"
+                android:layout_width="match_parent"
+                android:layout_height="147dp"
+                android:orientation="vertical" >
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

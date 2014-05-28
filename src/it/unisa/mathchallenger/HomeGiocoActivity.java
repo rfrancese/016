@@ -133,15 +133,19 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			return;
 
 		final LinearLayout lay = (LinearLayout) findViewById(R.id.layoutPartiteInCorso);
+		final LinearLayout lay2 = (LinearLayout) findViewById(R.id.layoutPartiteInAttesa);
 		lay.removeAllViews();
+		lay2.removeAllViews();
 		ArrayList<Partita> terminate = new ArrayList<Partita>();
 		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 		int height = (int) (scale * 45 + 0.5f);
 		boolean inCorso = false;
+		boolean inAttesa = false;
 		for (int i = 0; i < partite.size(); i++) {
 			final Partita p = partite.get(i);
 			if (!p.isTerminata()) {
-				inCorso = true;
+				
+				
 				final Button b_prt = new Button(getApplicationContext());
 				Account acc = p.getUtenteSfidato();
 				b_prt.setText(acc == null ? "null" : acc.getUsername());
@@ -174,7 +178,11 @@ public class HomeGiocoActivity extends ActionBarActivity {
 									comm.send(m);
 									if (CommunicationParser.getInstance().parseAbandon(m)) {
 										Status.getInstance().rimuoviPartita(p.getIDPartita());
-										lay.removeView(b_prt);
+										if(p.isInAttesa()){
+											lay2.removeView(b_prt);
+										}else{
+											lay.removeView(b_prt);
+										}
 									}
 								}
 								catch (IOException | LoginException | ConnectionException e) {
@@ -186,7 +194,14 @@ public class HomeGiocoActivity extends ActionBarActivity {
 						return true;
 					}
 				});
-				lay.addView(b_prt);
+				if(p.isInAttesa()){
+					inAttesa = true;
+					lay2.addView(b_prt);
+				}else{
+					inCorso = true;
+					lay.addView(b_prt);
+				}
+				
 			}
 			else {
 				terminate.add(p);
@@ -198,11 +213,17 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			label_incorso.setTextColor(Color.WHITE);
 			lay.addView(label_incorso, 0);
 		}
+		if (inAttesa) {
+			TextView label_inattesa = new TextView(getApplicationContext());
+			label_inattesa.setText(R.string.homegioco_partite_in_attesa);
+			label_inattesa.setTextColor(Color.WHITE);			
+			lay2.addView(label_inattesa, 0);
+		}
 		if (terminate.size() > 0) {
 			TextView label_terminate = new TextView(getApplicationContext());
 			label_terminate.setText(R.string.homegioco_partite_terminate);
 			label_terminate.setTextColor(Color.WHITE);
-			lay.addView(label_terminate);
+			lay2.addView(label_terminate);
 			for (int i = 0; i < terminate.size(); i++) {
 				final Partita partita = terminate.get(i);
 				final Button b = new Button(getApplicationContext());
@@ -229,11 +250,11 @@ public class HomeGiocoActivity extends ActionBarActivity {
 
 					public boolean onLongClick(View v) {
 						Status.getInstance().rimuoviPartita(partita.getIDPartita());
-						lay.removeView(b);
+						lay2.removeView(b);
 						return true;
 					}
 				});
-				lay.addView(b);
+				lay2.addView(b);
 			}
 		}
 	}

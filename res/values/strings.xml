@@ -29,6 +29,7 @@
     <string name="homegioco_nuovapartita">Nuova partita</string>
     <string name="homegioco_statistiche_button">Statistiche</string>
     <string name="homegioco_partiteincorso_tv">Partite in corso</string>
+    <string name="homegioco_partite_in_attesa">Partite in attesa</string>
     <string name="homegioco_test_partita_button">Partita prova</string>
     <string name="action_cambia_password_menu">Cambia password</string>
     <string name="action_logout_menu">Logout</string>
