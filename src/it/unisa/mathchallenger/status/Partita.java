@@ -15,6 +15,7 @@ public class Partita {
 	private int				stato_partita;
 	private StatoPartita	   stato;
 	private boolean in_attesa;
+	private boolean terminata;
 
 	public Partita() {
 		domande = new ArrayList<Domanda>(6);
@@ -57,6 +58,9 @@ public class Partita {
 	}
 
 	public boolean isTerminata() {
+		if(terminata)
+			return true;
+		
 		if (getStatoPartita() != CREATA && getStatoPartita() != INIZIATA)
 			return true;
 		return false;
@@ -68,8 +72,11 @@ public class Partita {
 
 	public void setDettagliPartita(StatoPartita p) {
 		stato = p;
-		if (p != null)
+		if (p != null){
 			setStatoPartita(p.getStato());
+			if(p.isAvversarioRisposto())
+				setInAttesa(false);
+		}
 	}
 
 	public boolean haiVinto() throws DettagliNonPresentiException {
@@ -122,5 +129,8 @@ public class Partita {
 	}
 	public void setInAttesa(boolean attesa){
 		in_attesa=attesa;
+	}
+	public void setTerminata(){
+		terminata=true;
 	}
 }

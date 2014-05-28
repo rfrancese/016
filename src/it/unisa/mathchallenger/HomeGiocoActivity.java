@@ -141,7 +141,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		boolean inCorso = false;
 		for (int i = 0; i < partite.size(); i++) {
 			final Partita p = partite.get(i);
-			if (!p.isTerminata()&&!p.isInAttesa()) {
+			if (!p.isTerminata() && !p.isInAttesa()) {
 				inCorso = true;
 				final Button b_prt = new Button(getApplicationContext());
 				Account acc = p.getUtenteSfidato();
@@ -189,9 +189,10 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				});
 				lay.addView(b_prt);
 			}
-		else if(p.isInAttesa()){ 
+			else if (p.isInAttesa()) {
 				inattesa.add(p);
-		}else if(p.isTerminata()){
+			}
+			else if (p.isTerminata()) {
 				terminate.add(p);
 			}
 		}
@@ -344,6 +345,24 @@ public class HomeGiocoActivity extends ActionBarActivity {
 			try {
 				comm.send(m);
 				ArrayList<Partita> partite = CommunicationParser.getInstance().parseGetPartiteInCorso(m);
+				ArrayList<Partita> tutte = Status.getInstance().getElencoPartite();
+
+				for (int i = 0; i < tutte.size(); i++) {
+					Partita p = tutte.get(i);
+
+					boolean found = false;
+					for (int j = 0; j < partite.size(); j++) {
+						Partita p1 = partite.get(j);
+						if (p.getIDPartita() == p1.getIDPartita()) {
+							found = true;
+						}
+					}
+					if (!found) {
+						p.setTerminata();
+						p.setInAttesa(false);
+					}
+				}
+
 				if (partite != null) {
 					for (int i = 0; i < partite.size(); i++)
 						Status.getInstance().aggiungiPartita(partite.get(i));
