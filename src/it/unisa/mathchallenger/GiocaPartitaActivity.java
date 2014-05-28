@@ -21,10 +21,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 public class GiocaPartitaActivity extends Activity {
 	private Communication	comm;
@@ -88,7 +85,7 @@ public class GiocaPartitaActivity extends Activity {
 	private void scriviDomanda() {
 		if (domanda_corrente < partita.getNumDomande()) {
 			Domanda d = partita.getDomanda(domanda_corrente);
-			TextView domanda = (TextView) findViewById(R.id.contdomanda);
+			Button domanda = (Button) findViewById(R.id.contdomanda);
 			Button risp1 = (Button) findViewById(R.id.gioca_partita_risp1);
 			Button risp2 = (Button) findViewById(R.id.gioca_partita_risp2);
 			Button risp3 = (Button) findViewById(R.id.gioca_partita_risp3);
