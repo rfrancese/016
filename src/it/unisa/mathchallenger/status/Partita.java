@@ -14,6 +14,7 @@ public class Partita {
 	private int				id_partita;
 	private int				stato_partita;
 	private StatoPartita	   stato;
+	private boolean in_attesa;
 
 	public Partita() {
 		domande = new ArrayList<Domanda>(6);
@@ -115,5 +116,11 @@ public class Partita {
 		domande.clear();
 		domande=null;
 		domande=d;
+	}
+	public boolean inInAttesa(){
+		return in_attesa;
+	}
+	public void setInAttesa(boolean attesa){
+		in_attesa=attesa;
 	}
 }
