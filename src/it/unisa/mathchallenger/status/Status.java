@@ -1,6 +1,5 @@
 package it.unisa.mathchallenger.status;
 
-import it.unisa.mathchallenger.communication.ThreadPing;
 import it.unisa.mathchallenger.database.DBAdapter;
 
 import java.util.ArrayList;
@@ -88,6 +87,7 @@ public class Status {
 			Partita partita = partite.get(i);
 			if (partita.getIDPartita() == p.getIDPartita()) {
 				partita.setStatoPartita(p.getStatoPartita());
+				partita.setInAttesa(p.isInAttesa());
 				database.aggiornaPartita(partita.getIDPartita(), getUtente().getID(), partita.getUtenteSfidato().getID(), partita.getUtenteSfidato().getUsername(), partita.getStatoPartita());
 				return;
 			}

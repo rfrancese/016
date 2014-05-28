@@ -117,7 +117,7 @@ public class Partita {
 		domande=null;
 		domande=d;
 	}
-	public boolean inInAttesa(){
+	public boolean isInAttesa(){
 		return in_attesa;
 	}
 	public void setInAttesa(boolean attesa){
