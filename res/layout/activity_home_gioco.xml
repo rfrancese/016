@@ -66,8 +66,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
-        android:textSize="20sp"
-        android:background="@drawable/button_trasparente"
+        android:textSize="@dimen/button_trasparente_text_size"
+        android:background="@drawable/button_trasparente_style"
         android:onClick="onClickStatistiche"
         android:text="@string/homegioco_statistiche_button"
         android:textStyle="bold" />
