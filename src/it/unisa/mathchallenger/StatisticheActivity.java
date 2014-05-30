@@ -15,11 +15,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class StatisticheActivity extends Activity {
@@ -68,7 +72,8 @@ public class StatisticheActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.aggiorna_statistiche) {
-			
+			getMieStatistiche();
+			getClassifica();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -91,31 +96,75 @@ public class StatisticheActivity extends Activity {
 	}
 	private void aggiornaMieStatistiche(Statistiche s){
 		TextView giocate=(TextView) findViewById(R.id.tv_partite_giocate);
-		giocate.setText(giocate.getText().toString()+s.getPartite_giocate());
+		giocate.setText(getResources().getString(R.string.stat_giocate)+s.getPartite_giocate());
 		TextView vinte=(TextView) findViewById(R.id.tv_partite_vinte);
-		vinte.setText(vinte.getText().toString()+s.getVittorie());
+		vinte.setText(getResources().getString(R.string.stat_vinte)+s.getVittorie());
 		TextView pareggiate=(TextView) findViewById(R.id.tv_partite_pareggiate);
-		pareggiate.setText(pareggiate.getText().toString()+s.getPareggi());
+		pareggiate.setText(getResources().getString(R.string.stat_pareggiate)+s.getPareggi());
 		TextView perse=(TextView) findViewById(R.id.tv_partite_perse);
-		perse.setText(perse.getText().toString()+s.getSconfitte());
+		perse.setText(getResources().getString(R.string.stat_perse)+s.getSconfitte());
 		TextView abbandonate=(TextView) findViewById(R.id.tv_partite_abbandonate);
-		abbandonate.setText(abbandonate.getText().toString()+s.getAbbandonate());
+		abbandonate.setText(getResources().getString(R.string.stat_abbandonate)+s.getAbbandonate());
 		TextView punti=(TextView) findViewById(R.id.tv_punti);
-		punti.setText(punti.getText().toString()+s.getPunti());
+		punti.setText(getResources().getString(R.string.stat_punti)+s.getPunti());
 	}
 	private void getClassifica(){
 		Classifica cl=Classifica.getInstance();
 		cl.loadClassifica();
-		LinearLayout container=(LinearLayout) findViewById(R.id.containerClassifica);
-		container.removeAllViews();
+		LinearLayout container_top=(LinearLayout) findViewById(R.id.containerClassifica);
+		container_top.removeAllViews();
+		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+		int width_pos=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*5);
+		int width_nome=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*80);
+		int width_punti=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*15);
 		for(int i=0;i<cl.getNumeroUtenti();i++){
 			String utente=cl.getUsernameAtIndex(i);
 			int punti=cl.getPuntiAtIndex(i);
-			CustomButton b=new CustomButton(getApplicationContext());
-			b.setText("Punti: "+punti + " - " + utente);
-			b.setGravity(Gravity.CENTER);
-			b.setBackgroundResource(R.drawable.button_trasparente);
-			container.addView(b);
+			
+			Log.d("Utente:", utente+ " - Punti: "+punti);
+			RelativeLayout container=new RelativeLayout(getApplicationContext());
+			CustomButton b_posizione=new CustomButton(getApplicationContext());
+			b_posizione.setId(i*3+1);
+			b_posizione.setBackgroundResource(R.drawable.button_trasparente);
+			switch(i){
+				case 0:
+				case 1:
+				case 2:
+				default: 
+						b_posizione.setText(""+(i+1));
+			}
+			RelativeLayout.LayoutParams l_pos=new RelativeLayout.LayoutParams(width_pos,ViewGroup.LayoutParams.WRAP_CONTENT);
+			l_pos.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+			b_posizione.setLayoutParams(l_pos);
+			
+			
+			CustomButton b_nome=new CustomButton(getApplicationContext());
+			b_nome.setText(utente);
+			b_nome.setGravity(Gravity.CENTER);
+			b_nome.setBackgroundResource(R.drawable.button_trasparente);
+			b_nome.setId(i*3+2);
+			RelativeLayout.LayoutParams l_nome=new RelativeLayout.LayoutParams(width_nome,ViewGroup.LayoutParams.WRAP_CONTENT);
+			l_nome.addRule(RelativeLayout.RIGHT_OF, i*3+1);
+			l_nome.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+			b_nome.setLayoutParams(l_nome);
+			
+			
+			CustomButton b_punti=new CustomButton(getApplicationContext());
+			b_punti.setId(i*3+3);
+			b_punti.setText(punti+"");
+			b_punti.setGravity(Gravity.CENTER);
+			b_punti.setBackgroundResource(R.drawable.button_trasparente);
+			RelativeLayout.LayoutParams l_punti=new RelativeLayout.LayoutParams(width_punti,ViewGroup.LayoutParams.WRAP_CONTENT);
+			l_punti.addRule(RelativeLayout.RIGHT_OF, i*3+2);
+			l_punti.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+			b_punti.setLayoutParams(l_punti);
+			b_punti.setId(i*3+1);
+			
+			container.addView(b_posizione);
+			container.addView(b_nome);
+			//container.addView(b_punti);
+			
+			container_top.addView(container);
 		}
 	}
 }
