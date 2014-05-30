@@ -99,9 +99,9 @@
     <string name="menu_aggiorna_statistiche">Aggiorna statistiche</string>
 	<string name="classifica">Classifica</string>
 	<string name="stat_giocate">Partite giocate: </string>
-	<string name="stat_vinte">Partite vinte: </string>
-	<string name="stat_perse">Partite perse: </string>
-	<string name="stat_pareggiate">Partite pareggiate: </string>
-	<string name="stat_abbandonate">Partite abbandonate: </string>
+	<string name="stat_vinte">Vittorie: </string>
+	<string name="stat_perse">Sconfitte: </string>
+	<string name="stat_pareggiate">Pareggi: </string>
+	<string name="stat_abbandonate">Abbandoni: </string>
 	<string name="stat_punti">Punti: </string>
 </resources>

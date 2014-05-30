@@ -306,8 +306,9 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		t_aggiorna_partite.interrupt();
 		startActivity(intent);
 	}
-	public void onClickStatistiche(View v){
-		Intent intent=new Intent(getApplicationContext(), StatisticheActivity.class);
+
+	public void onClickStatistiche(View v) {
+		Intent intent = new Intent(getApplicationContext(), StatisticheActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		t_aggiorna_partite.interrupt();
 		startActivity(intent);
@@ -339,6 +340,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		private static final long time_sleep = 10 * 60 * 1000;
 
 		public void run() {
+			Log.d("MathChallenger", "Thread update avviato");
 			while (true) {
 				aggiorna();
 				try {
@@ -368,6 +370,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 							found = true;
 						}
 					}
+
 					if (!found) {
 						p.setTerminata();
 						p.setInAttesa(false);
@@ -392,6 +395,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	}
 
 	public void aggiorna(View v) {
-		t_aggiorna_partite.aggiorna();
+		if (t_aggiorna_partite != null && t_aggiorna_partite.isAlive())
+			t_aggiorna_partite.aggiorna();
 	}
 }

@@ -5,5 +5,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="size_default_title">30sp</dimen>
     <dimen name="size_default_text">18sp</dimen>
+    <dimen name="size_text_punti">32sp</dimen>
 
 </resources>

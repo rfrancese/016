@@ -47,47 +47,59 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="@drawable/box"
         android:orientation="vertical" >
 
-        <TextView
+        <it.unisa.mathchallenger.widget.CustomTextView
             android:id="@+id/tv_partite_giocate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="@string/stat_giocate" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/stat_giocate"
+            android:textSize="@dimen/size_default_text" />
 
-        <TextView
+        <it.unisa.mathchallenger.widget.CustomTextView
             android:id="@+id/tv_partite_vinte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/tv_partite_giocate"
-            android:text="@string/stat_vinte" />
+            android:layout_marginLeft="5dp"
+            android:text="@string/stat_vinte"
+            android:textSize="@dimen/size_default_text" />
 
-        <TextView
+        <it.unisa.mathchallenger.widget.CustomTextView
             android:id="@+id/tv_partite_pareggiate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/tv_partite_vinte"
-            android:text="@string/stat_pareggiate" />
+            android:layout_marginLeft="5dp"
+            android:text="@string/stat_pareggiate"
+            android:textSize="@dimen/size_default_text" />
 
-        <TextView
+        <it.unisa.mathchallenger.widget.CustomTextView
             android:id="@+id/tv_partite_perse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/tv_partite_pareggiate"
-            android:text="@string/stat_perse" />
+            android:layout_marginLeft="5dp"
+            android:text="@string/stat_perse"
+            android:textSize="@dimen/size_default_text" />
 
-        <TextView
+        <it.unisa.mathchallenger.widget.CustomTextView
             android:id="@+id/tv_partite_abbandonate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/tv_partite_perse"
-            android:text="@string/stat_abbandonate" />
+            android:layout_marginLeft="5dp"
+            android:text="@string/stat_abbandonate"
+            android:textSize="@dimen/size_default_text" />
 
         <it.unisa.mathchallenger.widget.CustomTextView
             android:id="@+id/tv_punti"
@@ -95,9 +107,9 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/tv_partite_perse"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="52dp"
+            android:layout_marginRight="35dp"
             android:text="@string/stat_punti"
-            android:textSize="@dimen/size_default_text"
+            android:textSize="@dimen/size_text_punti"
             android:textStyle="bold" />
 
     </RelativeLayout>

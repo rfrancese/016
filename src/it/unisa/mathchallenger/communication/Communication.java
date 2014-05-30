@@ -123,7 +123,7 @@ public class Communication implements Runnable {
 		throw new ConnectionException();
 	}
 
-	private String read() throws IOException {
+	private synchronized String read() throws IOException {
 		String r = "";
 		while ((r = in.readLine()) == null);
 		Log.d("Communication_R", r);
@@ -146,7 +146,7 @@ public class Communication implements Runnable {
 		}
 	}
 
-	private void write(String s) throws IOException {
+	private synchronized void write(String s) throws IOException {
 		OutputStream out = socket.getOutputStream();
 		out.write((s + "\n").getBytes());
 		Log.d("Communication_W", s);

@@ -57,7 +57,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
+    <it.unisa.mathchallenger.widget.CustomButton
         android:id="@+id/homegioco_mostrastatistiche"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -66,7 +66,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/button_style"
+        android:textSize="20sp"
+        android:background="@drawable/button_trasparente"
         android:onClick="onClickStatistiche"
         android:text="@string/homegioco_statistiche_button"
         android:textStyle="bold" />

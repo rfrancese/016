@@ -11,12 +11,31 @@ public class CustomTextView extends TextView {
 	
 	public CustomTextView(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
+		if (isInEditMode()) {
+            return;
+        }
+
+        String fontName = "fonts/EraserDust.ttf";
+        if (fontName != null) {
+            Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontName);
+            setTypeface(typeface);
+        }
 	}
 
 	public CustomTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		// TODO Auto-generated constructor stub
+		if (isInEditMode()) {
+            return;
+        }
+
+        TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.CustomTextView);
+        String fontName = "fonts/EraserDust.ttf";
+        styledAttrs.recycle();
+
+        if (fontName != null) {
+            Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontName);
+            setTypeface(typeface);
+        }
 	}
 
 	public CustomTextView(Context context, AttributeSet attrs) {
