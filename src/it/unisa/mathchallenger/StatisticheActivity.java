@@ -21,7 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -121,18 +120,12 @@ public class StatisticheActivity extends Activity {
 			String utente=cl.getUsernameAtIndex(i);
 			int punti=cl.getPuntiAtIndex(i);
 			
-			Log.d("Utente:", utente+ " - Punti: "+punti);
+			
 			RelativeLayout container=new RelativeLayout(getApplicationContext());
 			CustomButton b_posizione=new CustomButton(getApplicationContext());
 			b_posizione.setId(i*3+1);
 			b_posizione.setBackgroundResource(R.drawable.button_trasparente);
-			switch(i){
-				case 0:
-				case 1:
-				case 2:
-				default: 
-						b_posizione.setText(""+(i+1));
-			}
+			b_posizione.setText(""+(i+1));
 			RelativeLayout.LayoutParams l_pos=new RelativeLayout.LayoutParams(width_pos,ViewGroup.LayoutParams.WRAP_CONTENT);
 			l_pos.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
 			b_posizione.setLayoutParams(l_pos);
