@@ -8,14 +8,18 @@ import it.unisa.mathchallenger.communication.CommunicationParser;
 import it.unisa.mathchallenger.communication.Messaggio;
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
+import it.unisa.mathchallenger.status.Classifica;
 import it.unisa.mathchallenger.status.Statistiche;
+import it.unisa.mathchallenger.widget.CustomButton;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class StatisticheActivity extends Activity {
@@ -33,6 +37,7 @@ public class StatisticheActivity extends Activity {
 			view.setBackgroundResource(R.drawable.prova2hd);
 		}
 		getMieStatistiche();
+		getClassifica();
 	}
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
@@ -97,5 +102,20 @@ public class StatisticheActivity extends Activity {
 		abbandonate.setText(abbandonate.getText().toString()+s.getAbbandonate());
 		TextView punti=(TextView) findViewById(R.id.tv_punti);
 		punti.setText(punti.getText().toString()+s.getPunti());
+	}
+	private void getClassifica(){
+		Classifica cl=Classifica.getInstance();
+		cl.loadClassifica();
+		LinearLayout container=(LinearLayout) findViewById(R.id.containerClassifica);
+		container.removeAllViews();
+		for(int i=0;i<cl.getNumeroUtenti();i++){
+			String utente=cl.getUsernameAtIndex(i);
+			int punti=cl.getPuntiAtIndex(i);
+			CustomButton b=new CustomButton(getApplicationContext());
+			b.setText("Punti: "+punti + " - " + utente);
+			b.setGravity(Gravity.CENTER);
+			b.setBackgroundResource(R.drawable.button_trasparente);
+			container.addView(b);
+		}
 	}
 }

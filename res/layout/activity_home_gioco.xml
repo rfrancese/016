@@ -24,7 +24,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/buttonaggiorna"
-            android:background="@drawable/button_style"
+            android:background="@drawable/button_amico"
             android:onClick="onClickNuovaPartita"
             android:text="@string/homegioco_nuovapartita"
             android:textStyle="bold" />

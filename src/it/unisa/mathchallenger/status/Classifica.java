@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 
 public class Classifica {
 	private static String URLClassifica="http://pinoelefante.altervista.org/rank/getRankXML.php";
+	
 	class EntryClassifica {
 		private String username;
 		private int punti;
@@ -46,6 +47,8 @@ public class Classifica {
 			domparser = dbfactory.newDocumentBuilder();
 			Document doc = domparser.parse(URLClassifica);
 			NodeList entries=doc.getElementsByTagName("entry");
+			if(entries.getLength()>0)
+				classifica.clear();
 			for(int i=0;i<entries.getLength();i++){
 				Node entry=entries.item(i);
 				NodeList attrs=entry.getChildNodes();
@@ -70,7 +73,6 @@ public class Classifica {
 		catch (ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	public int getNumeroUtenti(){
 		return classifica.size();
