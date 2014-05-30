@@ -25,7 +25,7 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/VisualizzaUsernameAvversarioTV"
+            android:id="@+id/register_username_tv"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/username_tv"
@@ -54,7 +54,7 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/tv_partite_pareggiate"
+            android:id="@+id/register_password1_tv"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/password_tv"
@@ -82,7 +82,7 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/tv_partite_abbandonate"
+            android:id="@+id/register_password2_tv"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/password_tv"
@@ -110,7 +110,7 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/tv_punti"
+            android:id="@+id/register_email_tv"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/email_tv"
