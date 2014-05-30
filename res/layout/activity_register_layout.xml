@@ -54,7 +54,7 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_partite_pareggiate"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/password_tv"
@@ -82,7 +82,7 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_partite_abbandonate"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/password_tv"
@@ -110,7 +110,7 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_punti"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/email_tv"

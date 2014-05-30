@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerStatistiche"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/prova2hd"
+    tools:context="${packageName}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/title_classifica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/classifica"
+        android:textColor="@color/White"
+        android:textSize="@dimen/size_default_title"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/scrollClassifica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/title_classifica"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp" >
+
+        <LinearLayout
+            android:id="@+id/containerClassifica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/container_mie_statistiche"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_partite_giocate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stat_giocate" />
+
+        <TextView
+            android:id="@+id/tv_partite_vinte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stat_vinte" />
+
+        <TextView
+            android:id="@+id/tv_partite_pareggiate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stat_pareggiate" />
+
+        <TextView
+            android:id="@+id/tv_partite_perse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stat_perse" />
+
+        <TextView
+            android:id="@+id/tv_partite_abbandonate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stat_abbandonate" />
+
+        <TextView
+            android:id="@+id/tv_punti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stat_punti"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>

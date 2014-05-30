@@ -15,10 +15,8 @@ public class Status {
 	private ArrayList<Account> amici;
 	private DBAdapter		  database;
 
-	private long			   last_update_game;
-
 	private boolean			friendUpdated = false;
-	private boolean isValidVersion=true;
+	private boolean 		isValidVersion=true;
 	public final static int CURRENT_VERSION = 1;
 
 	public static Status getInstance() {
@@ -152,18 +150,6 @@ public class Status {
 			}
 		}
 		return null;
-	}
-
-	public long getLastUpdateGames() {
-		return last_update_game;
-	}
-
-	public void setLastUpdateGames(long u) {
-		last_update_game = u;
-	}
-
-	public void setLastUpdateGamesNow() {
-		last_update_game = System.currentTimeMillis();
 	}
 
 	public void closeDB() {

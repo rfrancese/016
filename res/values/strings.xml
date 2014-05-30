@@ -96,6 +96,12 @@
     <string name="errore_10">Non puoi aggiungere questo utente agli amici</string>
     <string name="errore_11">Per poter effettuare l\'accesso, scarica l\'ultima versione di Math Challenger dal Play Store</string>
     <string name="partita_avviso_landscape">Posiziona il dispositivo in posizione Portrait</string>
-    <string name="title_activity_ads">AdsActivity</string>
-
+    <string name="menu_aggiorna_statistiche">Aggiorna statistiche</string>
+	<string name="classifica">Classifica</string>
+	<string name="stat_giocate">Partite giocate: </string>
+	<string name="stat_vinte">Partite vinte: </string>
+	<string name="stat_perse">Partite perse: </string>
+	<string name="stat_pareggiate">Partite pareggiate: </string>
+	<string name="stat_abbandonate">Partite abbandonate: </string>
+	<string name="stat_punti">Punti: </string>
 </resources>

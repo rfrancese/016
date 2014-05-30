@@ -82,14 +82,13 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				Messaggio m_logout = CommunicationMessageCreator.getInstance().createLogoutMessage();
 				try {
 					comm.send(m_logout);
-					if (CommunicationParser.getInstance().parseLogout(m_logout)) {
-						Status.getInstance().logout();
-						Intent intent = new Intent(this, HomeAutenticazioneActivity.class);
-						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						t_aggiorna_partite.interrupt();
-						comm.close();
-						startActivity(intent);
-					}
+					CommunicationParser.getInstance().parseLogout(m_logout);
+					Status.getInstance().logout();
+					Intent intent = new Intent(this, HomeAutenticazioneActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					t_aggiorna_partite.interrupt();
+					comm.close();
+					startActivity(intent);
 				}
 				catch (IOException e) {
 					e.printStackTrace();
@@ -98,6 +97,12 @@ public class HomeGiocoActivity extends ActionBarActivity {
 					Intent intent = new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					t_aggiorna_partite.interrupt();
+					try {
+						comm.close();
+					}
+					catch (IOException e1) {
+						e1.printStackTrace();
+					}
 					startActivity(intent);
 				}
 				catch (ConnectionException e) {
@@ -297,6 +302,12 @@ public class HomeGiocoActivity extends ActionBarActivity {
 
 	public void onClickNuovaPartita(View v) {
 		Intent intent = new Intent(getApplicationContext(), NuovaPartitaActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		t_aggiorna_partite.interrupt();
+		startActivity(intent);
+	}
+	public void onClickStatistiche(View v){
+		Intent intent=new Intent(getApplicationContext(), StatisticheActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		t_aggiorna_partite.interrupt();
 		startActivity(intent);
