@@ -34,12 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
         </LinearLayout>
-
     </ScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/container_mie_statistiche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,39 +53,53 @@
             android:id="@+id/tv_partite_giocate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:text="@string/stat_giocate" />
 
         <TextView
             android:id="@+id/tv_partite_vinte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_partite_giocate"
             android:text="@string/stat_vinte" />
 
         <TextView
             android:id="@+id/tv_partite_pareggiate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_partite_vinte"
             android:text="@string/stat_pareggiate" />
 
         <TextView
             android:id="@+id/tv_partite_perse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_partite_pareggiate"
             android:text="@string/stat_perse" />
 
         <TextView
             android:id="@+id/tv_partite_abbandonate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_partite_perse"
             android:text="@string/stat_abbandonate" />
 
-        <TextView
+        <it.unisa.mathchallenger.widget.CustomTextView
             android:id="@+id/tv_punti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_partite_perse"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="52dp"
             android:text="@string/stat_punti"
+            android:textSize="@dimen/size_default_text"
             android:textStyle="bold" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

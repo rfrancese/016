@@ -10,5 +10,9 @@
         <attr name="metaButtonBarStyle" format="reference" />
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
+    
+    <declare-styleable name="CustomTextView">
+        <attr name="typeface" format="string" />
+    </declare-styleable>
 
 </resources>
