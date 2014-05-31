@@ -6,12 +6,9 @@ import it.unisa.mathchallenger.status.AccountUser;
 import it.unisa.mathchallenger.status.Status;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -23,13 +20,15 @@ public class Communication implements Runnable {
 
 	private Socket			   socket;
 	private final static String  HOSTNAME	  = "pinoelefante.no-ip.biz";
-	// private final static String HOSTNAME = "192.168.0.207";
 	private final static int	 HOSTNAME_PORT = 50000;
-	private static ThreadPing t_ping;
-	
+	private static int		   TIMEOUT_READ  = 10000;				   // 10
+																		   // secondi
+																		   // timeout
+	private static ThreadPing	t_ping;
+
 	private Communication() {
 		super();
-		t_ping=ThreadPing.getInstance();
+		t_ping = ThreadPing.getInstance();
 	}
 
 	public static synchronized Communication getInstance() {
@@ -39,32 +38,18 @@ public class Communication implements Runnable {
 		return singleton;
 	}
 
-	public void run() {
-		/*
-		if (isConnected())
-			return;
-		try {
-			connect();
-		}
-		catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
-	}
+	public void run() {}
 
-	private PrintWriter	out;
+	private OutputStream   out;
 	private BufferedReader in;
 
 	public boolean connect() throws UnknownHostException, IOException {
 		if (socket == null || socket.isClosed()) {
 			socket = new Socket(HOSTNAME, HOSTNAME_PORT);
 			socket.setSoTimeout(30000);
-			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+			out = socket.getOutputStream();
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			if(t_ping!=null && !t_ping.isAlive())
+			if (t_ping != null && !t_ping.isAlive())
 				t_ping.start();
 			return true;
 		}
@@ -82,11 +67,9 @@ public class Communication implements Runnable {
 			e.printStackTrace();
 		}
 		catch (LoginException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -110,22 +93,26 @@ public class Communication implements Runnable {
 		if (socket == null || socket.isClosed()) {
 			connect();
 		}
-		for (int i = 0; i < 5; i++) {
-			try {
-				write(m.getComando());
-				m.setResponse(read());
-				return;
-			}
-			catch (IOException e) {
-				restart();
-			}
+
+		try {
+			write(m.getComando());
+			m.setResponse(read());
+			return;
+		}
+		catch (IOException e) {
+			restart();
+			send(m);
 		}
 		throw new ConnectionException();
 	}
 
 	private synchronized String read() throws IOException {
 		String r = "";
-		while ((r = in.readLine()) == null);
+		long timeout = TIMEOUT_READ + System.currentTimeMillis();
+		while ((r = in.readLine()) == null) {
+			if (System.currentTimeMillis() > timeout)
+				throw new IOException("Timeout error");
+		}
 		Log.d("Communication_R", r);
 		return r;
 	}
@@ -147,7 +134,6 @@ public class Communication implements Runnable {
 	}
 
 	private synchronized void write(String s) throws IOException {
-		OutputStream out = socket.getOutputStream();
 		out.write((s + "\n").getBytes());
 		Log.d("Communication_W", s);
 		out.flush();

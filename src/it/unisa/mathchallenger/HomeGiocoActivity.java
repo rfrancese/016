@@ -116,9 +116,10 @@ public class HomeGiocoActivity extends ActionBarActivity {
 				break;
 			}
 			case R.id.action_exit_menu:
-				t_aggiorna_partite.interrupt();
-				comm.disconnect();
-				System.exit(0);
+				Intent intent=new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("exit", true);
+				startActivity(intent);
 				break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -128,7 +129,10 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	public void onBackPressed() {
 		new AlertDialog.Builder(this).setMessage(R.string.exit_confirm).setCancelable(false).setPositiveButton("Si", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				System.exit(0);
+				Intent intent=new Intent(getApplicationContext(), HomeAutenticazioneActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("exit", true);
+				startActivity(intent);
 			}
 		}).setNegativeButton("No", null).show();
 	}

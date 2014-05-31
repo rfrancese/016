@@ -41,6 +41,12 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		if(getIntent().getBooleanExtra("exit", false)){
+			Status.getInstance().closeDB();
+			Communication.getInstance().disconnect();
+			finish();
+			System.exit(0);
+		}
 		super.onCreate(savedInstanceState);
 		current_layout = HOME;
 		if (VERSION.SDK_INT >= 9) {
