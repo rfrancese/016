@@ -249,7 +249,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				return;
 			}
 			if (!isValidEmail(email)) {
-				Toast.makeText(getApplicationContext(), R.string.email_non_valida, Toast.LENGTH_LONG);
+				Toast.makeText(getApplicationContext(), R.string.email_non_valida, Toast.LENGTH_LONG).show();
 				return;
 			}
 
