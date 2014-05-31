@@ -30,10 +30,13 @@ import android.widget.Toast;
 
 public class HomeAutenticazioneActivity extends ActionBarActivity {
 
-	Communication comm;
-	private int   current_layout = 0;
-	private final static int HOME = 0, REGISTRA = 1, RECUPERA = 2;
-	private static boolean socketOk=false;
+	Communication			comm;
+	private int			  current_layout   = 0;
+	private final static int HOME			 = 0, REGISTRA = 1, RECUPERA = 2;
+	private static boolean   socketOk		 = false;
+	private static boolean   isVersionChecked = false;
+	private static boolean   isVersionValid   = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,34 +45,24 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		if(!socketOk){
-    		Thread t=new Thread(Communication.getInstance());
-    		t.start();
-    		try {
-    			t.join();
-    			socketOk=true;
-    		}
-    		catch (InterruptedException e1) {
-    			e1.printStackTrace();
-    		}
+		if (!socketOk) {
+			Thread t = new Thread(Communication.getInstance());
+			t.start();
+			try {
+				t.join();
+				socketOk = true;
+			}
+			catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
 		}
 		comm = Communication.getInstance();
 		Status.getInstance(getApplicationContext());
-		AccountUser acc = Status.getInstance().getUtente();
-		boolean loginOK = false;
-		if (acc != null && socketOk) {
-			Messaggio m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
-			try {
-				comm.send(m);
-				loginOK = CommunicationParser.getInstance().parseLoginAuthcode(m);
-			}
-			catch (IOException | LoginException | ConnectionException e) {
-				e.printStackTrace();
-			}
-		}
-		comm = Communication.getInstance();
 
-		if (!loginOK) {
+		if (isValidVersion()) {
+			loginWithAuthcode();
+		}
+		else {
 			setContentView(R.layout.activity_home_autenticazione);
 			View view = (View) findViewById(R.id.ScrollHomeAutenticazione);
 			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -78,37 +71,32 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			else {
 				view.setBackgroundResource(R.drawable.sfondohome);
 			}
-			if(!socketOk)
+			if (!socketOk)
 				Toast.makeText(getApplicationContext(), R.string.errore_verificare_connessione, Toast.LENGTH_LONG).show();
-		}
-		else {
-			Status.getInstance().loginAuth(acc);
-			Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			finish();
+			
+			new AlertDialog.Builder(this).setMessage("Per poter accedere, scarica l'ultima versione di Math Challenger dal Play Store").setCancelable(false).setPositiveButton("OK", null).show();
 		}
 	}
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		
-		View view=null;
-		if(current_layout==HOME)
+
+		View view = null;
+		if (current_layout == HOME)
 			view = (View) findViewById(R.id.ScrollHomeAutenticazione);
-		else if(current_layout==REGISTRA)
+		else if (current_layout == REGISTRA)
 			view = (View) findViewById(R.id.ContainerRegistra);
-		else if(current_layout==RECUPERA)
+		else if (current_layout == RECUPERA)
 			view = (View) findViewById(R.id.ContainerRecupera);
-		
-		if(view!=null){
-    		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-    			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
-    		}
-    		else {
-    			view.setBackgroundResource(R.drawable.prova2hd);
-    		}
+
+		if (view != null) {
+			if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+				view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+			}
+			else {
+				view.setBackgroundResource(R.drawable.prova2hd);
+			}
 		}
 	}
 
@@ -260,7 +248,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 					AccountUser acc = CommunicationParser.getInstance().parseRegister(m);
 					if (acc == null) {
 						if (m.hasError()) {
-							Toast.makeText(getApplicationContext(), m.getErrorID()>=0?getResources().getString(m.getErrorID()):m.getErrorMessage(), Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), m.getErrorID() >= 0 ? getResources().getString(m.getErrorID()) : m.getErrorMessage(), Toast.LENGTH_LONG).show();
 						}
 						else
 							Toast.makeText(getApplicationContext(), R.string.error_unknown, Toast.LENGTH_LONG).show();
@@ -327,38 +315,92 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		}
 	}
 
-	public void onClickAccedi(View v) {
-		TextView u_tv = (TextView) findViewById(R.id.username_text);
-		TextView p_tv = (TextView) findViewById(R.id.password_text);
-		String username = u_tv.getText().toString();
-		String pass = p_tv.getText().toString();
-
+	private boolean isValidVersion() {
+		if (isVersionChecked)
+			return isVersionValid;
+		Messaggio m = CommunicationMessageCreator.getInstance().createIsValidVersion(Status.CURRENT_VERSION);
 		try {
-			Messaggio m = CommunicationMessageCreator.getInstance().createLoginMessage(username, pass);
 			comm.send(m);
-			AccountUser acc = CommunicationParser.getInstance().parseLogin(m);
-			if (acc == null) {
-				Toast.makeText(getApplicationContext(), R.string.login_fail_message, Toast.LENGTH_LONG).show();
+			isVersionChecked = true;
+			isVersionValid = CommunicationParser.getInstance().parseValidateVersion(m);
+			return isVersionValid;
+		}
+		catch (IOException | LoginException | ConnectionException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public void onClickAccedi(View v) {
+		if (isValidVersion()) {
+			TextView u_tv = (TextView) findViewById(R.id.username_text);
+			TextView p_tv = (TextView) findViewById(R.id.password_text);
+			String username = u_tv.getText().toString();
+			String pass = p_tv.getText().toString();
+
+			try {
+				Messaggio m = CommunicationMessageCreator.getInstance().createLoginMessage(username, pass);
+				comm.send(m);
+				AccountUser acc = CommunicationParser.getInstance().parseLogin(m);
+				if (acc == null) {
+					Toast.makeText(getApplicationContext(), R.string.login_fail_message, Toast.LENGTH_LONG).show();
+				}
+				else {
+					acc.setUsername(username);
+					Status.getInstance().login(acc);
+					Intent intent = new Intent(this, HomeGiocoActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+				}
+			}
+			catch (IOException e) {
+				Toast.makeText(getApplicationContext(), R.string.communication_error, Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+			catch (LoginException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (ConnectionException e) {
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+		}
+		else 
+			new AlertDialog.Builder(this).setMessage("Per poter accedere, scarica l'ultima versione di Math Challenger dal Play Store").setCancelable(false).setPositiveButton("OK", null).show();
+	}
+
+	private void loginWithAuthcode() {
+		boolean loginOK = false;
+		AccountUser acc = Status.getInstance().getUtente();
+		if (acc != null && socketOk) {
+			Messaggio m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
+			try {
+				comm.send(m);
+				loginOK = CommunicationParser.getInstance().parseLoginAuthcode(m);
+			}
+			catch (IOException | LoginException | ConnectionException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (!loginOK) {
+			setContentView(R.layout.activity_home_autenticazione);
+			View view = (View) findViewById(R.id.ScrollHomeAutenticazione);
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+				view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 			}
 			else {
-				acc.setUsername(username);
-				Status.getInstance().login(acc);
-				Intent intent = new Intent(this, HomeGiocoActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+				view.setBackgroundResource(R.drawable.sfondohome);
 			}
+			if (!socketOk)
+				Toast.makeText(getApplicationContext(), R.string.errore_verificare_connessione, Toast.LENGTH_LONG).show();
 		}
-		catch (IOException e) {
-			Toast.makeText(getApplicationContext(), R.string.communication_error, Toast.LENGTH_LONG).show();
-			e.printStackTrace();
-		}
-		catch (LoginException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (ConnectionException e) {
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-			e.printStackTrace();
+		else {
+			Status.getInstance().loginAuth(acc);
+			Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 		}
 	}
 }
