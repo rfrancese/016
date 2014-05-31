@@ -22,6 +22,7 @@
         android:id="@+id/scrollClassifica"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/container_mie_statistiche"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/title_classifica"

@@ -15,7 +15,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -112,19 +111,19 @@ public class StatisticheActivity extends Activity {
 		cl.loadClassifica();
 		LinearLayout container_top=(LinearLayout) findViewById(R.id.containerClassifica);
 		container_top.removeAllViews();
-		float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+		float scale=getResources().getDisplayMetrics().density;
 		int width_pos=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*5);
-		int width_nome=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*80);
-		int width_punti=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*15);
+		int width_punti=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*10);
 		for(int i=0;i<cl.getNumeroUtenti();i++){
 			String utente=cl.getUsernameAtIndex(i);
 			int punti=cl.getPuntiAtIndex(i);
 			
 			
 			RelativeLayout container=new RelativeLayout(getApplicationContext());
+			
 			CustomButton b_posizione=new CustomButton(getApplicationContext());
 			b_posizione.setId(i*3+1);
-			b_posizione.setBackgroundResource(R.drawable.button_trasparente);
+			b_posizione.setBackgroundResource(R.drawable.stat_left);
 			b_posizione.setText(""+(i+1));
 			RelativeLayout.LayoutParams l_pos=new RelativeLayout.LayoutParams(width_pos,ViewGroup.LayoutParams.WRAP_CONTENT);
 			l_pos.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
@@ -134,11 +133,11 @@ public class StatisticheActivity extends Activity {
 			CustomButton b_nome=new CustomButton(getApplicationContext());
 			b_nome.setText(utente);
 			b_nome.setGravity(Gravity.CENTER);
-			b_nome.setBackgroundResource(R.drawable.button_trasparente);
+			b_nome.setBackgroundResource(R.drawable.stat_center);
 			b_nome.setId(i*3+2);
-			RelativeLayout.LayoutParams l_nome=new RelativeLayout.LayoutParams(width_nome,ViewGroup.LayoutParams.WRAP_CONTENT);
-			l_nome.addRule(RelativeLayout.RIGHT_OF, i*3+1);
-			l_nome.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+			RelativeLayout.LayoutParams l_nome=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+			l_nome.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+			l_nome.addRule(RelativeLayout.LEFT_OF, i*3+3);
 			b_nome.setLayoutParams(l_nome);
 			
 			
@@ -146,16 +145,22 @@ public class StatisticheActivity extends Activity {
 			b_punti.setId(i*3+3);
 			b_punti.setText(punti+"");
 			b_punti.setGravity(Gravity.CENTER);
-			b_punti.setBackgroundResource(R.drawable.button_trasparente);
+			b_punti.setBackgroundResource(R.drawable.stat_right);
 			RelativeLayout.LayoutParams l_punti=new RelativeLayout.LayoutParams(width_punti,ViewGroup.LayoutParams.WRAP_CONTENT);
-			l_punti.addRule(RelativeLayout.RIGHT_OF, i*3+2);
 			l_punti.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
 			b_punti.setLayoutParams(l_punti);
-			b_punti.setId(i*3+1);
+			
+			RelativeLayout l_c=new RelativeLayout(getApplicationContext());
+			l_c.addView(b_nome);
+			l_c.addView(b_punti);
+			RelativeLayout.LayoutParams l_p=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+			l_p.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+			l_p.addRule(RelativeLayout.RIGHT_OF, i*3+1);
+			l_c.setLayoutParams(l_p);
+			
 			
 			container.addView(b_posizione);
-			container.addView(b_nome);
-			//container.addView(b_punti);
+			container.addView(l_c);
 			
 			container_top.addView(container);
 		}
