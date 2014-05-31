@@ -104,4 +104,5 @@
 	<string name="stat_pareggiate">Pareggi: </string>
 	<string name="stat_abbandonate">Abbandoni: </string>
 	<string name="stat_punti">Punti: </string>
+	<string name="email_non_valida">Inserisci un\'email valida</string>
 </resources>

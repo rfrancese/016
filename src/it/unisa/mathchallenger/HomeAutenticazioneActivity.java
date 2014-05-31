@@ -1,6 +1,8 @@
 package it.unisa.mathchallenger;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import it.unisa.mathchallenger.communication.Communication;
 import it.unisa.mathchallenger.communication.CommunicationMessageCreator;
@@ -73,7 +75,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			}
 			if (!socketOk)
 				Toast.makeText(getApplicationContext(), R.string.errore_verificare_connessione, Toast.LENGTH_LONG).show();
-			
+
 			new AlertDialog.Builder(this).setMessage("Per poter accedere, scarica l'ultima versione di Math Challenger dal Play Store").setCancelable(false).setPositiveButton("OK", null).show();
 		}
 	}
@@ -210,7 +212,6 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 					String email = ((TextView) v).getText().toString();
 					if (email.length() > 100) {
 						new AlertDialog.Builder(HomeAutenticazioneActivity.this).setMessage(R.string.invalid_registration_mail).setCancelable(true).setNeutralButton("OK", null).show();
-
 					}
 
 					return false;
@@ -241,40 +242,44 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				Toast.makeText(getApplicationContext(), R.string.reg_password_diverse, Toast.LENGTH_LONG).show();
 				return;
 			}
-			else {
-				Messaggio m = CommunicationMessageCreator.getInstance().createRegisterMessage(username, pass1, email);
-				try {
-					comm.send(m);
-					AccountUser acc = CommunicationParser.getInstance().parseRegister(m);
-					if (acc == null) {
-						if (m.hasError()) {
-							Toast.makeText(getApplicationContext(), m.getErrorID() >= 0 ? getResources().getString(m.getErrorID()) : m.getErrorMessage(), Toast.LENGTH_LONG).show();
-						}
-						else
-							Toast.makeText(getApplicationContext(), R.string.error_unknown, Toast.LENGTH_LONG).show();
-					}
-					else {
-						acc.setUsername(username);
-						Status.getInstance().login(acc);
+			if (!isValidEmail(email)) {
+				Toast.makeText(getApplicationContext(), R.string.email_non_valida, Toast.LENGTH_LONG);
+				return;
+			}
 
-						Intent intent = new Intent(this, HomeGiocoActivity.class);
-						startActivity(intent);
+			Messaggio m = CommunicationMessageCreator.getInstance().createRegisterMessage(username, pass1, email);
+			try {
+				comm.send(m);
+				AccountUser acc = CommunicationParser.getInstance().parseRegister(m);
+				if (acc == null) {
+					if (m.hasError()) {
+						Toast.makeText(getApplicationContext(), m.getErrorID() >= 0 ? getResources().getString(m.getErrorID()) : m.getErrorMessage(), Toast.LENGTH_LONG).show();
 					}
+					else
+						Toast.makeText(getApplicationContext(), R.string.error_unknown, Toast.LENGTH_LONG).show();
 				}
-				catch (IOException e) {
-					Toast.makeText(getApplicationContext(), R.string.communication_error, Toast.LENGTH_LONG).show();
-					e.printStackTrace();
-				}
-				catch (LoginException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				catch (ConnectionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				else {
+					acc.setUsername(username);
+					Status.getInstance().login(acc);
+
+					Intent intent = new Intent(this, HomeGiocoActivity.class);
+					startActivity(intent);
 				}
 			}
+			catch (IOException e) {
+				Toast.makeText(getApplicationContext(), R.string.communication_error, Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+			catch (LoginException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (ConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+
 	}
 
 	public void onClickResetPassword(View v) {
@@ -366,7 +371,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				e.printStackTrace();
 			}
 		}
-		else 
+		else
 			new AlertDialog.Builder(this).setMessage("Per poter accedere, scarica l'ultima versione di Math Challenger dal Play Store").setCancelable(false).setPositiveButton("OK", null).show();
 	}
 
@@ -402,5 +407,11 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 		}
+	}
+
+	private boolean isValidEmail(String email) {
+		Pattern p = Pattern.compile("\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b");
+		Matcher m = p.matcher(email);
+		return m.matches();
 	}
 }

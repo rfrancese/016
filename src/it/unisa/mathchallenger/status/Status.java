@@ -5,6 +5,7 @@ import it.unisa.mathchallenger.database.DBAdapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 public class Status {
 
@@ -17,7 +18,7 @@ public class Status {
 
 	private boolean			friendUpdated = false;
 	private boolean 		isValidVersion=true;
-	public final static int CURRENT_VERSION = 1;
+	public static int CURRENT_VERSION = 1;
 
 	public static Status getInstance() {
 		return status;
@@ -35,6 +36,13 @@ public class Status {
 		amici = new ArrayList<Account>();
 		database = new DBAdapter(c);
 		database.open();
+		try {
+			int version=c.getPackageManager().getPackageInfo(c.getPackageName(), 0).versionCode;
+			CURRENT_VERSION=version;
+		}
+		catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
 		AccountUser user = database.selezionaAccount();
 		setAccount(user);
 	}
