@@ -138,7 +138,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	}
 
 	private void aggiungiPartite(ArrayList<Partita> partite) {
-		if (partite == null || partite.size() == 0)
+		if (partite == null)
 			return;
 
 		final LinearLayout lay = (LinearLayout) findViewById(R.id.layoutPartiteInCorso);
