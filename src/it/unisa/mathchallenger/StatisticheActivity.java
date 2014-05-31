@@ -36,7 +36,7 @@ public class StatisticheActivity extends Activity {
 			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
 		}
 		else {
-			view.setBackgroundResource(R.drawable.prova2hd);
+			view.setBackgroundResource(R.drawable.sfondohome);
 		}
 		getMieStatistiche();
 		getClassifica();
@@ -50,7 +50,7 @@ public class StatisticheActivity extends Activity {
     			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
     		}
     		else {
-    			view.setBackgroundResource(R.drawable.prova2hd);
+    			view.setBackgroundResource(R.drawable.sfondohome);
     		}
 		}
 	}
