@@ -368,6 +368,8 @@ public class HomeGiocoActivity extends ActionBarActivity {
 					Partita p = tutte.get(i);
 
 					boolean found = false;
+					if(partite==null)
+						continue;
 					for (int j = 0; j < partite.size(); j++) {
 						Partita p1 = partite.get(j);
 						if (p.getIDPartita() == p1.getIDPartita()) {
