@@ -33,10 +33,10 @@ public class StatisticheActivity extends Activity {
 		comm=Communication.getInstance();
 		View view = (View) findViewById(R.id.containerStatistiche);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+			view.setBackgroundResource(R.drawable.sfondo_landscape_no);
 		}
 		else {
-			view.setBackgroundResource(R.drawable.sfondohome);
+			view.setBackgroundResource(R.drawable.sfondo_potrait_no);
 		}
 		getMieStatistiche();
 		getClassifica();
@@ -45,13 +45,11 @@ public class StatisticheActivity extends Activity {
 		super.onConfigurationChanged(newConfig);
 		
 		View view = (View) findViewById(R.id.containerStatistiche);
-		if(view!=null){
-    		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-    			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
-    		}
-    		else {
-    			view.setBackgroundResource(R.drawable.sfondohome);
-    		}
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.sfondo_landscape_no);
+		}
+		else {
+			view.setBackgroundResource(R.drawable.sfondo_potrait_no);
 		}
 	}
 

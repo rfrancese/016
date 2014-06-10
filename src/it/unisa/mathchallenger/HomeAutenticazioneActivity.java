@@ -74,15 +74,17 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			setContentView(R.layout.activity_home_autenticazione);
 			View view = (View) findViewById(R.id.ScrollHomeAutenticazione);
 			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-				view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+				view.setBackgroundResource(R.drawable.sfondo_landscape_no);
 			}
 			else {
 				view.setBackgroundResource(R.drawable.sfondohome);
 			}
 			if (!socketOk)
 				Toast.makeText(getApplicationContext(), R.string.errore_verificare_connessione, Toast.LENGTH_LONG).show();
-
-			new AlertDialog.Builder(this).setMessage("Per poter accedere, scarica l'ultima versione di Math Challenger dal Play Store").setCancelable(false).setPositiveButton("OK", null).show();
+			if(isVersionChecked)
+				new AlertDialog.Builder(this).setMessage("Per poter accedere, scarica l'ultima versione di Math Challenger dal Play Store").setCancelable(false).setPositiveButton("OK", null).show();
+			else
+				new AlertDialog.Builder(this).setMessage("Verifica che la connessione sia attiva. Altrimenti riprova tra qualche minuto").setCancelable(false).setPositiveButton("OK", null).show();
 		}
 	}
 
@@ -99,11 +101,11 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			view = (View) findViewById(R.id.ContainerRecupera);
 
 		if (view != null) {
-			if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-				view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+				view.setBackgroundResource(R.drawable.sfondo_landscape_no);
 			}
 			else {
-				view.setBackgroundResource(R.drawable.prova2hd);
+				view.setBackgroundResource(R.drawable.sfondohome);
 			}
 		}
 	}

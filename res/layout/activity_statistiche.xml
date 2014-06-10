@@ -3,7 +3,7 @@
     android:id="@+id/containerStatistiche"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sfondohome"
+    android:background="@drawable/sfondo_potrait_no"
     tools:context="${packageName}.${activityClass}" >
 
     <TextView

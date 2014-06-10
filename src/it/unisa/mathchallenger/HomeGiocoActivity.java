@@ -44,10 +44,10 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		t_aggiorna_partite.start();
 		View view = (View) findViewById(R.id.containerHomeGioco);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+			view.setBackgroundResource(R.drawable.sfondo_landscape_no);
 		}
 		else {
-			view.setBackgroundResource(R.drawable.prova2hd);
+			view.setBackgroundResource(R.drawable.sfondo_potrait_no);
 		}
 	}
 
@@ -55,11 +55,11 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		View view = (View) findViewById(R.id.containerHomeGioco);
-		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			view.setBackgroundResource(R.drawable.sfondo_landscape_no);
 		}
 		else {
-			view.setBackgroundResource(R.drawable.prova2hd);
+			view.setBackgroundResource(R.drawable.sfondo_potrait_no);
 		}
 
 	}

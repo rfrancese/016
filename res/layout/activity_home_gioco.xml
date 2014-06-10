@@ -3,7 +3,7 @@
     android:id="@+id/containerHomeGioco"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/prova2hd"
+    android:background="@drawable/sfondo_potrait_no"
     android:orientation="vertical"
     tools:context="it.unisa.mathchallenger.HomeGiocoActivity"
     tools:ignore="MergeRootFrame" >
@@ -57,7 +57,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <it.unisa.mathchallenger.widget.CustomButton
+    <Button
         android:id="@+id/homegioco_mostrastatistiche"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -66,8 +66,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
-        android:textSize="@dimen/button_trasparente_text_size"
-        android:background="@drawable/button_trasparente_style"
+        android:background="@drawable/button_style"
         android:onClick="onClickStatistiche"
         android:text="@string/homegioco_statistiche_button"
         android:textStyle="bold" />
