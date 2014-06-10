@@ -73,17 +73,12 @@ public class Communication implements Runnable {
 	}
 
 	public void restart() throws UnknownHostException, IOException, LoginException, ConnectionException {
-		try {
-			send(CommunicationMessageCreator.getInstance().createPingMessage());
-		}
-		catch (IOException e) {
-			close();
-			connect();
-			AccountUser a = Status.getInstance().getUtente();
-			if (a != null) {
-				Messaggio relog = CommunicationMessageCreator.getInstance().createLoginAuthcode(a.getID(), a.getAuthCode());
-				send(relog);
-			}
+		close();
+		connect();
+		AccountUser a = Status.getInstance().getUtente();
+		if (a != null) {
+			Messaggio relog = CommunicationMessageCreator.getInstance().createLoginAuthcode(a.getID(), a.getAuthCode());
+			send(relog);
 		}
 	}
 
