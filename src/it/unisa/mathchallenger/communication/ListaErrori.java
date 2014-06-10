@@ -11,7 +11,7 @@ public class ListaErrori {
 			NON_PUOI_AGGIUNGERE_QUESTO_ACCOUNT_AGLI_AMICI = 10,
 			VERSIONE_NON_VALIDA = 11;
 	
-	public int getMessage(String m){
+	public static int getMessage(String m){
 		try {
 			int m_id=Integer.parseInt(m);
 			switch(m_id){

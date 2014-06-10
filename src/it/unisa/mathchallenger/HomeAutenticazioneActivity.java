@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import it.unisa.mathchallenger.communication.Communication;
 import it.unisa.mathchallenger.communication.CommunicationMessageCreator;
 import it.unisa.mathchallenger.communication.CommunicationParser;
+import it.unisa.mathchallenger.communication.ListaErrori;
 import it.unisa.mathchallenger.communication.Messaggio;
 import it.unisa.mathchallenger.eccezioni.ConnectionException;
 import it.unisa.mathchallenger.eccezioni.LoginException;
@@ -36,8 +37,8 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 	private int			  current_layout   = 0;
 	private final static int HOME			 = 0, REGISTRA = 1, RECUPERA = 2;
 	private static boolean   socketOk		 = false;
-	private static boolean   isVersionChecked = false;
-	private static boolean   isVersionValid   = false;
+	private boolean   isVersionChecked = false;
+	private boolean   isVersionValid   = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -352,6 +353,16 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			String pass = p_tv.getText().toString();
 
 			try {
+				if(!isVersionChecked){
+					Messaggio validaVersione=CommunicationMessageCreator.getInstance().createIsValidVersion(Status.CURRENT_VERSION);
+					comm.send(validaVersione);
+					isVersionChecked=true;
+					isVersionValid=CommunicationParser.getInstance().parseValidateVersion(validaVersione);
+					if(!isValidVersion()){
+						int id_error=ListaErrori.getMessage(validaVersione.getErrorMessage());
+						Toast.makeText(getApplicationContext(), id_error>=0?getResources().getString(id_error):validaVersione.getErrorMessage(), Toast.LENGTH_LONG).show();
+					}
+				}
 				Messaggio m = CommunicationMessageCreator.getInstance().createLoginMessage(username, pass);
 				comm.send(m);
 				AccountUser acc = CommunicationParser.getInstance().parseLogin(m);
