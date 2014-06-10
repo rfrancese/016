@@ -23,6 +23,7 @@ public class Communication implements Runnable {
 	private final static int	 HOSTNAME_PORT = 50000;
 	private static int		   TIMEOUT_READ  = 10000;		// 10 secondi timeout
 	private static ThreadPing	t_ping;
+	private static long last_write;
 
 	private Communication() {
 		super();
@@ -158,5 +159,9 @@ public class Communication implements Runnable {
 		out.write((s + "\n").getBytes());
 		Log.d("Communication_W", s);
 		out.flush();
+		last_write=System.currentTimeMillis();
+	}
+	public static long getLastWriteTime(){
+		return last_write;
 	}
 }
