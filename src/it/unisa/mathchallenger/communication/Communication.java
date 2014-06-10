@@ -24,6 +24,8 @@ public class Communication implements Runnable {
 	private static int		   TIMEOUT_READ  = 10000;		// 10 secondi timeout
 	private static ThreadPing	t_ping;
 	private static long last_write;
+	
+	private static boolean restart_connection=false;
 
 	private Communication() {
 		super();
@@ -77,10 +79,12 @@ public class Communication implements Runnable {
 
 	public synchronized void restart() throws UnknownHostException, IOException, LoginException, ConnectionException {
 		Log.d("", "Riavvio della connessione");
-		t_ping.interrupt();
+		if(t_ping!=null)
+			t_ping.interrupt();
 		t_ping=null;
 		close();
 		connect();
+		restart_connection=false;
 		AccountUser a = Status.getInstance().getUtente();
 		if (a != null) {
 			Messaggio valida_versione = CommunicationMessageCreator.getInstance().createIsValidVersion(Status.CURRENT_VERSION);
@@ -97,7 +101,9 @@ public class Communication implements Runnable {
 	}
 
 	public synchronized void send(Messaggio m) throws IOException, LoginException, ConnectionException {
-		if (socket == null || socket.isClosed()) {
+		if(restart_connection)
+			restart();
+		else if (socket == null || socket.isClosed()) {
 			connect();
 		}
 
@@ -111,8 +117,9 @@ public class Communication implements Runnable {
 				try {
 					restart();
 				}
-				catch(Exception e1){
+				catch(IOException e1){
 					e.printStackTrace();
+					restart_connection=true;
 				}
 			}
 		}
