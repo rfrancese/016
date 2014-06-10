@@ -47,6 +47,8 @@ public class Communication implements Runnable {
 			socket.setSoTimeout(30000);
 			out = socket.getOutputStream();
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			if(t_ping==null)
+				t_ping=ThreadPing.getInstance();
 			if (t_ping != null && !t_ping.isAlive())
 				t_ping.start();
 			return true;
@@ -72,13 +74,24 @@ public class Communication implements Runnable {
 		}
 	}
 
-	public void restart() throws UnknownHostException, IOException, LoginException, ConnectionException {
+	public synchronized void restart() throws UnknownHostException, IOException, LoginException, ConnectionException {
+		Log.d("", "Riavvio della connessione");
+		t_ping.interrupt();
+		t_ping=null;
 		close();
 		connect();
 		AccountUser a = Status.getInstance().getUtente();
 		if (a != null) {
-			Messaggio relog = CommunicationMessageCreator.getInstance().createLoginAuthcode(a.getID(), a.getAuthCode());
-			send(relog);
+			Messaggio valida_versione = CommunicationMessageCreator.getInstance().createIsValidVersion(Status.CURRENT_VERSION);
+			write(valida_versione.getComando());
+			valida_versione.setResponse(read());
+			if(CommunicationParser.getInstance().parseValidateVersion(valida_versione)){
+				Messaggio relog = CommunicationMessageCreator.getInstance().createLoginAuthcode(a.getID(), a.getAuthCode());
+				write(relog.getComando());
+				relog.setResponse(read());
+				if(!CommunicationParser.getInstance().parseLoginAuthcode(relog))
+					throw new LoginException("Errore durante il relog");
+			}
 		}
 	}
 
@@ -87,19 +100,27 @@ public class Communication implements Runnable {
 			connect();
 		}
 
-		try {
-			write(m.getComando());
-			m.setResponse(read());
-			return;
-		}
-		catch (IOException e) {
-			restart();
-			send(m);
+		for(int i=0;i<5;i++){
+			try {
+				write(m.getComando());
+				m.setResponse(read());
+				return;
+			}
+			catch (IOException e) {
+				try {
+					restart();
+				}
+				catch(Exception e1){
+					e.printStackTrace();
+				}
+			}
 		}
 		throw new ConnectionException();
 	}
 
 	private synchronized String read() throws IOException {
+		if(in==null)
+			throw new IOException("ConnectionReader null");
 		String r = "";
 		long timeout = TIMEOUT_READ + System.currentTimeMillis();
 		while ((r = in.readLine()) == null) {
@@ -117,16 +138,23 @@ public class Communication implements Runnable {
 	}
 
 	public void close() throws IOException {
-		if (in != null)
+		if (in != null){
 			in.close();
-		if (out != null)
+			in=null;
+		}
+		if (out != null){
 			out.close();
+			out=null;
+		}
 		if (socket != null) {
 			socket.close();
+			socket=null;
 		}
 	}
 
 	private synchronized void write(String s) throws IOException {
+		if(out==null)
+			throw new IOException("ConnectionWriter null");
 		out.write((s + "\n").getBytes());
 		Log.d("Communication_W", s);
 		out.flush();

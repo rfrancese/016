@@ -29,6 +29,7 @@ public class ThreadPing extends Thread {
 			}
 			catch (InterruptedException e) {
 				e.printStackTrace();
+				break;
 			}
 			Messaggio m = new Messaggio("ping");
 			try {
@@ -36,22 +37,13 @@ public class ThreadPing extends Thread {
 				comm.send(m);
 			}
 			catch (IOException | LoginException | ConnectionException e) {
-				try {
-					comm.restart();
-				}
-				catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				catch (LoginException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				catch (ConnectionException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				e.printStackTrace();
 			}
 		}
+	}
+	@Override
+	public void interrupt() {
+		super.interrupt();
+		thread=null;
 	}
 }

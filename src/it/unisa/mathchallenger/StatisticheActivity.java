@@ -91,18 +91,20 @@ public class StatisticheActivity extends Activity {
 		}
 	}
 	private void aggiornaMieStatistiche(Statistiche s){
-		TextView giocate=(TextView) findViewById(R.id.tv_partite_giocate);
-		giocate.setText(getResources().getString(R.string.stat_giocate)+s.getPartite_giocate());
-		TextView vinte=(TextView) findViewById(R.id.tv_partite_vinte);
-		vinte.setText(getResources().getString(R.string.stat_vinte)+s.getVittorie());
-		TextView pareggiate=(TextView) findViewById(R.id.tv_partite_pareggiate);
-		pareggiate.setText(getResources().getString(R.string.stat_pareggiate)+s.getPareggi());
-		TextView perse=(TextView) findViewById(R.id.tv_partite_perse);
-		perse.setText(getResources().getString(R.string.stat_perse)+s.getSconfitte());
-		TextView abbandonate=(TextView) findViewById(R.id.tv_partite_abbandonate);
-		abbandonate.setText(getResources().getString(R.string.stat_abbandonate)+s.getAbbandonate());
-		TextView punti=(TextView) findViewById(R.id.tv_punti);
-		punti.setText(getResources().getString(R.string.stat_punti)+s.getPunti());
+		if(s!=null){
+			TextView giocate=(TextView) findViewById(R.id.tv_partite_giocate);
+			giocate.setText(getResources().getString(R.string.stat_giocate)+s.getPartite_giocate());
+			TextView vinte=(TextView) findViewById(R.id.tv_partite_vinte);
+			vinte.setText(getResources().getString(R.string.stat_vinte)+s.getVittorie());
+			TextView pareggiate=(TextView) findViewById(R.id.tv_partite_pareggiate);
+			pareggiate.setText(getResources().getString(R.string.stat_pareggiate)+s.getPareggi());
+			TextView perse=(TextView) findViewById(R.id.tv_partite_perse);
+			perse.setText(getResources().getString(R.string.stat_perse)+s.getSconfitte());
+			TextView abbandonate=(TextView) findViewById(R.id.tv_partite_abbandonate);
+			abbandonate.setText(getResources().getString(R.string.stat_abbandonate)+s.getAbbandonate());
+			TextView punti=(TextView) findViewById(R.id.tv_punti);
+			punti.setText(getResources().getString(R.string.stat_punti)+s.getPunti());
+		}
 	}
 	private void getClassifica(){
 		Classifica cl=Classifica.getInstance();
