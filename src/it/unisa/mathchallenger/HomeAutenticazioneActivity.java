@@ -280,11 +280,9 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				e.printStackTrace();
 			}
 			catch (LoginException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			catch (ConnectionException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -318,7 +316,6 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 					e.printStackTrace();
 				}
 				catch (LoginException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				catch (ConnectionException e) {
@@ -367,7 +364,14 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				comm.send(m);
 				AccountUser acc = CommunicationParser.getInstance().parseLogin(m);
 				if (acc == null) {
-					Toast.makeText(getApplicationContext(), R.string.login_fail_message, Toast.LENGTH_LONG).show();
+					if(m.getErrorMessage().compareTo(""+ListaErrori.SEI_LOGGATO)==0){
+						Status.getInstance().loginAuth(acc);
+						Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+					}
+					else
+						Toast.makeText(getApplicationContext(), R.string.login_fail_message, Toast.LENGTH_LONG).show();
 				}
 				else {
 					acc.setUsername(username);
@@ -382,7 +386,6 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				e.printStackTrace();
 			}
 			catch (LoginException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			catch (ConnectionException e) {
@@ -397,8 +400,9 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 	private void loginWithAuthcode() {
 		boolean loginOK = false;
 		AccountUser acc = Status.getInstance().getUtente();
+		Messaggio m = null;
 		if (acc != null && socketOk) {
-			Messaggio m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
+			m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
 			try {
 				comm.send(m);
 				loginOK = CommunicationParser.getInstance().parseLoginAuthcode(m);
@@ -406,9 +410,17 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			catch (IOException | LoginException | ConnectionException e) {
 				e.printStackTrace();
 			}
+			
 		}
-
-		if (!loginOK) {
+		if(!loginOK && m!=null){
+			if(m.getErrorMessage().compareTo(ListaErrori.SEI_LOGGATO+"")==0){
+				Status.getInstance().loginAuth(acc);
+				Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}
+		}
+		else if (!loginOK) {
 			setContentView(R.layout.activity_home_autenticazione);
 			View view = (View) findViewById(R.id.ScrollHomeAutenticazione);
 			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
