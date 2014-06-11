@@ -40,7 +40,7 @@ public class HomeGiocoActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		comm = Communication.getInstance();
 		setContentView(R.layout.activity_home_gioco);
-		if(t_aggiorna_partite==null){
+		if(t_aggiorna_partite==null || !t_aggiorna_partite.isAlive()){
 			t_aggiorna_partite = new ThreadAggiornaPartite();
 			t_aggiorna_partite.start();
 		}
