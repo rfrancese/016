@@ -83,4 +83,7 @@ public class Classifica {
 	public int getPuntiAtIndex(int i){
 		return classifica.get(i).getPunti();
 	}
+	public static void setURLClassifica(String p){
+		URLClassifica=p;
+	}
 }

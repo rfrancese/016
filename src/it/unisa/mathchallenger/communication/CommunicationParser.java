@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import it.unisa.mathchallenger.status.Account;
 import it.unisa.mathchallenger.status.AccountUser;
+import it.unisa.mathchallenger.status.Classifica;
 import it.unisa.mathchallenger.status.Domanda;
 import it.unisa.mathchallenger.status.Partita;
 import it.unisa.mathchallenger.status.Statistiche;
@@ -532,6 +533,9 @@ public class CommunicationParser {
 					break;
 				case "punti":
 					stat.setPunti(Integer.parseInt(kv[1]));
+					break;
+				case "url_classifica":
+					Classifica.setURLClassifica(kv[1]);
 					break;
 			}
 		}
