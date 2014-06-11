@@ -33,15 +33,20 @@ import android.widget.TextView;
 public class HomeGiocoActivity extends ActionBarActivity {
 
 	private Communication		 comm;
-	private ThreadAggiornaPartite t_aggiorna_partite;
+	private static ThreadAggiornaPartite t_aggiorna_partite;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		comm = Communication.getInstance();
 		setContentView(R.layout.activity_home_gioco);
-		t_aggiorna_partite = new ThreadAggiornaPartite();
-		t_aggiorna_partite.start();
+		if(t_aggiorna_partite==null){
+			t_aggiorna_partite = new ThreadAggiornaPartite();
+			t_aggiorna_partite.start();
+		}
+		else {
+			t_aggiorna_partite.aggiorna();
+		}
 		View view = (View) findViewById(R.id.containerHomeGioco);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			view.setBackgroundResource(R.drawable.sfondo_landscape_no);
