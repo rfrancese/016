@@ -400,13 +400,11 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			}
 			
 		}
-		if(!loginOK && m!=null){
-			if(m.getErrorMessage().compareTo(ListaErrori.SEI_LOGGATO+"")==0){
-				Status.getInstance().loginAuth(acc);
-				Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}
+		if(!loginOK && m.getErrorMessage().compareTo(ListaErrori.SEI_LOGGATO+"")==0){ //già loggato
+			Status.getInstance().loginAuth(acc);
+			Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 		}
 		else if (!loginOK) {
 			setContentView(R.layout.activity_home_autenticazione);
