@@ -36,7 +36,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 	Communication			comm;
 	private int			  current_layout   = 0;
 	private final static int HOME			 = 0, REGISTRA = 1, RECUPERA = 2;
-	private static boolean   socketOk		 = false;
+	//private static boolean   socketOk		 = false;
 	private boolean   isVersionChecked = false;
 	private boolean   isVersionValid   = false;
 
@@ -415,8 +415,10 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			else {
 				view.setBackgroundResource(R.drawable.sfondohome);
 			}
+			/*
 			if (!socketOk)
 				Toast.makeText(getApplicationContext(), R.string.errore_verificare_connessione, Toast.LENGTH_LONG).show();
+			*/
 		}
 		else {
 			Status.getInstance().loginAuth(acc);
