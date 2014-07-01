@@ -400,7 +400,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			}
 			
 		}
-		if(!loginOK && m.getErrorMessage().compareTo(ListaErrori.SEI_LOGGATO+"")==0){ //già loggato
+		if(!loginOK &&m!=null && m.getErrorMessage().compareTo(ListaErrori.SEI_LOGGATO+"")==0){ //già loggato
 			Status.getInstance().loginAuth(acc);
 			Intent intent = new Intent(getApplicationContext(), HomeGiocoActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
