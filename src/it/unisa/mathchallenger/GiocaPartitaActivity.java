@@ -17,7 +17,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
@@ -117,7 +121,7 @@ public class GiocaPartitaActivity extends Activity {
 			final ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar1);
 			runOnUiThread(new Runnable() {
 				public void run() {
-					bar.setMax(DURATA_DOMANDA*1000);
+					bar.setMax(DURATA_DOMANDA * 1000);
 				}
 			});
 
@@ -165,18 +169,34 @@ public class GiocaPartitaActivity extends Activity {
 
 		public void run() {
 			int time = DURATA_DOMANDA;
-			int sleep_time=time*1000;;
+			int sleep_time = time * 1000;
+			boolean audio_started=false;
 			while (time > 0) {
 				try {
 					sleep(100L);
-					sleep_time-=100;
+					sleep_time -= 100;
 				}
 				catch (InterruptedException e) {
 					e.printStackTrace();
 					return;
 				}
-				if(sleep_time%1000==0){
+				if (sleep_time % 1000 == 0) {
 					time--;
+					audio_started=false;
+				}
+				if (time == 3) {
+					if(!audio_started){
+						audio_started=true;
+    					Log.d("MathC_Audio", "time="+time);
+    					SoundPool sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+    					sp.load(getApplicationContext(), R.raw.countdown, 1); // in 2nd param u have to pass your desire ringtone
+    					sp.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+    						@Override
+    						public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+    							soundPool.play(sampleId, 1, 1, 1, 0, 1);
+    						}
+    					});
+					}
 				}
 				progressUpdater pu = new progressUpdater(progressbar, sleep_time);
 				runOnUiThread(pu);
@@ -204,37 +224,38 @@ public class GiocaPartitaActivity extends Activity {
 			p_bar.setProgress(value);
 		}
 	}
-	private void dimensionaBottoni(){
-		int h_screen=getResources().getDisplayMetrics().heightPixels;
-		int w_screen=getResources().getDisplayMetrics().widthPixels;
-		
-		int h_domanda=(h_screen/100)*40;
+
+	private void dimensionaBottoni() {
+		int h_screen = getResources().getDisplayMetrics().heightPixels;
+		int w_screen = getResources().getDisplayMetrics().widthPixels;
+
+		int h_domanda = (h_screen / 100) * 40;
 		Button domanda = (Button) findViewById(R.id.contdomanda);
-		domanda.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_domanda/5);
-		RelativeLayout.LayoutParams l_domanda=(RelativeLayout.LayoutParams) domanda.getLayoutParams();
-		l_domanda.height=h_domanda;
-		
-		int w_button=(w_screen/100)*45;
-		int h_button=(h_screen/100)*18;
+		domanda.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_domanda / 5);
+		RelativeLayout.LayoutParams l_domanda = (RelativeLayout.LayoutParams) domanda.getLayoutParams();
+		l_domanda.height = h_domanda;
+
+		int w_button = (w_screen / 100) * 45;
+		int h_button = (h_screen / 100) * 18;
 		Button risp1 = (Button) findViewById(R.id.gioca_partita_risp1);
-		risp1.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_button/3);
-		RelativeLayout.LayoutParams l_r1=(RelativeLayout.LayoutParams) risp1.getLayoutParams();
-		l_r1.height=h_button;
-		l_r1.width=w_button;
+		risp1.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_button / 3);
+		RelativeLayout.LayoutParams l_r1 = (RelativeLayout.LayoutParams) risp1.getLayoutParams();
+		l_r1.height = h_button;
+		l_r1.width = w_button;
 		Button risp2 = (Button) findViewById(R.id.gioca_partita_risp2);
-		risp2.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_button/3);
-		RelativeLayout.LayoutParams l_r2=(RelativeLayout.LayoutParams) risp2.getLayoutParams();
-		l_r2.height=h_button;
-		l_r2.width=w_button;
+		risp2.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_button / 3);
+		RelativeLayout.LayoutParams l_r2 = (RelativeLayout.LayoutParams) risp2.getLayoutParams();
+		l_r2.height = h_button;
+		l_r2.width = w_button;
 		Button risp3 = (Button) findViewById(R.id.gioca_partita_risp3);
-		risp3.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_button/3);
-		RelativeLayout.LayoutParams l_r3=(RelativeLayout.LayoutParams) risp3.getLayoutParams();
-		l_r3.height=h_button;
-		l_r3.width=w_button;
+		risp3.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_button / 3);
+		RelativeLayout.LayoutParams l_r3 = (RelativeLayout.LayoutParams) risp3.getLayoutParams();
+		l_r3.height = h_button;
+		l_r3.width = w_button;
 		Button risp4 = (Button) findViewById(R.id.gioca_partita_risp4);
-		risp4.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_button/3);
-		RelativeLayout.LayoutParams l_r4=(RelativeLayout.LayoutParams) risp4.getLayoutParams();
-		l_r4.height=h_button;
-		l_r4.width=w_button;
+		risp4.setTextSize(TypedValue.COMPLEX_UNIT_PX, h_button / 3);
+		RelativeLayout.LayoutParams l_r4 = (RelativeLayout.LayoutParams) risp4.getLayoutParams();
+		l_r4.height = h_button;
+		l_r4.width = w_button;
 	}
 }
