@@ -7,6 +7,7 @@ import it.unisa.mathchallenger.status.Status;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -14,13 +15,14 @@ import java.net.UnknownHostException;
 
 import android.util.Log;
 
-public class Communication implements Runnable {
+public class Communication extends Thread {
 
 	private static Communication singleton;
 
 	private Socket			   socket;
 	//private final static String  HOSTNAME	  = "54.76.113.193"; //ip del server
-	private final static String  HOSTNAME	  = "mathchallenger.servegame.com";
+	//private final static String  HOSTNAME	  = "mathchallenger.servegame.com";
+	private final static String  HOSTNAME	  = "5.231.68.209";
 	private final static int	 HOSTNAME_PORT = 50000;
 	private static int		   TIMEOUT_READ  = 10000;		// 10 secondi timeout
 	private static ThreadPing	t_ping;
@@ -32,11 +34,15 @@ public class Communication implements Runnable {
 		super();
 		t_ping = ThreadPing.getInstance();
 	}
-
+	
+	private static boolean canAccess=true;
 	public static synchronized Communication getInstance() {
-		if (singleton == null) {
+		while(!canAccess){} //sincronizzazione primitiva
+		canAccess=false;
+		if(singleton==null){
 			singleton = new Communication();
 		}
+		canAccess=true;
 		return singleton;
 	}
 
@@ -44,13 +50,15 @@ public class Communication implements Runnable {
 
 	private OutputStream   out;
 	private BufferedReader in;
+	private InputStream input;
 
-	public boolean connect() throws UnknownHostException, IOException {
+	public synchronized boolean connect() throws UnknownHostException, IOException {
 		if (socket == null || socket.isClosed()) {
 			socket = new Socket(HOSTNAME, HOSTNAME_PORT);
-			socket.setSoTimeout(30000);
+			socket.setSoTimeout(TIMEOUT_READ);
 			out = socket.getOutputStream();
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			input=socket.getInputStream();
+			in = new BufferedReader(new InputStreamReader(input));
 			if(t_ping==null)
 				t_ping=ThreadPing.getInstance();
 			if (t_ping != null && !t_ping.isAlive())
@@ -132,10 +140,13 @@ public class Communication implements Runnable {
 			throw new IOException("ConnectionReader null");
 		String r = "";
 		long timeout = TIMEOUT_READ + System.currentTimeMillis();
-		while ((r = in.readLine()) == null) {
+		while(input.available()==0){
 			if (System.currentTimeMillis() > timeout)
 				throw new IOException("Timeout error");
 		}
+		if((r = in.readLine()) == null)
+			throw new IOException("String null");
+		
 		Log.d("Communication_R", r);
 		return r;
 	}

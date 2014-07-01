@@ -54,17 +54,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		if (!socketOk) {
-			Thread t = new Thread(Communication.getInstance());
-			t.start();
-			try {
-				t.join();
-				socketOk = true;
-			}
-			catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-		}
+		
 		comm = Communication.getInstance();
 		Status.getInstance(getApplicationContext());
 
@@ -80,12 +70,10 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			else {
 				view.setBackgroundResource(R.drawable.sfondohome);
 			}
-			if (!socketOk)
-				Toast.makeText(getApplicationContext(), R.string.errore_verificare_connessione, Toast.LENGTH_LONG).show();
-			if(isVersionChecked)
-				new AlertDialog.Builder(this).setMessage("Per poter accedere, scarica l'ultima versione di Math Challenger dal Play Store").setCancelable(false).setPositiveButton("OK", null).show();
-			else
-				new AlertDialog.Builder(this).setMessage("Verifica che la connessione sia attiva. Altrimenti riprova tra qualche minuto").setCancelable(false).setPositiveButton("OK", null).show();
+			if (!isVersionChecked)
+				new AlertDialog.Builder(this).setMessage(R.string.errore_verificare_connessione).setCancelable(false).setPositiveButton("OK", null).show();
+			if(isVersionChecked && !isVersionValid)
+				new AlertDialog.Builder(this).setMessage(R.string.errore_versione).setCancelable(false).setPositiveButton("OK", null).show();
 		}
 	}
 
@@ -401,7 +389,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		boolean loginOK = false;
 		AccountUser acc = Status.getInstance().getUtente();
 		Messaggio m = null;
-		if (acc != null && socketOk) {
+		if (acc != null) {
 			m = CommunicationMessageCreator.getInstance().createLoginAuthcode(acc.getID(), acc.getAuthCode());
 			try {
 				comm.send(m);
