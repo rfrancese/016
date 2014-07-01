@@ -424,7 +424,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			setContentView(R.layout.activity_home_autenticazione);
 			View view = (View) findViewById(R.id.ScrollHomeAutenticazione);
 			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-				view.setBackgroundResource(R.drawable.prova2hdhorizontal);
+				view.setBackgroundResource(R.drawable.sfondo_landscape_no);
 			}
 			else {
 				view.setBackgroundResource(R.drawable.sfondohome);
