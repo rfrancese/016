@@ -3,7 +3,7 @@ FIX:
 
 - fixare il background in homeAutenticazione
 
-
+- spazio nell'username durante la registrazione
 
 
 FEATURES:
@@ -23,3 +23,10 @@ FEATURES:
 - modalità gioco: scrivi tu la risposta (DIFFICILE)
 
 - aggiungere avatar
+
+- notifiche push quando una nuova partita è disponibile
+
+CONTROLLARE
+- scroll registrazione
+
+- lunghezza minima account
