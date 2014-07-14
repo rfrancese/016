@@ -62,6 +62,7 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 							visualizzaRisposte(stato);
 							aggiungiListenerShowDomande(p);
 						}
+						addListenerAddAmico(p);
 					}
 					else {
 						Toast.makeText(getApplicationContext(), m.getErrorID()>=0?getResources().getString(m.getErrorID()):m.getErrorMessage(), Toast.LENGTH_LONG).show();
@@ -443,5 +444,41 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
     				});
 			}
 		}
+	}
+	private void addListenerAddAmico(final Partita p){
+		final int id_utente = p.getUtenteSfidato().getID();
+		Button bottone = (Button) findViewById(R.id.visualizza_add_friend);
+		if(id_utente<=0 || Status.getInstance().isMyFriend(id_utente)){
+			bottone.setVisibility(View.INVISIBLE);
+			return;
+		}
+		bottone.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				Messaggio m = CommunicationMessageCreator.getInstance().createAggiungiAmico(id_utente);
+				try {
+					comm.send(m);
+					boolean res = CommunicationParser.getInstance().parseAggiungiAmico(m);
+					if (res) {
+						Status.getInstance().aggiungiAmico(p.getUtenteSfidato());
+						Toast.makeText(getApplicationContext(), R.string.amico_aggiunto, Toast.LENGTH_LONG).show();
+						v.setVisibility(View.INVISIBLE);
+					}
+					else
+						Toast.makeText(getApplicationContext(), R.string.amico_non_aggiunto, Toast.LENGTH_LONG).show();
+				}
+				catch (IOException e) {
+					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+					e.printStackTrace();
+				}
+				catch (LoginException e) {
+					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+					e.printStackTrace();
+				}
+				catch (ConnectionException e) {
+					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

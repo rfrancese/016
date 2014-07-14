@@ -109,4 +109,5 @@
 	<string name="invalid_registration_username_length">La lunghezza dell\'username deve essere di almeno 3 caratteri</string>
 	<string name="invalid_registration_username_space_not_allowed">Non è consentito l\'utilizzo di spazi all\'interno dell\'username</string>
 	<string name="reg_password_space_not_allowed">Non è consentito l\'utilizzo di spazi all\'interno della password</string>
+	<string name="add_friend_visualizza">+Amico</string>
 </resources>

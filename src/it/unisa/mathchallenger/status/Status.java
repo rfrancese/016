@@ -136,6 +136,13 @@ public class Status {
 		else
 			return null;
 	}
+	public boolean isMyFriend(int id){
+		for(int i=0;i<amici.size();i++){
+			if(amici.get(i).getID()==id)
+				return true;
+		}
+		return false;
+	}
 
 	public ArrayList<Account> getElencoAmici() {
 		return amici;

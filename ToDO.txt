@@ -5,13 +5,13 @@ FIX:
 
 - spazio nell'username durante la registrazione  //FATTO
 
-- fix grafico statistiche e barra del tempo
+- fix grafico statistiche e barra del tempo nel gioco
 
 
 FEATURES:
 - bottone rivincita in una partita conclusa
 
-- bottone +amico in visualizza partita
+- bottone +amico in visualizza partita  //FATTO
 
 - intervallo tra una domanda e l'altra
 
@@ -29,6 +29,6 @@ FEATURES:
 - notifiche push quando una nuova partita è disponibile
 
 CONTROLLARE
-- scroll registrazione
+- scroll registrazione  //FATTO
 
 - lunghezza minima account  //FATTO
