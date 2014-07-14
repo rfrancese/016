@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ContainerRegistra"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollHomeRegistrazione"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sfondo_potrait_no"
+    android:background="@drawable/sfondo_potrait_no" >
+
+<LinearLayout
+    android:id="@+id/ContainerRegistra"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
@@ -143,3 +150,4 @@
         android:textStyle="bold" />
 
 </LinearLayout>
+</ScrollView>

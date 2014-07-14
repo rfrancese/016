@@ -85,7 +85,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		if (current_layout == HOME)
 			view = (View) findViewById(R.id.ScrollHomeAutenticazione);
 		else if (current_layout == REGISTRA)
-			view = (View) findViewById(R.id.ContainerRegistra);
+			view = (View) findViewById(R.id.ScrollHomeRegistrazione);
 		else if (current_layout == RECUPERA)
 			view = (View) findViewById(R.id.ContainerRecupera);
 
