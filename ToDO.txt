@@ -1,1 +1,25 @@
-prova
+FIX:
+- interruzione countdown quando viene cliccato un tasto
+
+- fixare il background in homeAutenticazione
+
+
+
+
+FEATURES:
+- bottone rivincita in una partita conclusa
+
+- bottone +amico in visualizza partita
+
+- intervallo tra una domanda e l'altra
+
+- "clicca per iniziare" per avviare la partita
+
+- activity advertising
+	- visualizza advertising al termine di una partita
+
+- integrazione social network
+
+- modalità gioco: scrivi tu la risposta (DIFFICILE)
+
+- aggiungere avatar
