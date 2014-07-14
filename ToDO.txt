@@ -5,6 +5,8 @@ FIX:
 
 - spazio nell'username durante la registrazione
 
+- fix grafico statistiche e barra del tempo
+
 
 FEATURES:
 - bottone rivincita in una partita conclusa
