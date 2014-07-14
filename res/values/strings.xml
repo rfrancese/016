@@ -107,4 +107,6 @@
 	<string name="ad_non_skippable">E\' obbligatoria la visualizzazione di almeno 3 secondi di pubblicità</string>
 	<string name="errore_versione">Per poter accedere, scarica l\'ultima versione di Math Challenger dal Play Store</string>
 	<string name="invalid_registration_username_length">La lunghezza dell\'username deve essere di almeno 3 caratteri</string>
+	<string name="invalid_registration_username_space_not_allowed">Non è consentito l\'utilizzo di spazi all\'interno dell\'username</string>
+	<string name="reg_password_space_not_allowed">Non è consentito l\'utilizzo di spazi all\'interno della password</string>
 </resources>

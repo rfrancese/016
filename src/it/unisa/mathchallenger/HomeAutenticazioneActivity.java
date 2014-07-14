@@ -230,6 +230,11 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				return;
 			}
 			
+			if(username.contains(" ")){
+				new AlertDialog.Builder(HomeAutenticazioneActivity.this).setMessage(R.string.invalid_registration_username_space_not_allowed).setCancelable(true).setNeutralButton("OK", null).show();
+				return; 
+			}
+			
 			if(username.trim().length()<3) {
 				new AlertDialog.Builder(HomeAutenticazioneActivity.this).setMessage(R.string.invalid_registration_username_length).setCancelable(true).setNeutralButton("OK", null).show();
 				return;
@@ -241,9 +246,15 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 			}
 
 			if (pass1.compareTo(pass2) != 0) {
-				Toast.makeText(getApplicationContext(), R.string.reg_password_diverse, Toast.LENGTH_LONG).show();
+				new AlertDialog.Builder(HomeAutenticazioneActivity.this).setMessage(R.string.reg_password_diverse).setCancelable(true).setNeutralButton("OK", null).show();
 				return;
 			}
+			
+			if(pass1.contains(" ")){
+				new AlertDialog.Builder(HomeAutenticazioneActivity.this).setMessage(R.string.reg_password_space_not_allowed).setCancelable(true).setNeutralButton("OK", null).show();
+				return;
+			}
+			
 			if (!isValidEmail(email)) {
 				Toast.makeText(getApplicationContext(), R.string.email_non_valida, Toast.LENGTH_LONG).show();
 				return;
