@@ -1,9 +1,9 @@
 FIX:
-- interruzione countdown quando viene cliccato un tasto
+- interruzione countdown quando viene cliccato un tasto  //FATTO
 
 - fixare il background in homeAutenticazione
 
-- spazio nell'username durante la registrazione
+- spazio nell'username durante la registrazione  //FATTO
 
 - fix grafico statistiche e barra del tempo
 
@@ -31,4 +31,4 @@ FEATURES:
 CONTROLLARE
 - scroll registrazione
 
-- lunghezza minima account
+- lunghezza minima account  //FATTO

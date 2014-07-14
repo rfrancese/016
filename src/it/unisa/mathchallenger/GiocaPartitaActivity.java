@@ -162,11 +162,19 @@ public class GiocaPartitaActivity extends Activity {
 
 	class timer_partita extends Thread {
 		private ProgressBar progressbar;
+		private int current_id_sound;
+		private SoundPool sp;
 
 		public timer_partita(ProgressBar bar) {
 			progressbar = bar;
 		}
-
+		@Override
+		public void interrupt() {
+			if(sp!=null && current_id_sound>0){
+				sp.stop(current_id_sound);
+			}
+			super.interrupt();
+		}
 		public void run() {
 			int time = DURATA_DOMANDA;
 			int sleep_time = time * 1000;
@@ -188,8 +196,8 @@ public class GiocaPartitaActivity extends Activity {
 					if(!audio_started){
 						audio_started=true;
     					Log.d("MathC_Audio", "time="+time);
-    					SoundPool sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-    					sp.load(getApplicationContext(), R.raw.countdown, 1); // in 2nd param u have to pass your desire ringtone
+    					sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+    					current_id_sound=sp.load(getApplicationContext(), R.raw.countdown, 1); // in 2nd param u have to pass your desire ringtone
     					sp.setOnLoadCompleteListener(new OnLoadCompleteListener() {
     						@Override
     						public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
