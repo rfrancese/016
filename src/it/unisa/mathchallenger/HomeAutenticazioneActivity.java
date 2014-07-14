@@ -229,6 +229,11 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 				Toast.makeText(getApplicationContext(), R.string.empty_fields, Toast.LENGTH_LONG).show();
 				return;
 			}
+			
+			if(username.trim().length()<3) {
+				new AlertDialog.Builder(HomeAutenticazioneActivity.this).setMessage(R.string.invalid_registration_username_length).setCancelable(true).setNeutralButton("OK", null).show();
+				return;
+			}
 
 			if (pass1.length() < 8) {
 				new AlertDialog.Builder(HomeAutenticazioneActivity.this).setMessage(R.string.invalid_registration_password).setCancelable(true).setNeutralButton("OK", null).show();
