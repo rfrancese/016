@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -449,7 +450,9 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 		final int id_utente = p.getUtenteSfidato().getID();
 		Button bottone = (Button) findViewById(R.id.visualizza_add_friend);
 		if(id_utente<=0 || Status.getInstance().isMyFriend(id_utente)){
-			bottone.setVisibility(View.INVISIBLE);
+			RelativeLayout l=(RelativeLayout) bottone.getParent();
+			l.removeView(bottone);
+			//bottone.setVisibility(View.INVISIBLE);
 			return;
 		}
 		bottone.setOnClickListener(new Button.OnClickListener() {
@@ -461,7 +464,9 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					if (res) {
 						Status.getInstance().aggiungiAmico(p.getUtenteSfidato());
 						Toast.makeText(getApplicationContext(), R.string.amico_aggiunto, Toast.LENGTH_LONG).show();
-						v.setVisibility(View.INVISIBLE);
+						//v.setVisibility(View.INVISIBLE);
+						RelativeLayout l=(RelativeLayout) v.getParent();
+						l.removeView(v);
 					}
 					else
 						Toast.makeText(getApplicationContext(), R.string.amico_non_aggiunto, Toast.LENGTH_LONG).show();

@@ -112,8 +112,8 @@ public class StatisticheActivity extends Activity {
 		LinearLayout container_top=(LinearLayout) findViewById(R.id.containerClassifica);
 		container_top.removeAllViews();
 		float scale=getResources().getDisplayMetrics().density;
-		int width_pos=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*5);
-		int width_punti=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*10);
+		int width_pos=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*10);
+		int width_punti=(int) ((scale*(getResources().getDisplayMetrics().widthPixels/100))*15);
 		for(int i=0;i<cl.getNumeroUtenti();i++){
 			String utente=cl.getUsernameAtIndex(i);
 			int punti=cl.getPuntiAtIndex(i);

@@ -46,12 +46,30 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="15dp" />
     </RelativeLayout>
+    
+     <RelativeLayout
+        android:id="@+id/containerAddFriendVisualizza"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/visualizza_azione_container"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" >
+
+        <Button
+            android:id="@+id/visualizza_add_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="26dp"
+            android:background="@drawable/button_amico"
+            android:text="@string/add_friend_visualizza" />
+    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/ScrollContainerDomande"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/visualizza_azione_container"
+        android:layout_above="@id/containerAddFriendVisualizza"
         android:layout_below="@id/visualizza_nomi_utente"
         android:layout_marginTop="20dp" >
 
@@ -191,22 +209,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/visualizza_azione_container"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" >
-
-        <Button
-            android:id="@+id/visualizza_add_friend"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="26dp"
-            android:background="@drawable/button_amico"
-            android:text="@string/add_friend_visualizza" />
-    </RelativeLayout>
-
 </RelativeLayout>
