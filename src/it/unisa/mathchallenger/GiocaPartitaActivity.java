@@ -158,18 +158,25 @@ public class GiocaPartitaActivity extends Activity {
 		risp2.setOnClickListener(null);
 		risp3.setOnClickListener(null);
 		risp4.setOnClickListener(null);
-		domanda.setTypeface(Typeface.DEFAULT);
-		domanda.setText(R.string.prossimaDomanda);
-		domanda.setOnClickListener(new Button.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				onClickStart(v);
-			}
-		});
 		risp1.setText("");
 		risp2.setText("");
 		risp3.setText("");
 		risp4.setText("");
+		
+		if(domanda_corrente < partita.getNumDomande()){
+			domanda.setTypeface(Typeface.DEFAULT);
+			domanda.setText(R.string.prossimaDomanda);
+			domanda.setOnClickListener(new Button.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					onClickStart(v);
+				}
+			});
+		}
+		else {
+			domanda.setText("Invio risposte");
+			scriviDomanda();
+		}
 	}
 
 	class clickRisposta implements Button.OnClickListener {
