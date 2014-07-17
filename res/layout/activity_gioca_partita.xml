@@ -17,6 +17,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="@drawable/blackboard"
+        android:onClick="onClickStart"
+        android:text="@string/clickToStart"
         android:textColor="@color/White"
         android:textSize="40sp" />
 

@@ -53,7 +53,6 @@ public class GiocaPartitaActivity extends Activity {
 					Domanda dom = list.get(i);
 					partita.aggiungiDomanda(dom);
 				}
-				scriviDomanda();
 			}
 			catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -86,9 +85,16 @@ public class GiocaPartitaActivity extends Activity {
 	public void onBackPressed() {
 
 	};
+	
+	public void onClickStart(View v){
+		Button buttonAvvia=(Button) findViewById(R.id.contdomanda);
+		buttonAvvia.setOnClickListener(null);
+		buttonAvvia.setClickable(false);
+		buttonAvvia.setText("");
+		scriviDomanda();
+	}
 
 	private Thread tempo = null;
-
 	private void scriviDomanda() {
 		if (domanda_corrente < partita.getNumDomande()) {
 			Domanda d = partita.getDomanda(domanda_corrente);
@@ -142,6 +148,29 @@ public class GiocaPartitaActivity extends Activity {
 			startActivity(intent);
 		}
 	}
+	private void attesa(){
+		Button domanda = (Button) findViewById(R.id.contdomanda);
+		Button risp1 = (Button) findViewById(R.id.gioca_partita_risp1);
+		Button risp2 = (Button) findViewById(R.id.gioca_partita_risp2);
+		Button risp3 = (Button) findViewById(R.id.gioca_partita_risp3);
+		Button risp4 = (Button) findViewById(R.id.gioca_partita_risp4);
+		risp1.setOnClickListener(null);
+		risp2.setOnClickListener(null);
+		risp3.setOnClickListener(null);
+		risp4.setOnClickListener(null);
+		domanda.setTypeface(Typeface.DEFAULT);
+		domanda.setText(R.string.prossimaDomanda);
+		domanda.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onClickStart(v);
+			}
+		});
+		risp1.setText("");
+		risp2.setText("");
+		risp3.setText("");
+		risp4.setText("");
+	}
 
 	class clickRisposta implements Button.OnClickListener {
 		Domanda domanda;
@@ -156,10 +185,10 @@ public class GiocaPartitaActivity extends Activity {
 			tempo.interrupt();
 			domanda.setRispostaUtente(this.risposta);
 			domanda_corrente++;
-			scriviDomanda();
+			attesa();
 		}
 	}
-
+	
 	class timer_partita extends Thread {
 		private ProgressBar progressbar;
 		private int current_id_sound;
@@ -213,7 +242,7 @@ public class GiocaPartitaActivity extends Activity {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					domanda_corrente++;
-					scriviDomanda();
+					attesa();
 				}
 			});
 		}
