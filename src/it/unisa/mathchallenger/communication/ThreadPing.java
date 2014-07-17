@@ -35,6 +35,12 @@ public class ThreadPing extends Thread {
 
     public void run() {
 	Communication comm = Communication.getInstance();
+	try {
+	    comm.send(new Messaggio("ping"));
+	}
+	catch (IOException | LoginException | ConnectionException e1) {
+	    e1.printStackTrace();
+	}
 	while (true) {
 	    try {
 		sleep(SLEEP_TIME);

@@ -42,8 +42,16 @@ public class HomeGiocoActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	comm = Communication.getInstance();
 	setContentView(R.layout.activity_home_gioco);
+	View view = (View) findViewById(R.id.containerHomeGioco);
+	if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+	    view.setBackgroundResource(R.drawable.sfondo_landscape_no);
+	}
+	else {
+	    view.setBackgroundResource(R.drawable.sfondo_potrait_no);
+	}
+	
+	comm = Communication.getInstance();
 	aggiungiAD();
 	if (t_aggiorna_partite == null || !t_aggiorna_partite.isAlive()) {
 	    t_aggiorna_partite = new ThreadAggiornaPartite();
@@ -51,13 +59,6 @@ public class HomeGiocoActivity extends ActionBarActivity {
 	}
 	else {
 	    t_aggiorna_partite.aggiorna();
-	}
-	View view = (View) findViewById(R.id.containerHomeGioco);
-	if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-	    view.setBackgroundResource(R.drawable.sfondo_landscape_no);
-	}
-	else {
-	    view.setBackgroundResource(R.drawable.sfondo_potrait_no);
 	}
     }
 

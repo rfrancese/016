@@ -322,8 +322,8 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 		else {
 		    acc.setUsername(username);
 		    Status.getInstance().login(acc);
-
 		    Intent intent = new Intent(this, HomeGiocoActivity.class);
+		    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    startActivity(intent);
 		}
 	    }
@@ -448,7 +448,7 @@ public class HomeAutenticazioneActivity extends ActionBarActivity {
 	    }
 	}
 	else
-	    new AlertDialog.Builder(this).setMessage("Per poter accedere, scarica l'ultima versione di Math Challenger dal Play Store").setCancelable(false).setPositiveButton("OK", null).show();
+	    new AlertDialog.Builder(this).setMessage(R.string.errore_versione).setCancelable(false).setPositiveButton("OK", null).show();
     }
 
     private void loginWithAuthcode() {
