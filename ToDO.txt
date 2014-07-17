@@ -21,8 +21,17 @@ FEATURES:
 	- visualizza advertising al termine di una partita
 
 - integrazione social network
+	- login facebook
+	- login google plus
+	- login twitter
+	- condivisione facebook
+	- condivisione twitter
+	- condivisione g+ 
+	- associazione account social con account esistente
 
-- modalità gioco: scrivi tu la risposta (DIFFICILE)
+- modalità gioco:
+	- scrivi tu la risposta
+	- memory
 
 - aggiungere avatar
 
@@ -32,3 +41,11 @@ CONTROLLARE
 - scroll registrazione  //FATTO
 
 - lunghezza minima account  //FATTO
+
+SERVIZI A PAGAMENTO
+
+- cambio username
+
+- unione account
+
+- personalizzazione avatar
