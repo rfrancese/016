@@ -1,8 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/ADLayoutInterstitial"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="it.unisa.mathchallenger.AdsActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/logo" android:contentDescription="@string/app_name"/>
+
+</FrameLayout>
 

@@ -71,4 +71,12 @@
         android:text="@string/homegioco_statistiche_button"
         android:textStyle="bold" />
 
+    <LinearLayout
+        android:id="@+id/ADSLayoutHomeGioco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
 </LinearLayout>

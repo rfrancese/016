@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.unisa.mathchallenger"
-    android:versionCode="1"
-    android:versionName="1.0" >
-
+    android:versionCode="2"
+    android:versionName="1.1" >
+    
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="19" />
@@ -16,10 +16,11 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name="it.unisa.mathchallenger.HomeAutenticazioneActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:noHistory="true"
+            android:noHistory="false"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,10 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name="it.unisa.mathchallenger.HomeGiocoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:noHistory="true"
+            android:noHistory="false"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,30 +40,35 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name="it.unisa.mathchallenger.ActivityCambiaPassword"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:noHistory="true"
             android:label="@string/app_name" >
         </activity>
+        
         <activity
             android:name="it.unisa.mathchallenger.GiocaPartitaActivity"
             android:label="@string/app_name"
             android:noHistory="true"
             android:screenOrientation="portrait" >
         </activity>
+        
         <activity
             android:name="it.unisa.mathchallenger.VisualizzaPartitaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:noHistory="true"
             android:label="@string/app_name" >
         </activity>
+        
         <activity
             android:name="it.unisa.mathchallenger.NuovaPartitaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:noHistory="true"
             android:label="@string/app_name" >
         </activity>
+        
         <activity
             android:name="it.unisa.mathchallenger.CercaUtenteActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -69,20 +76,24 @@
             android:label="@string/app_name" >
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <activity
+            android:name="it.unisa.mathchallenger.StatisticheActivity"
+            android:noHistory="true"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <meta-data android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version"/>
+        
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
 
         <activity
             android:name="it.unisa.mathchallenger.AdsActivity"
             android:noHistory="true"
             android:label="@string/app_name" >
         </activity>
-        <activity
-            android:name="it.unisa.mathchallenger.StatisticheActivity"
-            android:noHistory="true"
-            android:label="@string/app_name" >
-        </activity>
+        
     </application>
 
 </manifest>

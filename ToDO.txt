@@ -1,22 +1,11 @@
 FIX:
-- interruzione countdown quando viene cliccato un tasto  //FATTO
-
 - fixare il background in homeAutenticazione
-
-- spazio nell'username durante la registrazione  //FATTO
-
 - fix grafico statistiche //FORSE 
 - fix barra del tempo nel gioco
 
 
 FEATURES:
 - bottone rivincita in una partita conclusa
-
-- bottone +amico in visualizza partita  //FATTO
-
-- intervallo tra una domanda e l'altra  //FATTO
-
-- "clicca per iniziare" per avviare la partita  //FATTO
 
 - activity advertising
 	- visualizza advertising al termine di una partita
@@ -35,18 +24,12 @@ FEATURES:
 	- memory
 
 - aggiungere avatar
-
 - notifiche push quando una nuova partita è disponibile
 
 CONTROLLARE
-- scroll registrazione  //FATTO
 
-- lunghezza minima account  //FATTO
 
 SERVIZI A PAGAMENTO
-
 - cambio username
-
 - unione account
-
 - personalizzazione avatar

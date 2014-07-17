@@ -7,25 +7,25 @@ import android.widget.Button;
 
 public class CustomButton extends Button {
 
-	public CustomButton(Context context) {
-		super(context);
-		String fontName = "fonts/EraserDust.ttf";
-		Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontName);
-        setTypeface(typeface);
-	}
+    public CustomButton(Context context) {
+	super(context);
+	String fontName = "fonts/EraserDust.ttf";
+	Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontName);
+	setTypeface(typeface);
+    }
 
-	public CustomButton(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		String fontName = "fonts/EraserDust.ttf";
-		Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontName);
-        setTypeface(typeface);
-	}
+    public CustomButton(Context context, AttributeSet attrs) {
+	super(context, attrs);
+	String fontName = "fonts/EraserDust.ttf";
+	Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontName);
+	setTypeface(typeface);
+    }
 
-	public CustomButton(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		String fontName = "fonts/EraserDust.ttf";
-		Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontName);
-        setTypeface(typeface);
-	}
+    public CustomButton(Context context, AttributeSet attrs, int defStyle) {
+	super(context, attrs, defStyle);
+	String fontName = "fonts/EraserDust.ttf";
+	Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontName);
+	setTypeface(typeface);
+    }
 
 }

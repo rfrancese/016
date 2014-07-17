@@ -1,0 +1,12 @@
+FIX:
+- interruzione countdown quando viene cliccato un tasto  //FATTO
+- spazio nell'username durante la registrazione  //FATTO
+
+FEATURES:
+- bottone +amico in visualizza partita  //FATTO
+- intervallo tra una domanda e l'altra  //FATTO
+- "clicca per iniziare" per avviare la partita  //FATTO
+
+CONTROLLARE:
+- scroll registrazione  //FATTO
+- lunghezza minima account  //FATTO

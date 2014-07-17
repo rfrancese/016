@@ -1,101 +1,122 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ScrollHomeAutenticazione"
+    android:id="@+id/containerVisualizzaPartita"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sfondohome" >
-
-<LinearLayout
-    android:id="@+id/containerGiocaPartita"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
+    android:background="@drawable/sfondo_potrait_no"
     android:orientation="vertical"
-    tools:context="it.unisa.mathchallenger.HomeAutenticazioneActivity" >
+    tools:context="it.unisa.mathchallenger.HomeAutenticazioneActivity"
+    tools:ignore="MergeRootFrame" >
 
-    <TextView
-        android:id="@+id/home_login_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/home_login_tv"
-        android:textColor="@color/White"
-        android:textSize="30sp"
-        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/username_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/textfield"
-        android:ems="10"
-        android:hint="@string/username_hint"
-        android:inputType="text"
-        android:paddingBottom="3dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="3dp" >
-        
-        <requestFocus />
-    </EditText>
+	<ScrollView
+	    android:id="@+id/ScrollHomeAutenticazione"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="@drawable/sfondohome"
+	    android:orientation="vertical" >
+	
+	    <LinearLayout
+	        android:id="@+id/containerGiocaPartita"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal"
+	        android:orientation="vertical"	>
+	
+	        <TextView
+	            android:id="@+id/home_login_tv"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal"
+	            android:text="@string/home_login_tv"
+	            android:textColor="@color/White"
+	            android:textSize="30sp"
+	            android:textStyle="bold" />
+	
+	        <EditText
+	            android:id="@+id/username_text"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:layout_marginTop="20dp"
+	            android:background="@drawable/textfield"
+	            android:ems="10"
+	            android:hint="@string/username_hint"
+	            android:inputType="text"
+	            android:paddingBottom="3dp"
+	            android:paddingLeft="5dp"
+	            android:paddingRight="5dp"
+	            android:paddingTop="3dp" >
+	
+	            <requestFocus />
+	        </EditText>
+	
+	        <EditText
+	            android:id="@+id/password_text"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:layout_marginTop="20dp"
+	            android:background="@drawable/textfield"
+	            android:ems="10"
+	            android:hint="@string/password_hint"
+	            android:inputType="textPassword"
+	            android:paddingBottom="3dp"
+	            android:paddingLeft="5dp"
+	            android:paddingRight="5dp"
+	            android:paddingTop="3dp" >
+	        </EditText>
+	
+	        <Button
+	            android:id="@+id/home_accedi_button"
+	            android:layout_width="match_parent"
+	            android:layout_height="45dp"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:layout_marginTop="15dp"
+	            android:background="@drawable/button_style"
+	            android:onClick="onClickAccedi"
+	            android:text="@string/login_button"
+	            android:textStyle="bold" />
+	
+	        <Button
+	            android:id="@+id/button_registrazione_home"
+	            android:layout_width="match_parent"
+	            android:layout_height="45dp"
+	            android:layout_marginBottom="5dp"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:layout_marginTop="20dp"
+	            android:background="@drawable/button_style"
+	            android:onClick="onClickRegistra"
+	            android:text="@string/register_button"
+	            android:textStyle="bold" />
+	
+	        <Button
+	            android:id="@+id/button_recupera_pass_home"
+	            android:layout_width="match_parent"
+	            android:layout_height="45dp"
+	            android:layout_marginBottom="15dp"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:background="@drawable/button_style"
+	            android:onClick="onClickResetPassword"
+	            android:text="@string/lost_pass_button"
+	            android:textStyle="bold" />
+	    </LinearLayout>
+	
+	</ScrollView>
 
-    <EditText
-        android:id="@+id/password_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/textfield"
-        android:ems="10"
-        android:hint="@string/password_hint"
-        android:inputType="textPassword"
-        android:paddingBottom="3dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="3dp" >
+	<LinearLayout
+	    android:id="@+id/ADSHomeAuth"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:gravity="end|bottom"
+	    android:orientation="vertical" >
 
-    </EditText>
+	</LinearLayout>
 
-    <Button
-        android:id="@+id/home_accedi_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/button_style"
-        android:onClick="onClickAccedi"
-        android:text="@string/login_button"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/button_registrazione_home"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_style"
-        android:onClick="onClickRegistra"
-        android:text="@string/register_button"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/button_recupera_pass_home"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button_style"
-        android:onClick="onClickResetPassword"
-        android:text="@string/lost_pass_button"
-        android:textStyle="bold" />
-
-</LinearLayout>
-</ScrollView>
+</RelativeLayout>
