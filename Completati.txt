@@ -6,6 +6,8 @@ FEATURES:
 - bottone +amico in visualizza partita  //FATTO
 - intervallo tra una domanda e l'altra  //FATTO
 - "clicca per iniziare" per avviare la partita  //FATTO
+- activity advertising	//FATTO
+	- visualizza advertising al termine di una partita
 
 CONTROLLARE:
 - scroll registrazione  //FATTO

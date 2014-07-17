@@ -7,9 +7,6 @@ FIX:
 FEATURES:
 - bottone rivincita in una partita conclusa
 
-- activity advertising
-	- visualizza advertising al termine di una partita
-
 - integrazione social network
 	- login facebook
 	- login google plus
