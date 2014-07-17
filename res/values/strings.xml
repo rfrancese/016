@@ -112,4 +112,5 @@
 	<string name="add_friend_visualizza">+Amico</string>
 	<string name="clickToStart">Avvia il gioco</string>
 	<string name="prossimaDomanda">Prossima domanda</string>
+	<string name="invioRisposte">Invio risposte</string>
 </resources>

@@ -174,7 +174,8 @@ public class GiocaPartitaActivity extends Activity {
 			});
 		}
 		else {
-			domanda.setText("Invio risposte");
+			domanda.setTypeface(Typeface.DEFAULT);
+			domanda.setText(R.string.invioRisposte);
 			scriviDomanda();
 		}
 	}
