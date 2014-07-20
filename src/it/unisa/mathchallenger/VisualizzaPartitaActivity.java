@@ -260,73 +260,97 @@ public class VisualizzaPartitaActivity extends ActionBarActivity {
 					ImageView risut = (ImageView) findViewById(R.id.risutente1);
 					ImageView risavv = (ImageView) findViewById(R.id.risavv1);
 					if (risposteutente[i] == Domanda.ESATTA)
-						risut.setBackgroundResource(R.drawable.risposta_ok);
+						risut.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteutente[i] == Domanda.SBAGLIATA)
-						risut.setBackgroundResource(R.drawable.risposta_wrong);
+						risut.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risut.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					if (risposteavversario[i] == Domanda.ESATTA)
-						risavv.setBackgroundResource(R.drawable.risposta_ok);
+						risavv.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteavversario[i] == Domanda.SBAGLIATA)
-						risavv.setBackgroundResource(R.drawable.risposta_wrong);
+						risavv.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risavv.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					break;
 				case 1:
 					ImageView risut2 = (ImageView) findViewById(R.id.risutente2);
 					ImageView risavv2 = (ImageView) findViewById(R.id.risavv2);
 					if (risposteutente[i] == Domanda.ESATTA)
-						risut2.setBackgroundResource(R.drawable.risposta_ok);
+						risut2.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteutente[i] == Domanda.SBAGLIATA)
-						risut2.setBackgroundResource(R.drawable.risposta_wrong);
+						risut2.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risut2.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					if (risposteavversario[i] == Domanda.ESATTA)
-						risavv2.setBackgroundResource(R.drawable.risposta_ok);
+						risavv2.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteavversario[i] == Domanda.SBAGLIATA)
-						risavv2.setBackgroundResource(R.drawable.risposta_wrong);
+						risavv2.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risavv2.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					break;
 				case 2:
 					ImageView risut3 = (ImageView) findViewById(R.id.risutente3);
 					ImageView risavv3 = (ImageView) findViewById(R.id.risavv3);
 					if (risposteutente[i] == Domanda.ESATTA)
-						risut3.setBackgroundResource(R.drawable.risposta_ok);
+						risut3.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteutente[i] == Domanda.SBAGLIATA)
-						risut3.setBackgroundResource(R.drawable.risposta_wrong);
+						risut3.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risut3.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					if (risposteavversario[i] == Domanda.ESATTA)
-						risavv3.setBackgroundResource(R.drawable.risposta_ok);
+						risavv3.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteavversario[i] == Domanda.SBAGLIATA)
-						risavv3.setBackgroundResource(R.drawable.risposta_wrong);
+						risavv3.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risavv3.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					break;
 				case 3:
 					ImageView risut4 = (ImageView) findViewById(R.id.risutente4);
 					ImageView risavv4 = (ImageView) findViewById(R.id.risavv4);
 					if (risposteutente[i] == Domanda.ESATTA)
-						risut4.setBackgroundResource(R.drawable.risposta_ok);
+						risut4.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteutente[i] == Domanda.SBAGLIATA)
-						risut4.setBackgroundResource(R.drawable.risposta_wrong);
+						risut4.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risut4.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					if (risposteavversario[i] == Domanda.ESATTA)
-						risavv4.setBackgroundResource(R.drawable.risposta_ok);
+						risavv4.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteavversario[i] == Domanda.SBAGLIATA)
-						risavv4.setBackgroundResource(R.drawable.risposta_wrong);
+						risavv4.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risavv4.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					break;
 				case 4:
 					ImageView risut5 = (ImageView) findViewById(R.id.risutente5);
 					ImageView risavv5 = (ImageView) findViewById(R.id.risavv5);
 					if (risposteutente[i] == Domanda.ESATTA)
-						risut5.setBackgroundResource(R.drawable.risposta_ok);
+						risut5.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteutente[i] == Domanda.SBAGLIATA)
-						risut5.setBackgroundResource(R.drawable.risposta_wrong);
+						risut5.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risut5.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					if (risposteavversario[i] == Domanda.ESATTA)
-						risavv5.setBackgroundResource(R.drawable.risposta_ok);
+						risavv5.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteavversario[i] == Domanda.SBAGLIATA)
-						risavv5.setBackgroundResource(R.drawable.risposta_wrong);
+						risavv5.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risavv5.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					break;
 				case 5:
 					ImageView risut6 = (ImageView) findViewById(R.id.risutente6);
 					ImageView risavv6 = (ImageView) findViewById(R.id.risavv6);
 					if (risposteutente[i] == Domanda.ESATTA)
-						risut6.setBackgroundResource(R.drawable.risposta_ok);
+						risut6.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteutente[i] == Domanda.SBAGLIATA)
-						risut6.setBackgroundResource(R.drawable.risposta_wrong);
+						risut6.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risut6.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					if (risposteavversario[i] == Domanda.ESATTA)
-						risavv6.setBackgroundResource(R.drawable.risposta_ok);
+						risavv6.setBackgroundResource(R.drawable.bottone_visualizza_ok);
 					else if (risposteavversario[i] == Domanda.SBAGLIATA)
-						risavv6.setBackgroundResource(R.drawable.risposta_wrong);
+						risavv6.setBackgroundResource(R.drawable.bottone_visualizza_sbagliata);
+					else
+						risavv6.setBackgroundResource(R.drawable.bottone_visualizza_attesa);
 					break;
 			}
 		}
