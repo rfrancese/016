@@ -2,5 +2,5 @@ package it.unisa.mathchallenger.database;
 
 public interface Database {
 
-    public void executeUpdate(String query);
+	public void executeUpdate(String query);
 }
